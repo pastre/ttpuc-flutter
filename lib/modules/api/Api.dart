@@ -5,14 +5,17 @@ import 'package:http/http.dart';
 
 
 class Api{
-  String notas;
-  Api(){
-    this.notas = '';
+  String notas = '';
+
+  static final Api _singleton = new Api._internal();
+
+  factory Api() {
+    return _singleton;
   }
+  Api._internal();
+
 
   _doGetNotas(String username, String password) async {
-    String username = 'bruno.pastre';
-    String password = 'asdqwe123!@#';
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
     print(basicAuth);
@@ -22,7 +25,8 @@ class Api{
     this.notas =  r.body;
   }
 
-  void updateNotas(username, password) async{
+  void updateNotas(String username, String password) async{
+    print("Updating notas");
     await this._doGetNotas(username, password );
   }
 

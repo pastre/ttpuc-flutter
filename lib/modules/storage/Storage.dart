@@ -35,7 +35,6 @@ class Storage{
   Future<String> getNotas() async {
     var tmp;
     return await _get('notas');
-    return tmp;
   }
   void setNotas(String notasJson){
     _set('notas', notasJson);
