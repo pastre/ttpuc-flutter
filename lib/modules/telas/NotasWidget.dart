@@ -51,7 +51,7 @@ class _NotasState extends State<NotasWidget>{
 
   void getNotas() async {
     var localNotas = await this.storage.getNotas();
-    this.setState((){ //TODO resolver leak de memoria aqui. s
+    this.setState((){
       this.list = json.decode(localNotas);
     });
   }
