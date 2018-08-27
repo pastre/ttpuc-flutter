@@ -1,10 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/storage/Nota.dart';
-import 'package:horariopucpr/modules/storage/Storage.dart' as storage;
-
 import 'package:horariopucpr/modules/storage/Storage.dart' ;
 
 class NotasWidget extends StatefulWidget{
@@ -18,11 +14,11 @@ class _NotasState extends State<NotasWidget>{
   _NotasState(){
     this.storage = new Storage();
     this.list = new List<ListTile>();
+    this.getNotas();
   }
 
   @override
   Widget build(BuildContext context) {
-    this.getNotas();
     return _buildList(context);
   }
 
@@ -33,19 +29,24 @@ class _NotasState extends State<NotasWidget>{
       int nFaltas = int.parse(i["faltaspresencas"].split('/')[0]);
       list.add(this.buildTableCell(i['disciplina'], i['nota1'], i['nota2'], i['nota3'], i['nota4'],(maxFaltas - nFaltas).round()));
     }
-
     return new ListView.builder(
         itemCount: list.length,
         itemBuilder: (context, int){
           return list[int];
-    });
+        },
+    );
   }
 
   Widget buildTableCell(materia, n1, n2, n3, n4, faltas){
-    return new ListTile(
-      title: Text('$materia'),
-      subtitle:  Text('N1: $n1  N2: $n2\nN3: $n3  N4: $n4\nVoce ainda pode faltar $faltas aulas'),
-    );
+      String subt = 'Nota 1: $n1  Nota 2: $n2';
+      if (n3 != '--/--') subt += '\nNota 3: $n3';
+      if(n4 != '--/--') subt += '  Nota 4: $n4';
+      subt +='\nVocê ainda pode faltar $faltas aulas';
+      return new ListTile(
+        title: Text('$materia'),
+        subtitle:  Text(subt),
+        isThreeLine: true,
+      );
   }
 
   void getNotas() async {

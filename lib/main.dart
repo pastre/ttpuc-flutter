@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'modules/notas/NotasWidget.dart' as notas;
-import 'modules/notas/Notas.dart' as n;
+import 'package:horariopucpr/modules/telas/NotasWidget.dart' as notas;
+import 'modules/design/NavScreenComposite.dart';
+
 void main() {
-  runApp(TabBarDemo());
+  runApp(Test());
 }
 
 class TabBarDemo extends StatelessWidget {
@@ -20,7 +21,7 @@ class TabBarDemo extends StatelessWidget {
                 Tab(icon: Icon(Icons.subject), text: 'Horários'),
                 Tab(icon: Icon(Icons.book), text: 'Notas',),
                 Tab(icon: Icon(Icons.person_pin), text: 'Professores',),
-                Tab(icon: Icon(Icons.calendar_today), text: 'Calendário',),
+                Tab(icon: Icon(Icons.calendar_today), text: 'Agenda',),
               ],
             ),
             backgroundColor:  new Color(0xFFAD0000),
@@ -38,6 +39,17 @@ class TabBarDemo extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class Test extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    print('Returning');
+    return MaterialApp(home:MainScreen(),
+
+    //TODO:  theme: ,
     );
   }
 }
