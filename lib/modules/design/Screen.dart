@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/telas/HorariosWidget.dart';
 import 'package:horariopucpr/modules/telas/NotasWidget.dart';
+import 'package:horariopucpr/modules/telas/CalendarioWidget.dart';
+import 'package:horariopucpr/modules/telas/PlaceholderWidget.dart';
 class Screen extends StatefulWidget{
   _ScreenState state;
   Screen(){
@@ -21,7 +23,7 @@ class Screen extends StatefulWidget{
 class _ScreenState extends State<Screen>{
   var possibleScreens, currentScreen;
   _ScreenState(){
-    possibleScreens = {0: HorariosWidget(), 1: NotasWidget(), 2: HorariosWidget(),3: HorariosWidget(),};
+    possibleScreens = {0: HorariosWidget(), 1: NotasWidget(), 2: PlaceholderWidget(),3: CalendarioWidget(),};
     this.currentScreen = possibleScreens[1];
   }
 

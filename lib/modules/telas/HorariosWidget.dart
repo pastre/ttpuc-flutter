@@ -66,7 +66,7 @@ class _HorariosState extends GenericAppState<HorariosWidget> with TickerProvider
     for(String professor in professores)
       sbt += '$professor\n';
     sbt += sala;
-    return Card(child: ListTile(title: Text(title), subtitle: Text(sbt),),);
+    return Card(child: ListTile(title: Text(title), subtitle: Text(sbt, style: TextStyle(color: Colors.grey),),),);
   }
 }
 
