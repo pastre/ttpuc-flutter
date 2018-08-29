@@ -33,12 +33,19 @@ class Storage{
   }
 
   Future<String> getNotas() async {
-    var tmp;
     return await _get('notas');
   }
   void setNotas(String notasJson){
     _set('notas', notasJson);
   }
 
+  Future<bool> isLogged() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('logged');
+  }
 
+  void setLogin(bool isLogged) async{
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('logged', isLogged);
+  }
 }

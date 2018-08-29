@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/design/Screen.dart';
 
+import 'package:horariopucpr/modules/utils/Utils.dart';
+
 class BottomNavBar extends StatefulWidget{
   Widget screen;
   BottomNavBar(screen){
@@ -40,7 +42,7 @@ class _BottomNavBarState extends  State<BottomNavBar>{
     return new BottomNavigationBar(items: this.list,
       onTap: (value) => this.updateValue(value),
       currentIndex: this.currIndex,
-      fixedColor: Color(0xFFA00503),
+      fixedColor: PUC_COLOR,
     type: BottomNavigationBarType.fixed,
     );
   }

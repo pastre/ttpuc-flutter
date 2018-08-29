@@ -100,7 +100,7 @@ class _NotasState extends State<NotasWidget>{
   void getNotas() async {
     var localNotas = await this.storage.getNotas();
     if(localNotas == null){
-      await this.api.updateNotas('bruno.pastre', 'asdqwe123!@#');
+      await this.api.updateNotas();
       localNotas = this.api.getNotas();
       this.storage.setNotas(json.encode(localNotas));
       this.setState((){this.list = localNotas;});
