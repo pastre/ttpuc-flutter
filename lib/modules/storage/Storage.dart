@@ -1,21 +1,24 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Nota.dart';
-
-List<Nota> getNotas(){
-  var ret = new List<Nota>();
-
-  ret.add(new Nota('1', '**/**', '**/**', '**/**', '**/**', '20'));
-  ret.add(new Nota('2','**/**', '**/**', '**/**', '**/**', '19'));
-  ret.add(new Nota('3','**/**', '**/**', '**/**', '**/**', '18'));
-  ret.add(new Nota('4','**/**', '**/**', '**/**', '**/**', '17'));
-  ret.add(new Nota('5','**/**', '**/**', '**/**', '**/**', '16'));
-
-  return ret;
-}
+import './Evento.dart';
 
 class Storage{
+
+  Future<String> getEventos() async{
+    List<Evento> eventos = [
+      Evento(descricao: 'Fazer lista de exericios', dia: 31, mes: 08, materia: 'Estatística', nome: 'TDE 1'),
+      Evento(descricao: 'Fazer experimento 23', dia: 05, mes: 09, materia: 'Sistemas Digitais 2', nome: 'Atividade'),
+      Evento(descricao: 'Fazer lista de exericios', dia: 31, mes: 08, materia: 'Estatística', nome: 'TDE 1'),
+      Evento(descricao: 'Fazer lista de exericios', dia: 31, mes: 08, materia: 'Estatística', nome: 'TDE 1'),
+      Evento(descricao: 'Fazer lista de exericios', dia: 31, mes: 08, materia: 'Estatística', nome: 'TDE 1'),
+      Evento(descricao: 'Fazer lista de exericios', dia: 31, mes: 08, materia: 'Estatística', nome: 'TDE 1'),
+      Evento(descricao: 'Fazer lista de exericios', dia: 31, mes: 08, materia: 'Estatística', nome: 'TDE 1'),
+    ];
+    return json.encode(eventos);
+  }
+
   static final Storage _singleton = new Storage._internal();
   var notas;
   factory Storage() {

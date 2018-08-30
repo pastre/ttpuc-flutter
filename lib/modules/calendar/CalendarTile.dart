@@ -9,6 +9,7 @@ class CalendarTile extends StatelessWidget {
   final String dayOfWeek;
   final bool isDayOfWeek;
   final bool isSelected;
+  final bool hasEvent;
   final TextStyle dayOfWeekStyles;
   final TextStyle dateStyles;
   final Widget child;
@@ -52,13 +53,21 @@ class CalendarTile extends StatelessWidget {
           alignment: Alignment.center,
           child: new Text(
             Utils.formatDay(date).toString(),
-            style: isSelected ? new TextStyle(color: PUC_COLOR) : dateStyles,
+            style: isSelected ? new TextStyle(color: PUC_COLOR,
+                decoration: TextDecoration.combine(<TextDecoration>[TextDecoration.overline, TextDecoration.underline]),
+                decorationStyle: TextDecorationStyle.dashed,
+
+//                decorationStyle: TextDecorationStyle.dashed ,
+                decorationColor: Colors.blue,
+
+            ) : dateStyles,
 //            style: isSelected ? new TextStyle(color: Colors.white) : dateStyles,
             textAlign: TextAlign.center,
           ),
         ),
       );
     }
+
   }
 
   @override
