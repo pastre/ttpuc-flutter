@@ -47,5 +47,11 @@ class Storage{
   void setLogin(bool isLogged) async{
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('logged', isLogged);
+    return;
+  }
+
+  void clearData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
   }
 }

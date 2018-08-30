@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'modules/design/NavScreenComposite.dart';
+import 'modules/design/Main.dart';
 import 'package:horariopucpr/modules/api/Api.dart';
 import 'package:horariopucpr/modules/storage/Storage.dart';
 import 'modules/telas/LoginWidget.dart';
@@ -57,7 +57,7 @@ class AppState extends State<App>{
   Widget build(BuildContext context) {
     if(this.isLogged == null) this.isLogged = false;
     print('Returning ${this.isLogged}');
-    return MaterialApp(home: this.isLogged ? MainScreen() : LoginWidget(updateLogin),
+    return MaterialApp(home: this.isLogged ? MainScreen(updateLogin) : LoginWidget(updateLogin),
 //    return MaterialApp(home:MainScreen(),
 
       //TODO:  theme: ,

@@ -35,7 +35,6 @@ class _NotasState extends State<NotasWidget>{
     List<Widget> list = new List<Widget>();
     for (var i in this.list){
       if(i['faltaspresencas'] == '--/--%') continue;
-      print('hahr ${i['hahr'].split("/")[0]}');
       var maxFaltas = int.parse(i['hahr'].split("/")[0].replaceAll(' ', '')) * 0.25;
       int nFaltas = int.parse(i["faltaspresencas"].split('/')[0]);
       list.add(this.buildTableCell(i['disciplina'], i['nota1'], i['nota2'], i['nota3'], i['nota4'],(maxFaltas - nFaltas).round()));
