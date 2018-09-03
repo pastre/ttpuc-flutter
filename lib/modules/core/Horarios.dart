@@ -97,7 +97,7 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
     sbt += sala;
     return Card(child: ListTile(
       title: cardTitle(title),
-      subtitle: Text(sbt, style: TextStyle(color: Colors.grey),),),
+      subtitle: Text(sbt, style: TextStyle(color: Colors.grey),),),elevation: 2.0,
     );
   }
 
@@ -118,5 +118,10 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
         onPressed: () => print('asd'),
         iconSize: 20.0,),
       height: 25.0, width: 25.0,);
+  }
+
+
+  void _showAddMateria(){
+    showDialog(context: null);
   }
 }

@@ -59,6 +59,7 @@ class Api{
         headers: {'authorization': basicAuth});
 
     Map<String, dynamic> resp = await json.decode(r.body);
+
     if(resp['status'] == 'success')
       return json.encode(resp['data']);
 
@@ -68,6 +69,22 @@ class Api{
     this.username = username;
     this.password = password;
     return await _doCheckAuth();
+   }
+
+   Future<String> getEventos() async{
+     print('Fired request $username, $password');
+     String basicAuth =
+         'Basic ' + base64Encode(utf8.encode('$username:$password'));
+     print(basicAuth);
+     print('loading eventos');
+     Response r = await get('https://horariopucpr.herokuapp.com/agenda',
+         headers: {'authorization': basicAuth});
+
+     Map<String, dynamic> resp = await json.decode(r.body);
+     if(resp['status'] == 'success') {
+       print('return from api is ${resp['data']}');
+       return json.encode(resp['data']);
+     }
    }
 
 }

@@ -34,10 +34,8 @@ class NotasState extends GenericAppState<NotasWidget>{
   }
 
 
-
   @override
   bool hasLoaded() {
-    print("List length is ${this.list.length}");
     return this.list.length != 0;
   }
 
@@ -48,14 +46,16 @@ class NotasState extends GenericAppState<NotasWidget>{
   }
 
   @override
+  Future loadLocal() async {
+    return this.storage.getNotas();
+  }
+
+  @override
   Future apiCall() async {
     return this.api.nGetNotas();
   }
 
-  @override
-  Future loadLocal() async {
-    return this.storage.getNotas();
-  }
+
 
   @override
   void updateState(data) {
@@ -70,7 +70,8 @@ class NotasState extends GenericAppState<NotasWidget>{
   Widget _buildList(context){
     List<Widget> list = new List<Widget>();
     for (var i in this.list){
-      var maxFaltas = int.parse(i['hahr'].split("/")[0].substring(0, 2)) * 0.25;
+      if(i['faltaspresencas'] == '--/--%') continue;
+      var maxFaltas = int.parse(i['hahr'].split("/")[0].replaceAll(' ', '')) * 0.25;
       int nFaltas = int.parse(i["faltaspresencas"].split('/')[0]);
       list.add(this.buildTableCell(i['disciplina'], i['nota1'], i['nota2'], i['nota3'], i['nota4'],(maxFaltas - nFaltas).round()));
     }
@@ -87,13 +88,7 @@ class NotasState extends GenericAppState<NotasWidget>{
     if (n3 != '--/--') subt += '\nNota 3: $n3';
     if(n4 != '--/--') subt += '  Nota 4: $n4';
 
-//      subt +='\nVocê ainda pode faltar $faltas aulas';
-//      return new Card(child: ListTile(
-//        title: Text('$materia'),
-//        subtitle:  buildText(n1, n2, n3, n4, faltas) ,
-////        isThreeLine: true,
-//      )
-//      );
+
 
     return new Stack(children: <Widget>[
       ListTile(
@@ -104,13 +99,6 @@ class NotasState extends GenericAppState<NotasWidget>{
       Divider(height: 1.0, indent: 16.0,)
     ],
     );
-//
-//      ListTile(
-//        title: Text('$materia'),
-//        subtitle:  buildText(n1, n2, n3, n4, faltas),
-//        isThreeLine: true,
-//
-//      );
 
   }
 

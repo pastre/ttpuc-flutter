@@ -6,18 +6,6 @@ import './Evento.dart';
 
 class Storage{
 
-  Future<String> getEventos() async{
-    List<Evento> eventos = [
-      Evento(descricao: 'Fazer lista de exericios', dia: 31, mes: 08, materia: 'Estatística', nome: 'TDE 1'),
-      Evento(descricao: 'Fazer experimento 23', dia: 05, mes: 09, materia: 'Sistemas Digitais 2', nome: 'Atividade'),
-      Evento(descricao: 'Fazer lista de exericios', dia: 31, mes: 08, materia: 'Estatística', nome: 'TDE 1'),
-      Evento(descricao: 'Fazer lista de exericios', dia: 31, mes: 08, materia: 'Estatística', nome: 'TDE 1'),
-      Evento(descricao: 'Fazer lista de exericios', dia: 31, mes: 08, materia: 'Estatística', nome: 'TDE 1'),
-      Evento(descricao: 'Fazer lista de exericios', dia: 31, mes: 08, materia: 'Estatística', nome: 'TDE 1'),
-      Evento(descricao: 'Fazer lista de exericios', dia: 31, mes: 08, materia: 'Estatística', nome: 'TDE 1'),
-    ];
-    return json.encode(eventos);
-  }
 
   static final Storage _singleton = new Storage._internal();
   var notas;
@@ -49,6 +37,16 @@ class Storage{
 
   void setHorarios(String horariosJson){
     _set('horarios', horariosJson);
+  }
+
+
+  void setEventos(String horariosJson){
+    _set('eventos', horariosJson);
+  }
+
+  Future<String> getEventos() async{
+    print('eventos loaded');
+    return await _get('eventos');
   }
 
   void setLogin(bool isLogged) async{

@@ -21,8 +21,7 @@ class Calendar extends StatefulWidget {
   final bool showTodayAction;
   final bool showCalendarPickerIcon;
   final DateTime initialCalendarDateOverride;
-
-
+  var eventos;
 
   Calendar({
     this.onDateSelected,
@@ -32,15 +31,14 @@ class Calendar extends StatefulWidget {
     this.showTodayAction: false,
     this.showChevronsToChangeRange: true,
     this.showCalendarPickerIcon: false,
-    this.initialCalendarDateOverride
+    this.initialCalendarDateOverride,
+    this.eventos,
   });
 
   @override
   _CalendarState createState() => new _CalendarState();
 
 }
-
-
 
 class _CalendarState extends State<Calendar> {
   var storage, list, api;
@@ -80,7 +78,6 @@ class _CalendarState extends State<Calendar> {
     var rightInnerIcon;
     var leftOuterIcon;
     var rightOuterIcon;
-
     if (widget.showCalendarPickerIcon) {
       rightInnerIcon = new IconButton(
         onPressed: () => selectDateFromPicker(),
@@ -149,8 +146,6 @@ class _CalendarState extends State<Calendar> {
     );
   }
 
-
-
   List<Widget> calendarBuilder() {
     List<Widget> dayWidgets = [];
     List<DateTime> calendarDays =
@@ -186,34 +181,56 @@ class _CalendarState extends State<Calendar> {
               child: this.widget.dayBuilder(context, day),
             ),
           );
-        } else {
-          if(day.day % 3 == 0){
-            dayWidgets.add(
-              new CalendarTile(
-                onDateSelected: () => handleSelectedDateAndUserCallback(day),
-                date: day,
-                dateStyles: configureDateStyle(monthStarted, monthEnded),
-                isSelected: Utils.isSameDay(selectedDate, day),
-                hasEvent: true,
-              ),
-            );
-          }else {
-            dayWidgets.add(
-              new CalendarTile(
-                onDateSelected: () => handleSelectedDateAndUserCallback(day),
-                date: day,
-                dateStyles: configureDateStyle(monthStarted, monthEnded),
-                isSelected: Utils.isSameDay(selectedDate, day),
-                hasEvent: false,
-              ),
-            );
-          }
+        } else {addCalendarTile(day, dayWidgets);
+//          if(day.day % 3 == 0){
+//            dayWidgets.add(
+//              new CalendarTile(
+//                onDateSelected: () => handleSelectedDateAndUserCallback(day),
+//                date: day,
+//                dateStyles: configureDateStyle(monthStarted, monthEnded),
+//                isSelected: Utils.isSameDay(selectedDate, day),
+//                hasEvent: true,
+//              ),
+//            );
+//          }else {
+//            dayWidgets.add(
+//              new CalendarTile(
+//                onDateSelected: () => handleSelectedDateAndUserCallback(day),
+//                date: day,
+//                dateStyles: configureDateStyle(monthStarted, monthEnded),
+//                isSelected: Utils.isSameDay(selectedDate, day),
+//                hasEvent: false,
+//              ),
+//            );
+//          }
         }
       },
     );
     return dayWidgets;
   }
 
+  Widget addCalendarTile(day, dayWidgets){
+    if(day.day % 3 == 0){
+      print('Day is $day. Events is ${widget.eventos}');
+      dayWidgets.add(
+        new CalendarTile(
+          onDateSelected: () => handleSelectedDateAndUserCallback(day),
+          date: day,
+          isSelected: Utils.isSameDay(selectedDate, day),
+          hasEvent: true,
+        ),
+      );
+    }else {
+      dayWidgets.add(
+        new CalendarTile(
+          onDateSelected: () => handleSelectedDateAndUserCallback(day),
+          date: day,
+          isSelected: Utils.isSameDay(selectedDate, day),
+          hasEvent: false,
+        ),
+      );
+    }
+  }
 
   TextStyle configureDateStyle(monthStarted, monthEnded) {
     TextStyle dateStyles;
@@ -445,5 +462,17 @@ class ExpansionCrossFade extends StatelessWidget {
         duration: const Duration(milliseconds: 300),
       ),
     );
+  }
+}
+
+class CalendarEvent{
+  String nome, descricao, materia;
+  DateTime data;
+
+  CalendarEvent(nome, descricao, materia, data){
+    this.nome = nome;
+    this.descricao = descricao;
+    this.materia = materia;
+    this.data = DateTime.fromMillisecondsSinceEpoch(data);
   }
 }
