@@ -162,7 +162,7 @@ class _CalendarState extends State<Calendar> {
         dayWidgets.add(
           new CalendarTile(
             isDayOfWeek: true,
-            dayOfWeek: day,
+            dayOfWeek: day,hasEvent: true,
           ),
         );
       },
@@ -188,14 +188,27 @@ class _CalendarState extends State<Calendar> {
             ),
           );
         } else {
-          dayWidgets.add(
-            new CalendarTile(
-              onDateSelected: () => handleSelectedDateAndUserCallback(day),
-              date: day,
-              dateStyles: configureDateStyle(monthStarted, monthEnded),
-              isSelected: Utils.isSameDay(selectedDate, day),
-            ),
-          );
+          if(day.day % 3 == 0){
+            dayWidgets.add(
+              new CalendarTile(
+                onDateSelected: () => handleSelectedDateAndUserCallback(day),
+                date: day,
+                dateStyles: configureDateStyle(monthStarted, monthEnded),
+                isSelected: Utils.isSameDay(selectedDate, day),
+                hasEvent: true,
+              ),
+            );
+          }else {
+            dayWidgets.add(
+              new CalendarTile(
+                onDateSelected: () => handleSelectedDateAndUserCallback(day),
+                date: day,
+                dateStyles: configureDateStyle(monthStarted, monthEnded),
+                isSelected: Utils.isSameDay(selectedDate, day),
+                hasEvent: false,
+              ),
+            );
+          }
         }
       },
     );
@@ -322,7 +335,6 @@ class _CalendarState extends State<Calendar> {
   }
 
   void updateSelectedRange(DateTime start, DateTime end) {
-    print('Updating range...');
     selectedRange = new Tuple2<DateTime, DateTime>(start, end);
     if (widget.onSelectedRangeChange != null) {
       widget.onSelectedRangeChange(selectedRange);
