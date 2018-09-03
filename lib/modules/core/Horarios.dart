@@ -1,37 +1,66 @@
-import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/core/Generic.dart';
-import 'package:horariopucpr/modules/utils/Utils.dart';
+import 'dart:async';
+import 'dart:convert';
 
-class HorariosWidget extends StatefulWidget{
+import 'package:flutter/material.dart';
+import 'package:horariopucpr/modules/utils/Utils.dart';
+import 'package:horariopucpr/modules/core/Generic.dart';
+
+class HorariosWidget extends GenericAppWidget{
+  HorariosWidget({ List<ListTile> key }) : super(list: key);
   @override
   State<StatefulWidget> createState() {
-    return new _HorariosState();
+    return HorariosState();
   }
-
 }
 
-class _HorariosState extends GenericAppState<HorariosWidget> with TickerProviderStateMixin{
+
+class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderStateMixin{
+
+  var materias;
   var dias =  ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', ];
   List<Tab> _tabs = <Tab>[];
   TabController tabController;
 
-
   @override
-  initState() {
-    super.initState();
+  void preinit(){
     for(var i = 0; i < this.dias.length; i++){
       print("$i, ${this.dias[i]}");
       _tabs.add(new Tab(text: this.dias[i], ));
     }
+    materias = [];
     tabController = new TabController(length: _tabs.length, vsync: this, initialIndex: 1, );
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext ctx) {
+    // TODO: implement build
+    return super.build(ctx);
+  }
+
+  @override
+  Widget buildScreen(BuildContext ctx){
     Widget tabBar =  buildTabBar();
     Widget tabBarView = buildTabView();
     return new Scaffold(appBar: tabBar, body: tabBarView, );
   }
+
+  @override
+  bool hasLoaded() {
+    return this.materias.length != 0;
+  }
+
+  @override
+  void updateLocal(data) {
+    this.storage.setHorarios(data);
+  }
+
+  //  PAREI AQUI. INTEGRAR HORARIOS DEPOIS DO MERGE
+  @override
+  Future apiCall() async {
+    return this.api.nGetNotas();
+  }
+
+
 
   Widget buildTabView(){
     return new TabBarView(children: _tabs.map((tab) => buildCardList(tab.text)).toList(),
@@ -67,16 +96,16 @@ class _HorariosState extends GenericAppState<HorariosWidget> with TickerProvider
       sbt += '$professor\n';
     sbt += sala;
     return Card(child: ListTile(
-        title: cardTitle(title),
-        subtitle: Text(sbt, style: TextStyle(color: Colors.grey),),),
+      title: cardTitle(title),
+      subtitle: Text(sbt, style: TextStyle(color: Colors.grey),),),
     );
   }
 
   Widget cardTitle(String title){
     return Row(children: <Widget>[
-        Text(title),
-        eventButton(),
-      ],
+      Text(title),
+      eventButton(),
+    ],
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
     );
@@ -84,13 +113,10 @@ class _HorariosState extends GenericAppState<HorariosWidget> with TickerProvider
 
   Widget eventButton(){
     return SizedBox(
-        child: IconButton(
-            icon: Icon(Icons.add, color: Colors.lightBlue,),
-            onPressed: () => print('asd'),
-            iconSize: 20.0,),
-        height: 25.0, width: 25.0,);
+      child: IconButton(
+        icon: Icon(Icons.add, color: Colors.lightBlue,),
+        onPressed: () => print('asd'),
+        iconSize: 20.0,),
+      height: 25.0, width: 25.0,);
   }
-
-
 }
-

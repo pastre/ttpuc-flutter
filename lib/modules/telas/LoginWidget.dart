@@ -35,7 +35,6 @@ class LoginWidget extends StatelessWidget{
     this.userCtrl.text = 'bruno.pastre';
     this.pwdCtrl.text = 'asdqwe123!@#';
     this.api.setCredentials(this.userCtrl.text, this.pwdCtrl.text).then((b) => this.loginAction(b));
-
   }
   @override
   Widget build(BuildContext context) {

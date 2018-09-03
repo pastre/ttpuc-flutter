@@ -44,6 +44,10 @@ class Storage{
     return prefs.getBool('logged');
   }
 
+  void setHorarios(String horariosJson){
+    _set('horarios', horariosJson);
+  }
+
   void setLogin(bool isLogged) async{
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('logged', isLogged);
