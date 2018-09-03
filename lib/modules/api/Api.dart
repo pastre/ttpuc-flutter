@@ -31,6 +31,7 @@ class Api{
         'Basic ' + base64Encode(utf8.encode('${this.username}:${this.password}'));
     print('${this.username}:${this.password}');
 
+    print("Fired request for login");
     Response r = await get('https://horariopucpr.herokuapp.com/impressao',
         headers: {'authorization': basicAuth});
     print(r.body);

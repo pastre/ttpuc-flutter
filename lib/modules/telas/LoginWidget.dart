@@ -11,6 +11,7 @@ class LoginWidget extends StatelessWidget{
   Api api;
   Storage storage;
   TextEditingController userCtrl, pwdCtrl;
+
   LoginWidget(VoidCallback callback){
     this.api = Api();
     this.storage = Storage();
@@ -32,8 +33,8 @@ class LoginWidget extends StatelessWidget{
 
   VoidCallback login()  {
     print('text is ${this.userCtrl.text}, ${this.pwdCtrl.text}');
-    this.userCtrl.text = 'bruno.pastre';
-    this.pwdCtrl.text = 'asdqwe123!@#';
+    //this.userCtrl.text = 'bruno.pastre';
+    //this.pwdCtrl.text = 'asdqwe123!@#';
     this.api.setCredentials(this.userCtrl.text, this.pwdCtrl.text).then((b) => this.loginAction(b));
   }
   @override

@@ -4,6 +4,10 @@ import 'package:tuple/tuple.dart';
 import 'package:date_utils/date_utils.dart';
 import 'package:horariopucpr/modules/calendar/CalendarTile.dart';
 import 'package:horariopucpr/modules/calendar/Translator.dart';
+import 'package:horariopucpr/modules/storage/Storage.dart' ;
+import 'package:horariopucpr/modules/api/Api.dart';
+import 'package:horariopucpr/modules/utils/Utils.dart';
+
 
 
 typedef DayBuilder(BuildContext context, DateTime day);
@@ -17,6 +21,8 @@ class Calendar extends StatefulWidget {
   final bool showTodayAction;
   final bool showCalendarPickerIcon;
   final DateTime initialCalendarDateOverride;
+
+
 
   Calendar({
     this.onDateSelected,
@@ -37,7 +43,9 @@ class Calendar extends StatefulWidget {
 
 
 class _CalendarState extends State<Calendar> {
+  var storage, list, api;
   final calendarUtils = new Utils();
+
   DateTime today = new DateTime.now();
   List<DateTime> selectedMonthsDays;
   Iterable<DateTime> selectedWeeksDays;
@@ -52,6 +60,9 @@ class _CalendarState extends State<Calendar> {
 
   void initState() {
     super.initState();
+    this.storage = new Storage();
+    this.api = new Api();
+
     if(widget.initialCalendarDateOverride != null) today = widget.initialCalendarDateOverride;
     selectedMonthsDays = Utils.daysInMonth(today);
     var firstDayOfCurrentWeek = Utils.firstDayOfWeek(today);
@@ -150,7 +161,7 @@ class _CalendarState extends State<Calendar> {
         dayWidgets.add(
           new CalendarTile(
             isDayOfWeek: true,
-            dayOfWeek: day,
+            dayOfWeek: day,hasEvent: true,
           ),
         );
       },
@@ -176,14 +187,27 @@ class _CalendarState extends State<Calendar> {
             ),
           );
         } else {
-          dayWidgets.add(
-            new CalendarTile(
-              onDateSelected: () => handleSelectedDateAndUserCallback(day),
-              date: day,
-              dateStyles: configureDateStyle(monthStarted, monthEnded),
-              isSelected: Utils.isSameDay(selectedDate, day),
-            ),
-          );
+          if(day.day % 3 == 0){
+            dayWidgets.add(
+              new CalendarTile(
+                onDateSelected: () => handleSelectedDateAndUserCallback(day),
+                date: day,
+                dateStyles: configureDateStyle(monthStarted, monthEnded),
+                isSelected: Utils.isSameDay(selectedDate, day),
+                hasEvent: true,
+              ),
+            );
+          }else {
+            dayWidgets.add(
+              new CalendarTile(
+                onDateSelected: () => handleSelectedDateAndUserCallback(day),
+                date: day,
+                dateStyles: configureDateStyle(monthStarted, monthEnded),
+                isSelected: Utils.isSameDay(selectedDate, day),
+                hasEvent: false,
+              ),
+            );
+          }
         }
       },
     );
@@ -310,7 +334,6 @@ class _CalendarState extends State<Calendar> {
   }
 
   void updateSelectedRange(DateTime start, DateTime end) {
-    print('Updating range...');
     selectedRange = new Tuple2<DateTime, DateTime>(start, end);
     if (widget.onSelectedRangeChange != null) {
       widget.onSelectedRangeChange(selectedRange);
