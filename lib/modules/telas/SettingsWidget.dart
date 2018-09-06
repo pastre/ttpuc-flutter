@@ -19,10 +19,32 @@ class SettingsWidget extends StatelessWidget{
     return Scaffold(appBar: AppBar(title: Text('Configurações'), backgroundColor: PUC_COLOR,),body: this.buildScreen(context),backgroundColor: Colors.white,);
   }
 
+  Widget buildLogoutButton(BuildContext context) {
+    return MaterialButton(onPressed: () => this.doLogout(context), color: Colors.white, textColor: PUC_COLOR, child: Text('Logout'),);
+  } 
+
+  Widget buildOptionsList(){
+    return ListView(  // This next line does the trick.
+      children: <Widget>[
+        MaterialButton(onPressed: () => {}, child: Text('Adicionar materia'),),
+      ],
+    );
+  }
 
   Widget buildScreen(BuildContext context){
-//    return Text('Settings');
-    return MaterialButton(onPressed: () => this.doLogout(context), color: Colors.grey, textColor: Colors.deepOrange, child: Text('Logout'),);
+    Widget logoutBtt = this.buildLogoutButton(context);
+    return Stack(children: <Widget>[
+      Positioned(
+          child: MaterialButton(
+            onPressed: () => {},
+            child: Text('Adicionar Materia'), ),
+          top: 0.0,
+          left: 0.0,
+      ),
+      Positioned(child: logoutBtt, bottom: 0.0, right: 0.0, left: 0.0,)
+    ],
+      fit: StackFit.expand,
+    );
   }
 
 

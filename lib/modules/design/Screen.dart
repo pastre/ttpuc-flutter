@@ -4,6 +4,9 @@ import 'package:horariopucpr/modules/core/Calendario.dart';
 //import 'package:horariopucpr/modules/telas/CalendarioWidget.dart';
 import 'package:horariopucpr/modules/telas/PlaceholderWidget.dart';
 import 'package:horariopucpr/modules/core/Notas.dart';
+import 'package:horariopucpr/modules/utils/Utils.dart';
+
+
 class Screen extends StatefulWidget{
   _ScreenState state;
   Screen(){
@@ -24,7 +27,10 @@ class Screen extends StatefulWidget{
 class _ScreenState extends State<Screen>{
   var possibleScreens, currentScreen;
   _ScreenState(){
-    possibleScreens = {0: HorariosWidget(), 1: NotasWidget(), 2: PlaceholderWidget(),3: CalendarioWidget(),};
+    possibleScreens = Map<int, Widget>();
+    for(var i = 0;i < SCREENS.length; i++){
+      possibleScreens[i] = SCREENS[i].screenWidget;
+    }
     this.currentScreen = possibleScreens[1];
   }
 

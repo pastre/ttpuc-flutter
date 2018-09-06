@@ -17,9 +17,15 @@ class HorariosWidget extends GenericAppWidget{
 class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderStateMixin{
 
   var materias;
-  var dias =  ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', ];
+  var dias =  ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom' ];
   List<Tab> _tabs = <Tab>[];
   TabController tabController;
+
+
+  @override
+  Widget build(BuildContext ctx) {
+    return super.build(ctx);
+  }
 
   @override
   void preinit(){
@@ -32,13 +38,9 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
   }
 
   @override
-  Widget build(BuildContext ctx) {
-    // TODO: implement build
-    return super.build(ctx);
-  }
-
-  @override
   Widget buildScreen(BuildContext ctx){
+//    return Text('Carregado com sucesso');
+    print('My data is ${materias}');
     Widget tabBar =  buildTabBar();
     Widget tabBarView = buildTabView();
     return new Scaffold(appBar: tabBar, body: tabBarView, );
@@ -54,13 +56,24 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
     this.storage.setHorarios(data);
   }
 
-  //  PAREI AQUI. INTEGRAR HORARIOS DEPOIS DO MERGE
   @override
-  Future apiCall() async {
-    return this.api.nGetNotas();
+  Future loadLocal() async {
+    return this.storage.getHorarios();
   }
 
+  @override
+  Future apiCall() async {
+    return this.api.getHorarios();
+  }
 
+  @override
+  void updateState(data) {
+    print('Setting state');
+    setState(() {
+      var ret =  json.decode(data);
+      this.materias = ret['horarios'];
+    });
+  }
 
   Widget buildTabView(){
     return new TabBarView(children: _tabs.map((tab) => buildCardList(tab.text)).toList(),
@@ -78,15 +91,26 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
     return tabBar;
   }
 
-
   Widget buildCardList(String key){
-    var cards = <Card>[
-      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
-      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
-      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
-      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
-      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
-    ];
+//    var cards = <Card>[
+//      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
+//      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
+//      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
+//      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
+//      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
+//    ];
+
+    var cards = <Card>[];
+    print('Materias is $materias');
+    for(var i in materias) {
+      if(!i['dia'].contains(key)) continue;
+      print('I is $i');
+      String time = i['horaInicio'] + ' - ' + i['horaFim'];
+      String local = 'Sala ${i['sala']} - Bloco ${i['bloco']}';
+      cards.add(buildCard(i['nome'], time, i['professores'].split(','),local ));
+    }
+    if(cards.isEmpty)
+      return Text('Voce nao tem aulas hoje');
     return ListView.builder(itemBuilder: (_, int) => cards[int], itemCount: cards.length,);
   }
 

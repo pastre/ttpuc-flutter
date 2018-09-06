@@ -35,6 +35,9 @@ class Storage{
     return prefs.getBool('logged');
   }
 
+  Future<String> getHorarios() async{
+    return await _get('horarios');
+  }
   void setHorarios(String horariosJson){
     _set('horarios', horariosJson);
   }

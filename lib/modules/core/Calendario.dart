@@ -58,7 +58,8 @@ class CalendarioState extends GenericAppState<CalendarioWidget>{
   @override
   void updateState(data){
     setState((){
-      var ret =  json.decode(data);
+      var ret =  json.decode(json.decode(data)['eventos']);
+      print('Ret is $ret');
       this.eventos = ret;
     });
   }

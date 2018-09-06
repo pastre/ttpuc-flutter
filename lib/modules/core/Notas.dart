@@ -27,6 +27,8 @@ class NotasState extends GenericAppState<NotasWidget>{
   void preinit(){
     list = [];
   }
+
+
   @override
   Widget buildScreen(BuildContext ctx) {
     print("WORKED");

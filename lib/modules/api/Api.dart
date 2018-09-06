@@ -65,6 +65,21 @@ class Api{
 
   }
 
+  Future<String> getHorarios() async{
+    print('Fired request $username, $password');
+    String basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+//    print(basicAuth);
+
+    Response r = await get('https://horariopucpr.herokuapp.com/horario',
+        headers: {'authorization': basicAuth});
+
+    Map<String, dynamic> resp = await json.decode(r.body);
+    print('Response is ${r.body}');
+    if(resp['status'] == 'success')
+      return json.encode(resp['data']);
+  }
+
   Future<bool> setCredentials(String username, String password) async{
     this.username = username;
     this.password = password;
