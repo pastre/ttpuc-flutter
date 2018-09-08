@@ -20,20 +20,24 @@ class _BottomNavBarState extends  State<BottomNavBar>{
   var currIndex;
   Screen screen;
   _BottomNavBarState(screen){
-    this.list = [
-    BottomNavigationBarItem(icon: Icon(Icons.subject),
-      title: Text( 'Horários'),
-    ),
-    BottomNavigationBarItem(icon: Icon(Icons.book),
-      title: Text( 'Notas'),
-    ),
-    BottomNavigationBarItem(icon: Icon(Icons.person_pin),
-      title: Text( 'Professores'),
-    ),
-    BottomNavigationBarItem(icon: Icon(Icons.calendar_today),
-      title: Text( 'Agenda'),
-    ),
-    ];
+//    this.list = [
+//      BottomNavigationBarItem(icon: Icon(Icons.subject),
+//        title: Text( 'Horários'),
+//      ),
+//      BottomNavigationBarItem(icon: Icon(Icons.book),
+//        title: Text( 'Notas'),
+//      ),
+//      BottomNavigationBarItem(icon: Icon(Icons.person_pin),
+//        title: Text( 'Professores'),
+//      ),
+//      BottomNavigationBarItem(icon: Icon(Icons.calendar_today),
+//        title: Text( 'Agenda'),
+//      ),
+//    ];
+    this.list = new List<BottomNavigationBarItem>();
+    for(ScreenOption i in SCREENS){
+      this.list.add(BottomNavigationBarItem(icon: i.icon, title: Text(i.nome)));
+    }
     this.screen = screen;
     this.currIndex = 1;
   }

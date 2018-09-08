@@ -29,7 +29,7 @@ class CalendarTile extends StatelessWidget {
   });
 
   Widget renderDateOrDayOfWeek(BuildContext context) {
-    print("Selected ${this.isSelected} $date");
+//    print("Selected ${this.isSelected} $date");
     if (isDayOfWeek) {
       return new InkWell(
         child: new Container(

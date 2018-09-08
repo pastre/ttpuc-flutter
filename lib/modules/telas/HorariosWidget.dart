@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/utils/Generic.dart';
+import 'package:horariopucpr/modules/core/Generic.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 
 class HorariosWidget extends StatefulWidget{
@@ -66,7 +66,31 @@ class _HorariosState extends GenericAppState<HorariosWidget> with TickerProvider
     for(String professor in professores)
       sbt += '$professor\n';
     sbt += sala;
-    return Card(child: ListTile(title: Text(title), subtitle: Text(sbt, style: TextStyle(color: Colors.grey),),),);
+    return Card(child: ListTile(
+        title: cardTitle(title),
+        subtitle: Text(sbt, style: TextStyle(color: Colors.grey),),),
+    );
   }
+
+  Widget cardTitle(String title){
+    return Row(children: <Widget>[
+        Text(title),
+        eventButton(),
+      ],
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+    );
+  }
+
+  Widget eventButton(){
+    return SizedBox(
+        child: IconButton(
+            icon: Icon(Icons.add, color: Colors.lightBlue,),
+            onPressed: () => print('asd'),
+            iconSize: 20.0,),
+        height: 25.0, width: 25.0,);
+  }
+
+
 }
 
