@@ -5,7 +5,8 @@ import 'package:http/http.dart';
 
 
 class Api{
-  String notas = '', username = 'bruno.pastre', password = 'asdqwe123!@#';
+  String notas = '', username = '', password = '';
+//  String notas = '', username = 'bruno.pastre', password = 'asdqwe123!@#';
   bool couldLogin = false;
   static final Api _singleton = new Api._internal();
 
@@ -32,7 +33,7 @@ class Api{
     print('${this.username}:${this.password}');
 
     print("Fired request for login");
-    Response r = await get('https://horariopucpr.herokuapp.com/impressao',
+    Response r = await get('https://horariopucpr.herokuapp.com/dadosPessoais',
         headers: {'authorization': basicAuth});
     print(r.body);
     return json.decode(r.body)['status'] == 'success';
@@ -72,6 +73,21 @@ class Api{
 //    print(basicAuth);
 
     Response r = await get('https://horariopucpr.herokuapp.com/horario',
+        headers: {'authorization': basicAuth});
+
+    Map<String, dynamic> resp = await json.decode(r.body);
+    print('Response is ${r.body}');
+    if(resp['status'] == 'success')
+      return json.encode(resp['data']);
+  }
+
+  Future<String> generateHorarios() async{
+    print('Fired request to build horarios $username, $password');
+    String basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+//    print(basicAuth);
+
+    Response r = await get('https://horariopucpr.herokuapp.com/horario/generate',
         headers: {'authorization': basicAuth});
 
     Map<String, dynamic> resp = await json.decode(r.body);

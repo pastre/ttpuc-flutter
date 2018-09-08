@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:horariopucpr/modules/materiasPicker/Picker.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 
@@ -15,7 +16,7 @@ class HorariosWidget extends GenericAppWidget{
 
 
 class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderStateMixin{
-
+  var PLACEHOLDER = 'asd';
   var materias;
   var dias =  ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom' ];
   List<Tab> _tabs = <Tab>[];
@@ -29,10 +30,6 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
 
   @override
   void preinit(){
-    for(var i = 0; i < this.dias.length; i++){
-      print("$i, ${this.dias[i]}");
-      _tabs.add(new Tab(text: this.dias[i], ));
-    }
     materias = [];
     tabController = new TabController(length: _tabs.length, vsync: this, initialIndex: 1, );
   }
@@ -40,6 +37,10 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
   @override
   Widget buildScreen(BuildContext ctx){
 //    return Text('Carregado com sucesso');
+    for(var i = 0; i < this.dias.length; i++){
+//      print("$i, ${this.dias[i]}");
+      _tabs.add(new Tab(text: this.dias[i], ));
+    }
     print('My data is ${materias}');
     Widget tabBar =  buildTabBar();
     Widget tabBarView = buildTabView();
@@ -58,6 +59,7 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
 
   @override
   Future loadLocal() async {
+    print('Loding local...');
     return this.storage.getHorarios();
   }
 
@@ -68,11 +70,23 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
 
   @override
   void updateState(data) {
-    print('Setting state');
-    setState(() {
-      var ret =  json.decode(data);
-      this.materias = ret['horarios'];
-    });
+    var ret =  json.decode(data)['horarios'];
+    print('Setting state ${ret}');
+    if(ret.isEmpty){
+      this.materias.add(PLACEHOLDER);
+      print('Empty!!!');
+      buildMaterias();
+    }else {
+      setState(() {
+        this.materias = ret['horarios'];
+      });
+    }
+  }
+
+  void buildMaterias(){
+    Navigator.push(
+        this.context,
+        MaterialPageRoute(builder: (context) => Picker()));
   }
 
   Widget buildTabView(){
@@ -99,7 +113,9 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
 //      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
 //      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
 //    ];
-
+    if(materias.contains(PLACEHOLDER)){
+      return MaterialButton(child: Text('Aguardando insercao das materias'), onPressed: buildMaterias,);
+    }
     var cards = <Card>[];
     print('Materias is $materias');
     for(var i in materias) {

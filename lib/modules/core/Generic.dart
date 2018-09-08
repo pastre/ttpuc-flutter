@@ -74,15 +74,16 @@ class GenericAppState<GenericAppWidget> extends State{
   void fetchData() async{
     print("Fetching data");
     var localData = await this.loadLocal();
+    print('Loaded local');
     if(localData == null) {
+      print('Null');
       await this.apiCall().then((data) {
         this.updateLocal(data);
       });
     }
-//      print('Local data is $localData');
       localData = await this.loadLocal();
+      print('loadedLocal');
       updateState(localData);
-
   }
 
 }
