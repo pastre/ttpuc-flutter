@@ -132,7 +132,7 @@ class _ConflitoState extends State<Conflito>{
 
   @override
   Widget build(BuildContext context) {
-    return buildList(context);
+    return buildList(context );
     return new Column( children: makeRadios(),);
   }
 }
