@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/core/Horarios.dart';
 import 'package:horariopucpr/modules/core/Notas.dart';
+import 'package:horariopucpr/modules/materiasPicker/Picker.dart';
 import 'package:horariopucpr/modules/telas/PlaceholderWidget.dart';
 
 Color TATY_COLOR = Colors.pinkAccent;
@@ -9,7 +10,7 @@ Color PUC_COLOR = Color(0xFFA00503);
 List<ScreenOption> SCREENS = [
   ScreenOption(nome: 'Horarios', icon: Icon(Icons.subject), screenWidget: HorariosWidget()),
   ScreenOption(nome: 'Notas', icon: Icon(Icons.book), screenWidget: NotasWidget()),
-  ScreenOption(nome: 'Eu', icon: Icon(Icons.person), screenWidget: PlaceholderWidget()),
+  ScreenOption(nome: 'Eu', icon: Icon(Icons.person), screenWidget: Picker()),
 ];
 //Color PUC_COLOR = TATY_COLOR;
 

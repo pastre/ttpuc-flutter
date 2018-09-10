@@ -16,12 +16,13 @@ class Picker extends StatefulWidget{
 
 class PickerState extends State<Picker>{
 
-  var resp, api;
+  var resp, dups, api;
 
   @override
   void initState() {
     super.initState();
     this.resp = [];
+    this.dups = [];
     this.api = Api();
     this.updateData();
   }
@@ -41,46 +42,23 @@ class PickerState extends State<Picker>{
     if(resp.isEmpty){
       return Text('Loading');
     }
-    var items = <ListTile>[];
-    for(var i in resp['duplicados'])
-      items.add(buildRadio(i));
-    return ListView(children: items, );
+    return ListView(children: buildConflitos(), );
   }
 
-  Widget buildTile(data){
-    return ListTile(title:buildCard(data),);
-//    print('Tile is $data');
-  }
-
-
-  int tmp = 0;
-
-  Widget buildRadio(item){
-    return RadioListTile(value: false, groupValue: tmp, onChanged: (asd) => this._handleOptionChanged(asd));
-  }
-  void _handleOptionChanged(int value){
-
-  }
-  Widget buildCard(data){
-    return new Card(
-      child: RadioListTile(value: false, groupValue: tmp, onChanged: (asd) => this._handleOptionChanged(asd) ),
-    );
-  }
-
-  List<Group> groupItems(data){
+  List<Conflito> buildConflitos(){
     var done = [];
-    List<Group> ret = new List<Group>();
-    for(var i in data){
-      if(!done.contains(i)){
-        Group toAppend = new Group();
-        for(var j in data) {
-          if (i['subject'] == j['subject']) {
-            toAppend.addOption(j);
-            done.add(j);
-          }
+    List<Conflito> ret = new List<Conflito>();
+    for(var i in dups){
+      if(done.contains(i)) continue;
+      var toAppend = [];
+      for(var j in dups){
+        if(i['subject'] == j['subject'] ){
+          toAppend.add(j);
+          done.add(j);
         }
-        ret.add(toAppend);
       }
+      print('Created conflito $toAppend');
+      if(!toAppend.isEmpty) ret.add(new Conflito(conflito: toAppend,));
     }
 
     return ret;
@@ -91,25 +69,71 @@ class PickerState extends State<Picker>{
     ret = json.decode(ret);
     print('Ret is $ret');
     setState((){
-      resp = ret;
+      resp = ret['horarios'];
+      dups = ret['duplicados'];
     });
   }
 }
 
 
-class Group{
-  var options;
-  int _radioValue = 0;
-  Group() {
-    this.options = [];
-  }
+class Conflito extends StatefulWidget{
+  var conflito;
+  Conflito({this.conflito});
 
-  Widget getWidget(){
-    return ListView(children: <Widget>[],);
-  }
-
-
-  void addOption(opt){
-    this.options.add(opt);
+  @override
+  State<StatefulWidget> createState() {
+    return _ConflitoState();
   }
 }
+
+class _ConflitoState extends State<Conflito>{
+
+  int _selectedIndex = 0;
+
+  void onChange(int value){
+    setState(() {
+      _selectedIndex = value;
+    });
+  }
+
+  Card buildCard(option){
+    return Card(
+        child: Text(option['subject'],),
+
+    );
+  }
+
+  Row radio(int val){
+    return Row(children: <Widget>[
+      buildCard(widget.conflito[val]),
+      new Radio(value: val, groupValue: _selectedIndex, onChanged: (int val) => onChange(val), ),
+    ],);
+
+  }
+
+  List<Widget> makeRadios(){
+    List<Widget> ret = new List<Widget>();
+    for(var i = 0; i < widget.conflito.length; i++){
+      ret.add(radio(i));
+    }
+    ret.add(Divider());
+    return ret;
+  }
+
+  Widget buildList(BuildContext context){
+    return new ListView.builder(itemBuilder: (BuildContext context, int index){
+      return new Card(child: ListTile(
+        title: Text("asd"),
+        subtitle: Text('qwe'),
+        )
+      );
+    }, shrinkWrap: true,);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return buildList(context);
+    return new Column( children: makeRadios(),);
+  }
+}
+
