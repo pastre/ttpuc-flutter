@@ -36,11 +36,10 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
 
   @override
   Widget buildScreen(BuildContext ctx){
-//    return Text('Carregado com sucesso');
     for(var i = 0; i < this.dias.length; i++){
-//      print("$i, ${this.dias[i]}");
       _tabs.add(new Tab(text: this.dias[i], ));
     }
+    print('Tabs is $_tabs');
     print('My data is ${materias}');
     Widget tabBar =  buildTabBar();
     Widget tabBarView = buildTabView();
@@ -70,6 +69,7 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
 
   @override
   void updateState(data) {
+    print('Updating state');
     var ret =  json.decode(data)['horarios'];
     print('Setting state ${ret}');
     if(ret.isEmpty){
@@ -77,8 +77,9 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
       print('Empty!!!');
       buildMaterias();
     }else {
+      print('Setting state with materias $ret');
       setState(() {
-        this.materias = ret['horarios'];
+        this.materias = ret;
       });
     }
   }
@@ -96,6 +97,7 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
   }
 
   Widget buildTabBar(){
+    print('Tabs is $_tabs');
     TabBar tabBar = new TabBar(tabs: _tabs,
       controller: tabController,
       labelColor: PUC_COLOR,
@@ -106,24 +108,23 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
   }
 
   Widget buildCardList(String key){
-//    var cards = <Card>[
-//      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
-//      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
-//      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
-//      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
-//      buildCard('Estatistica', '19:45 - 21:15', ['Rosane Aparecida'], 'Sala 224 - Bloco Vermelho'),
-//    ];
     if(materias.contains(PLACEHOLDER)){
       return MaterialButton(child: Text('Aguardando insercao das materias'), onPressed: buildMaterias,);
     }
     var cards = <Card>[];
-    print('Materias is $materias');
+//    print('Materias is $materias');
     for(var i in materias) {
-      if(!i['dia'].contains(key)) continue;
-      print('I is $i');
-      String time = i['horaInicio'] + ' - ' + i['horaFim'];
-      String local = 'Sala ${i['sala']} - Bloco ${i['bloco']}';
-      cards.add(buildCard(i['nome'], time, i['professores'].split(','),local ));
+      if(!i['day'].contains(key)) continue;
+//      print('I is $i');
+      String time = i['starttime'] + ' - ' + i['endtime'];
+      String local = '';
+      var professores = [];
+      for(var j in i['classrooms'])
+        local += j['sala'] + ' - ' + j['lugar'];
+
+      for(var j in i['teachers'])
+        professores.add(j);
+      cards.add(buildCard(i['subject'], time, professores,local ));
     }
     if(cards.isEmpty)
       return Text('Voce nao tem aulas hoje');
@@ -160,8 +161,4 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
       height: 25.0, width: 25.0,);
   }
 
-
-  void _showAddMateria(){
-    showDialog(context: null);
-  }
 }

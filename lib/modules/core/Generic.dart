@@ -82,7 +82,7 @@ class GenericAppState<GenericAppWidget> extends State{
       });
     }
       localData = await this.loadLocal();
-      print('loadedLocal');
+      print('loadedLocal $localData');
       updateState(localData);
   }
 
