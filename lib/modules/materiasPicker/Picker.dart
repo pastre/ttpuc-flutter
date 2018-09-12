@@ -55,7 +55,7 @@ class PickerState extends State<Picker>{
       list.add(q);
     }
     for(var i in conflitos){
-      print('Loop');
+//      print('Loop');
       Map toAppend = i.selected();
       bool found = false;
       int day = days[toAppend['day']];
@@ -64,7 +64,7 @@ class PickerState extends State<Picker>{
         Map k = resp[j];
         int d = days[k['day']];
         int s = startTime(k);
-        print('Days $day $d $s $starttime ${(s == starttime) && (day > d)}');
+//        print('Days $day $d $s $starttime ${(s == starttime) && (day > d)}');
         if((s == starttime) && (day > d)){
           print('Achei um lugar');
           list.insert(j, toAppend);
@@ -76,7 +76,7 @@ class PickerState extends State<Picker>{
     }
     Map<String, dynamic> r = {'horarios': list};
     String ret = json.encode(r);
-    debugPrint('Response is $ret');
+//    debugPrint('Response is $ret');
     storage.setHorarios(ret);
     Navigator.pop(this.context);
 //  TODO  api.setHorarios(ret);
