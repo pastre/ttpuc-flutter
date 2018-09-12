@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:horariopucpr/modules/storage/Storage.dart';
 import 'package:http/http.dart';
 
 
 class Api{
+  Storage s = new Storage();
   String notas = '', username = '', password = '';
 //  String notas = '', username = 'bruno.pastre', password = 'asdqwe123!@#';
   bool couldLogin = false;
@@ -16,6 +18,10 @@ class Api{
 
   Api._internal();
 
+  void assertData() async{
+    s.getUsername().then((a){username = a;});
+    s.getPassword().then((a){password = a;print('Refreshed credentials $username $password');});
+  }
 
   _doGetNotas() async {
     String basicAuth =

@@ -50,9 +50,29 @@ class Storage{
     return await _get('eventos');
   }
 
+  Future<String> getUsername() async{
+    return null; // TODO
+  }
+  Future<String> getPassword() async{
+    return null; // TODO
+  }
+
+
   void setLogin(bool isLogged) async{
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('logged', isLogged);
+    return;
+  }
+
+  void setUsername(String username) async{
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('username', username);
+    return;
+  }
+
+  void setPassword(String password) async{
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('password', password);
     return;
   }
 

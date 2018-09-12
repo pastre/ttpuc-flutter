@@ -32,8 +32,11 @@ class LoginState extends State<LoginWidget>{
 
   void loginAction(isLogged)async{
     if(isLogged){
+      String username = this.userCtrl.text, password = this.pwdCtrl.text;
       print('Logged!');
       this.storage.setLogin(isLogged);
+      this.storage.setUsername(username);
+      this.storage.setPassword(username);
       callback();
     }
     else {

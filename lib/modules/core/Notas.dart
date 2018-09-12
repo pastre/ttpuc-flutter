@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
+import "package:pull_to_refresh/pull_to_refresh.dart";
 
 class NotasWidget extends GenericAppWidget{
   NotasWidget({ List<ListTile> key }) : super(list: key);
@@ -16,7 +17,7 @@ class NotasWidget extends GenericAppWidget{
 class NotasState extends GenericAppState<NotasWidget>{
 
   var list;
-
+  RefreshController _refreshController;
   @override
   Widget build(BuildContext ctx) {
     // TODO: implement build
@@ -26,13 +27,25 @@ class NotasState extends GenericAppState<NotasWidget>{
   @override
   void preinit(){
     list = [];
+    _refreshController = new RefreshController();
   }
+
+  void refresh(a){
+    print('Refreshed! $a');
+    this.apiCall().then((data){
+
+    });
+    Future.delayed(Duration(milliseconds: 2000)).then((v){
+      print('Done $v ');
+      _refreshController.sendBack(true, RefreshStatus.completed);});
+  }
+
 
 
   @override
   Widget buildScreen(BuildContext ctx) {
-    print("WORKED");
-    return _buildList(ctx);
+    return SmartRefresher(child: _buildList(ctx), enablePullDown: true, enablePullUp: false, onRefresh: (a)=> refresh(a)
+      , controller: _refreshController, );
   }
 
 

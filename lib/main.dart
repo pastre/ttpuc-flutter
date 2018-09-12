@@ -57,7 +57,6 @@ class AppState extends State<App>{
   Widget build(BuildContext context) {
     if(this.isLogged == null) this.isLogged = false;
     return MaterialApp(home: this.isLogged ? MainScreen(updateLogin) : LoginWidget(updateLogin),
-//    return MaterialApp(home:MainScreen(),
 
       //TODO:  theme: ,
     );

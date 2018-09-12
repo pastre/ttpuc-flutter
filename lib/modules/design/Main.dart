@@ -1,18 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:horariopucpr/modules/api/Api.dart';
 import 'package:horariopucpr/modules/design/BottonNavigation.dart';
 import 'package:horariopucpr/modules/design/Screen.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/telas/SettingsWidget.dart';
-
-class Tmp extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-
-    print('Builded tmp');
-    return Scaffold(backgroundColor: Colors.white,);
-  }
-
-}
 
 class MainScreen extends StatelessWidget{
   Screen screen;
@@ -21,6 +12,8 @@ class MainScreen extends StatelessWidget{
   MainScreen(VoidCallback updateLogin){
     this.screen = Screen();
     this.updateLogin = updateLogin;
+    print('Loaded main screen');
+    Api().assertData();
   }
 
   void showConfig(context){
