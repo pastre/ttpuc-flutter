@@ -39,15 +39,40 @@ class PickerState extends State<Picker>{
         );
   }
 
+  int startTime(i){
+    var tmp = i['starttime'].split(':');
+//    print('Tmp is $tmp');
+    var ret = int.parse(tmp[0])*100+int.parse(tmp[1]);
+    print('Ret is $ret');
+    return ret;
+  }
+
   void done(List<Conflito> conflitos){
+    var days = {'Seg': 0, 'Ter': 1, 'Qua': 2, 'Qui': 3, 'Sex': 4, 'Sáb': 5, 'Dom': 6};
     var list = [];
     for(var i in resp){
       Map q = i;
       list.add(q);
     }
     for(var i in conflitos){
-      Map q = i.selected();
-      list.add(q);
+      print('Loop');
+      Map toAppend = i.selected();
+      bool found = false;
+      int day = days[toAppend['day']];
+      int starttime = startTime(toAppend);
+      for(int j = 0; j < resp.length; j++){
+        Map k = resp[j];
+        int d = days[k['day']];
+        int s = startTime(k);
+        print('Days $day $d $s $starttime ${(s == starttime) && (day > d)}');
+        if((s == starttime) && (day > d)){
+          print('Achei um lugar');
+          list.insert(j, toAppend);
+          found = true;
+          break;
+        }
+        if(found) break;
+      }
     }
     Map<String, dynamic> r = {'horarios': list};
     String ret = json.encode(r);
