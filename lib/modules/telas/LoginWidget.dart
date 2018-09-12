@@ -1,18 +1,29 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:horariopucpr/modules/api/Api.dart';
 import 'package:horariopucpr/modules/storage/Storage.dart';
 
-class LoginWidget extends StatelessWidget{
+class LoginWidget extends StatefulWidget{
+  VoidCallback callback;
+  LoginWidget(VoidCallback callback){
+    this.callback = callback;;
+  }
+  @override
+  State<StatefulWidget> createState() {
+    return LoginState(callback);
+  }
+
+
+}
+
+class LoginState extends State<LoginWidget>{
   VoidCallback callback;
   Api api;
   Storage storage;
   TextEditingController userCtrl, pwdCtrl;
-
-  LoginWidget(VoidCallback callback){
+  bool isLoading = false;
+  LoginState(VoidCallback callback){
     this.api = Api();
     this.storage = Storage();
     this.callback = callback;
@@ -27,7 +38,12 @@ class LoginWidget extends StatelessWidget{
       this.storage.setLogin(isLogged);
       callback();
     }
-    else print('login error');
+    else {
+      setState(() {
+        this.isLoading = false;
+      });
+      //TODO: SNACKBAR QUE AVISA QUE O LOGIN FALHOU
+    }
   }
 
   VoidCallback login(context)  {
@@ -52,6 +68,7 @@ class LoginWidget extends StatelessWidget{
       return;
     }
     print('text is ${this.userCtrl.text}, ${this.pwdCtrl.text}');
+    setState((){isLoading = true;});
     //this.userCtrl.text = 'bruno.pastre';
     //this.pwdCtrl.text = 'asdqwe123!@#';
     this.api.setCredentials(this.userCtrl.text, this.pwdCtrl.text).then((b) => this.loginAction(b));
@@ -127,6 +144,10 @@ class LoginWidget extends StatelessWidget{
             SizedBox(height: 8.0),
             password,
             SizedBox(height: 24.0),
+            isLoading?
+            SpinKitRing(color: Colors.white, size: 16.0,): SizedBox(height: 0.0,),
+            isLoading?
+            SizedBox(height: 24.0, child: Text('Validando', style: TextStyle(color: Colors.white), textAlign: TextAlign.center,)): SizedBox(height: 0.0,),
             loginButton,
           ],
         ),
