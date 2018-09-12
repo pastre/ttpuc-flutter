@@ -22,7 +22,6 @@ class LoginWidget extends StatelessWidget{
   }
 
   void loginAction(isLogged)async{
-    print('LoginAction $isLogged');
     if(isLogged){
       print('Logged!');
       this.storage.setLogin(isLogged);
@@ -31,12 +30,34 @@ class LoginWidget extends StatelessWidget{
     else print('login error');
   }
 
-  VoidCallback login()  {
+  VoidCallback login(context)  {
+    if(this.userCtrl.text == ''){
+      FocusScope.of(context).requestFocus(new FocusNode());
+      LOGIN_SCAFFOLD_KEY.currentState.showSnackBar(
+          SnackBar(
+            duration: Duration(seconds: 4),
+            content: Text('Campo de usuário está vazio!'),
+          )
+      );
+      return;
+    }
+    if(this.pwdCtrl.text == ''){
+      print('Null user!');
+      LOGIN_SCAFFOLD_KEY.currentState.showSnackBar(
+          SnackBar(
+            duration: Duration(seconds: 4),
+            content: Text('Campo de senha está vazio!'),
+          )
+      );
+      return;
+    }
     print('text is ${this.userCtrl.text}, ${this.pwdCtrl.text}');
     //this.userCtrl.text = 'bruno.pastre';
     //this.pwdCtrl.text = 'asdqwe123!@#';
     this.api.setCredentials(this.userCtrl.text, this.pwdCtrl.text).then((b) => this.loginAction(b));
   }
+
+
   @override
   Widget build(BuildContext context) {
     final logo = Hero(
@@ -52,7 +73,7 @@ class LoginWidget extends StatelessWidget{
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       controller: this.userCtrl,
-
+      onFieldSubmitted: (text) => this.login(context),
       decoration: InputDecoration(
         filled: true, fillColor: Colors.white,
         hintText: 'Usuário',
@@ -66,7 +87,7 @@ class LoginWidget extends StatelessWidget{
       autofocus: false,
       obscureText: true,
       controller: this.pwdCtrl,
-//      initialValue: 'asdqwe123!@#',
+      onFieldSubmitted: (_) => this.login(context),
       decoration: InputDecoration(
         filled: true, fillColor: Colors.white,
         hintText: 'Senha',
@@ -83,7 +104,7 @@ class LoginWidget extends StatelessWidget{
         child: MaterialButton(
           minWidth: 200.0,
           height: 42.0,
-          onPressed: () => this.login(),
+          onPressed: () => this.login(context),
           color: Colors.white,
           child: Text('Login', style: TextStyle(color: PUC_COLOR)),
         ),
@@ -93,6 +114,7 @@ class LoginWidget extends StatelessWidget{
 
 
     return Scaffold(
+      key: LOGIN_SCAFFOLD_KEY,
       backgroundColor: PUC_COLOR,
       body: Center(
         child: ListView(
@@ -111,6 +133,7 @@ class LoginWidget extends StatelessWidget{
       ),
     );
   }
+
 
 
 }
