@@ -53,7 +53,7 @@ class PickerState extends State<Picker>{
     String ret = json.encode(r);
     debugPrint('Response is $ret');
     storage.setHorarios(ret);
-//    Navigator.pop(this.context);
+    Navigator.pop(this.context);
 //  TODO  api.setHorarios(ret);
   }
 
@@ -125,11 +125,17 @@ class _ConflitoState extends State<Conflito>{
     var rows = <Widget>[];
     String teachers = '', classrooms = '';
     for(var i in option['teachers']) teachers += i;
-    for(var i in option['classrooms']) classrooms+= '${i['sala']} - ${i['lugar']}';
+    for(var i in option['classrooms']){
+      String toAppend = '${i['sala']} - ${i['lugar']}';
+      print('Length is ${toAppend.length}');
+      if(toAppend.length >=30)
+        toAppend = toAppend.replaceFirst(' - ', '\n');
+      classrooms += toAppend;
+    }
     rows.add(Row(children: <Widget>[Text(option['subject'], style: TextStyle(fontSize: 16.0, color: Colors.black, ),), ],),);
     rows.add(Row(children: <Widget>[Text(dias[option['day']], style: TextStyle(color: Colors.grey),)],),);
     rows.add(Row(children: <Widget>[Text('${option['starttime']} - ${option['endtime']}', style: TextStyle(color: Colors.grey),)],),);
-    rows.add(Row(children: <Widget>[Text(classrooms, style: TextStyle(color: Colors.grey),)],),);
+    rows.add(Row(children: <Widget>[Text(classrooms, style: TextStyle(color: Colors.grey, ), softWrap: true,)],),);
     rows.add(Row(children: <Widget>[Text(teachers, style: TextStyle(color: Colors.grey),)],),);
     return Column(children:rows, );
   }

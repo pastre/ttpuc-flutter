@@ -5,8 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import './Evento.dart';
 
 class Storage{
-
-
   static final Storage _singleton = new Storage._internal();
   var notas;
   factory Storage() {

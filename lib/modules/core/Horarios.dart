@@ -18,7 +18,7 @@ class HorariosWidget extends GenericAppWidget{
 class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderStateMixin{
   var PLACEHOLDER = 'asd';
   var materias;
-  var dias =  ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom' ];
+  var dias =  ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ];
   List<Tab> _tabs = <Tab>[];
   TabController tabController;
 
@@ -31,18 +31,17 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
   @override
   void preinit(){
     materias = [];
-    tabController = new TabController(length: _tabs.length, vsync: this, initialIndex: 1, );
+    for(var i = 0; i < this.dias.length; i++){
+      _tabs.add(new Tab(text: this.dias[i], ));
+    }
+    tabController = new TabController(length: dias.length, vsync: this, initialIndex: 1, );
+
   }
 
   @override
   Widget buildScreen(BuildContext ctx){
-    for(var i = 0; i < this.dias.length; i++){
-      _tabs.add(new Tab(text: this.dias[i], ));
-    }
-    print('Tabs is $_tabs');
-    print('My data is ${materias}');
-    Widget tabBar =  buildTabBar();
     Widget tabBarView = buildTabView();
+    Widget tabBar =  buildTabBar();
     return new Scaffold(appBar: tabBar, body: tabBarView, );
   }
 
@@ -58,7 +57,7 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
 
   @override
   Future loadLocal() async {
-    print('Loding local...');
+    print('Loding datalocal...');
     return this.storage.getHorarios();
   }
 
@@ -87,7 +86,8 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
   void buildMaterias(){
     Navigator.push(
         this.context,
-        MaterialPageRoute(builder: (context) => Picker()));
+        MaterialPageRoute(builder: (context) => Picker())).then((value ) {this.fetchData();});
+
   }
 
   Widget buildTabView(){
@@ -101,7 +101,7 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
     TabBar tabBar = new TabBar(tabs: _tabs,
       controller: tabController,
       labelColor: PUC_COLOR,
-      unselectedLabelColor: Color(0xFF919199),
+      unselectedLabelColor: PUC_COLOR,
       indicatorColor: PUC_COLOR,
     );
     return tabBar;

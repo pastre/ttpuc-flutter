@@ -10,7 +10,7 @@ Color PUC_COLOR = Color(0xFFA00503);
 List<ScreenOption> SCREENS = [
   ScreenOption(nome: 'Horarios', icon: Icon(Icons.subject), screenWidget: HorariosWidget()),
   ScreenOption(nome: 'Notas', icon: Icon(Icons.book), screenWidget: NotasWidget()),
-  ScreenOption(nome: 'Eu', icon: Icon(Icons.person), screenWidget: Picker()),
+  ScreenOption(nome: 'Eu', icon: Icon(Icons.person), screenWidget: Placeholder()),
 ];
 //Color PUC_COLOR = TATY_COLOR;
 

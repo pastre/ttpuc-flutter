@@ -26,7 +26,12 @@ class SettingsWidget extends StatelessWidget{
   Widget buildOptionsList(){
     return ListView(  // This next line does the trick.
       children: <Widget>[
-        MaterialButton(onPressed: () => {}, child: Text('Adicionar materia'),),
+        ListTile(
+          title: MaterialButton(
+            onPressed: () => {},
+            child: Text('Sobre'), ),
+          leading: Icon(Icons.question_answer),),
+//        MaterialButton(onPressed: () => {}, child: Text('Adicionar materia'),),
       ],
     );
   }

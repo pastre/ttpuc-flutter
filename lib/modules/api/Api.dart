@@ -32,7 +32,7 @@ class Api{
         'Basic ' + base64Encode(utf8.encode('${this.username}:${this.password}'));
     print('${this.username}:${this.password}');
 
-    print("Fired request for login");
+    print("Fired request for login $username $password");
     Response r = await get('https://horariopucpr.herokuapp.com/dadosPessoais',
         headers: {'authorization': basicAuth});
     print(r.body);
@@ -82,6 +82,8 @@ class Api{
   }
 
   Future<String> generateHorarios() async{
+    username = 'tatyane.rodrigues';
+    password = 'ta@@2020';
     print('Fired request to build horarios $username, $password');
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
