@@ -36,7 +36,7 @@ class LoginState extends State<LoginWidget>{
       print('Logged!');
       this.storage.setLogin(isLogged);
       this.storage.setUsername(username);
-      this.storage.setPassword(username);
+      this.storage.setPassword(password);
       callback();
     }
     else {
@@ -61,7 +61,7 @@ class LoginState extends State<LoginWidget>{
             content: Text('Campo de usuário está vazio!'),
           )
       );
-      return;
+      return null;
     }
     if(this.pwdCtrl.text == ''){
       print('Null user!');
@@ -71,7 +71,7 @@ class LoginState extends State<LoginWidget>{
             content: Text('Campo de senha está vazio!'),
           )
       );
-      return;
+      return null;
     }
     print('text is ${this.userCtrl.text}, ${this.pwdCtrl.text}');
     setState((){isLoading = true;});

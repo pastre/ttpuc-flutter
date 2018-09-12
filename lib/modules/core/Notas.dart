@@ -41,9 +41,27 @@ class NotasState extends GenericAppState<NotasWidget>{
   }
 
 
+  Future<String> refreshData() async {
+    String ret =  await this.apiCall();
+    print('Ret is $ret');
+    return ret;
+  }
+
+
+  void compareData(newData){
+    print('Comparing $newData ');
+    this.updateState(newData);
+  }
 
   @override
   Widget buildScreen(BuildContext ctx) {
+    return  RefreshIndicator(
+        child: _buildList(ctx),
+        onRefresh: () => refreshData().then((newData) => compareData(newData)),
+        color: PUC_COLOR,
+
+    );
+    return  _buildList(ctx);
     return SmartRefresher(child: _buildList(ctx), enablePullDown: true, enablePullUp: false, onRefresh: (a)=> refresh(a)
       , controller: _refreshController, );
   }

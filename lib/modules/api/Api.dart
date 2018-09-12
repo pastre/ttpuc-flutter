@@ -7,7 +7,7 @@ import 'package:http/http.dart';
 
 class Api{
   Storage s = new Storage();
-  String notas = '', username = '', password = '';
+  String username = '', password = '';
 //  String notas = '', username = 'bruno.pastre', password = 'asdqwe123!@#';
   bool couldLogin = false;
   static final Api _singleton = new Api._internal();
@@ -18,20 +18,27 @@ class Api{
 
   Api._internal();
 
-  void assertData() async{
-    s.getUsername().then((a){username = a;});
-    s.getPassword().then((a){password = a;print('Refreshed credentials $username $password');});
+  assertData() async{
+    print('Asserted data');
+    if(username == '') await s.getUsername().then((a){
+      // TODO: Check if a is null
+      username = a;
+    });
+    if (password == '')await s.getPassword().then((a){password = a;print('Refreshed credentials $username $password');});
   }
 
-  _doGetNotas() async {
+  _doGet(String url) async{
+    await assertData();
+    print('Basic get with $username, $password');
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
     print(basicAuth);
 
-    Response r = await get('https://horariopucpr.herokuapp.com/notas',
+    Response r = await get('https://horariopucpr.herokuapp.com/$url',
         headers: {'authorization': basicAuth});
-    this.notas =  r.body;
+    return r.body;
   }
+
 
   Future<bool> _doCheckAuth() async {
     String basicAuth =
@@ -45,61 +52,30 @@ class Api{
     return json.decode(r.body)['status'] == 'success';
   }
 
-  void updateNotas() async{
-    print("Updating notas");
-    return await this._doGetNotas();
-  }
-
-  getNotas(){
-    Map<String, dynamic> resp = json.decode(this.notas);
-    if(resp['status'] == 'success')
-      return resp['data'];
-  }
 
   Future<String> nGetNotas() async{
-    print('Fired request $username, $password');
-    String basicAuth =
-        'Basic ' + base64Encode(utf8.encode('$username:$password'));
-    print(basicAuth);
-
-    Response r = await get('https://horariopucpr.herokuapp.com/notas',
-        headers: {'authorization': basicAuth});
-
-    Map<String, dynamic> resp = await json.decode(r.body);
-
-    if(resp['status'] == 'success')
+    String body = await _doGet('notas');
+    Map<String, dynamic> resp = await json.decode(body);
+    print('Resp is $resp');
+    if(resp['status'] == 'success') {
+      print('Returning data');
       return json.encode(resp['data']);
+    }
 
   }
 
   Future<String> getHorarios() async{
-    print('Fired request $username, $password');
-    String basicAuth =
-        'Basic ' + base64Encode(utf8.encode('$username:$password'));
-//    print(basicAuth);
-
-    Response r = await get('https://horariopucpr.herokuapp.com/horario',
-        headers: {'authorization': basicAuth});
-
-    Map<String, dynamic> resp = await json.decode(r.body);
-    print('Response is ${r.body}');
+    print('Called getHorarios()');
+    String body = await _doGet('horario');
+    Map<String, dynamic> resp = await json.decode(body);
     if(resp['status'] == 'success')
       return json.encode(resp['data']);
   }
 
   Future<String> generateHorarios() async{
-    username = 'tatyane.rodrigues';
-    password = 'ta@@2020';
+    String body = await _doGet('horario/generate');
+    Map<String, dynamic> resp = await json.decode(body);
     print('Fired request to build horarios $username, $password');
-    String basicAuth =
-        'Basic ' + base64Encode(utf8.encode('$username:$password'));
-//    print(basicAuth);
-
-    Response r = await get('https://horariopucpr.herokuapp.com/horario/generate',
-        headers: {'authorization': basicAuth});
-
-    Map<String, dynamic> resp = await json.decode(r.body);
-    print('Response is ${r.body}');
     if(resp['status'] == 'success')
       return json.encode(resp['data']);
   }

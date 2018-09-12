@@ -40,9 +40,12 @@ class SettingsWidget extends StatelessWidget{
     Widget logoutBtt = this.buildLogoutButton(context);
     return Stack(children: <Widget>[
       Positioned(
-          child: MaterialButton(
-            onPressed: () => {},
-            child: Text('Adicionar Materia'), ),
+          child: Column(children: <Widget>[
+            Text('Usuario'),
+            Text('Nome'),
+            Text('Carteirinha'),
+            Text('Saldo')
+          ],),
           top: 0.0,
           left: 0.0,
       ),

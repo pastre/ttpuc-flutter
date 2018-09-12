@@ -1,8 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
-import './Evento.dart';
 
 class Storage{
   static final Storage _singleton = new Storage._internal();
@@ -65,12 +62,14 @@ class Storage{
   }
 
   void setUsername(String username) async{
+    print('Set username $username');
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('username', username);
     return;
   }
 
   void setPassword(String password) async{
+    print('Set password $password');
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('password', password);
     return;
