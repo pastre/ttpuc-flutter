@@ -7,14 +7,12 @@ import 'package:horariopucpr/modules/storage/Storage.dart';
 class LoginWidget extends StatefulWidget{
   VoidCallback callback;
   LoginWidget(VoidCallback callback){
-    this.callback = callback;;
+    this.callback = callback;
   }
   @override
   State<StatefulWidget> createState() {
     return LoginState(callback);
   }
-
-
 }
 
 class LoginState extends State<LoginWidget>{
@@ -42,7 +40,12 @@ class LoginState extends State<LoginWidget>{
       setState(() {
         this.isLoading = false;
       });
-      //TODO: SNACKBAR QUE AVISA QUE O LOGIN FALHOU
+      LOGIN_SCAFFOLD_KEY.currentState.showSnackBar(
+          SnackBar(
+            duration: Duration(seconds: 4),
+            content: Text('Usuário ou senha incorretos. Tente novamente'),
+          )
+      );
     }
   }
 

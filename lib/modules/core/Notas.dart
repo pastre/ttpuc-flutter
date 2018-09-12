@@ -57,8 +57,6 @@ class NotasState extends GenericAppState<NotasWidget>{
     return this.api.nGetNotas();
   }
 
-
-
   @override
   void updateState(data) {
     setState(() {
@@ -67,7 +65,6 @@ class NotasState extends GenericAppState<NotasWidget>{
       print('OBA');
     });
   }
-
 
   Widget _buildList(context){
     List<Widget> list = new List<Widget>();
