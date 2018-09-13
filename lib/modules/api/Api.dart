@@ -19,10 +19,9 @@ class Api{
   Api._internal();
 
   assertData() async{
-    await s.getUsername().then((a){
-      username = a;
-    });
-      await s.getPassword().then((a){password = a;print('Refreshed credentials $username $password');});
+    username = await s.getUsername();
+    password = await s.getPassword();
+//      await s.getPassword().then((a){password = a;print('Refreshed credentials $username $password');});
     print('Asserted data $username, $password');
   }
 

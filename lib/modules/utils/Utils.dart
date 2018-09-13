@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/core/Horarios.dart';
 import 'package:horariopucpr/modules/core/Notas.dart';
-import 'package:horariopucpr/modules/materiasPicker/Picker.dart';
-import 'package:horariopucpr/modules/telas/PlaceholderWidget.dart';
 
 Color TATY_COLOR = Colors.pinkAccent;
 Color SUBTEXT_COLOR =  Color(0xFF919199);

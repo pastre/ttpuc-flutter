@@ -40,11 +40,10 @@ class SettingsWidget extends StatelessWidget{
     Widget logoutBtt = this.buildLogoutButton(context);
     return Stack(children: <Widget>[
       Positioned(
-          child: Column(children: <Widget>[
-            Text('Usuario'),
-            Text('Nome'),
-            Text('Carteirinha'),
-          ],),
+          child:
+            ListView.builder(itemBuilder: (a, b){
+
+            }),
           top: 0.0,
           left: 0.0,
       ),

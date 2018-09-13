@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/telas/HorariosWidget.dart';
 import 'package:horariopucpr/modules/core/Calendario.dart';
-//import 'package:horariopucpr/modules/telas/CalendarioWidget.dart';
 import 'package:horariopucpr/modules/telas/PlaceholderWidget.dart';
 import 'package:horariopucpr/modules/core/Notas.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';

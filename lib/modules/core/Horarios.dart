@@ -38,11 +38,23 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
 
   }
 
+  void setToday(){
+    var  now = DateTime.now().weekday;
+    tabController.animateTo(now - 1);
+  }
+
   @override
   Widget buildScreen(BuildContext ctx){
     Widget tabBarView = buildTabView();
     Widget tabBar =  buildTabBar();
-    return new Scaffold(appBar: tabBar, body: tabBarView, );
+    return new Scaffold(appBar: tabBar,
+      body: tabBarView,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => setToday(),
+        child: Icon(Icons.today),
+        backgroundColor: PUC_COLOR,
+      ),
+    );
   }
 
   @override

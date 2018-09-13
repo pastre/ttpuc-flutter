@@ -20,7 +20,6 @@ class NotasState extends GenericAppState<NotasWidget>{
   RefreshController _refreshController;
   @override
   Widget build(BuildContext ctx) {
-    // TODO: implement build
     return super.build(ctx);
   }
 
@@ -61,9 +60,6 @@ class NotasState extends GenericAppState<NotasWidget>{
         color: PUC_COLOR,
 
     );
-    return  _buildList(ctx);
-    return SmartRefresher(child: _buildList(ctx), enablePullDown: true, enablePullUp: false, onRefresh: (a)=> refresh(a)
-      , controller: _refreshController, );
   }
 
 
