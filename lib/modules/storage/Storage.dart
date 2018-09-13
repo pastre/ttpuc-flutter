@@ -48,10 +48,10 @@ class Storage{
   }
 
   Future<String> getUsername() async{
-    return null; // TODO
+    return await _get('username');
   }
   Future<String> getPassword() async{
-    return null; // TODO
+    return await _get('password');
   }
 
 

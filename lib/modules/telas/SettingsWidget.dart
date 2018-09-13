@@ -44,7 +44,6 @@ class SettingsWidget extends StatelessWidget{
             Text('Usuario'),
             Text('Nome'),
             Text('Carteirinha'),
-            Text('Saldo')
           ],),
           top: 0.0,
           left: 0.0,

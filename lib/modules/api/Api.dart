@@ -19,12 +19,11 @@ class Api{
   Api._internal();
 
   assertData() async{
-    print('Asserted data');
-    if(username == '') await s.getUsername().then((a){
-      // TODO: Check if a is null
+    await s.getUsername().then((a){
       username = a;
     });
-    if (password == '')await s.getPassword().then((a){password = a;print('Refreshed credentials $username $password');});
+      await s.getPassword().then((a){password = a;print('Refreshed credentials $username $password');});
+    print('Asserted data $username, $password');
   }
 
   _doGet(String url) async{
