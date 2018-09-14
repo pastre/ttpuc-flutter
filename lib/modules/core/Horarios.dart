@@ -81,7 +81,7 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
   @override
   void updateState(data) {
     print('Updating state');
-    var ret =  json.decode(data)['horarios'];
+    var ret =  json.decode(data)['horarios']; // TODO: Checar se data é null
     print('Setting state ${ret}');
     if(ret.isEmpty){
       this.materias.add(PLACEHOLDER);
@@ -133,7 +133,7 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
       var professores = [];
       for(var j in i['classrooms'])
         local += j['sala'] + ' - ' + j['lugar'];
-
+      print('Classrooms ${i['classrooms']}');
       for(var j in i['teachers'])
         professores.add(j);
       cards.add(buildCard(i['subject'], time, professores,local ));

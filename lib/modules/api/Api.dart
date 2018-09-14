@@ -61,16 +61,41 @@ class Api{
   }
 
   Future<String> getHorarios() async{
+
+    await assertData();
+    print('Basic get with $username, $password');
+    String basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+    print(basicAuth);
+
+    Response r = await get('http://192.168.1.100:5000/horario',
+        headers: {'authorization': basicAuth});
+    String body = r.body;
+    Map<String, dynamic> resp = await json.decode(body);
+    if(resp['status'] == 'success')
+      return json.encode(resp['data']);
+    /**
     print('Called getHorarios()');
     String body = await _doGet('horario');
     Map<String, dynamic> resp = await json.decode(body);
     if(resp['status'] == 'success')
       return json.encode(resp['data']);
+        */
   }
 
-  void setHorarios(String horariosJson){
-    print('Firing request');
-    put('0.0.0.0/horarios', body: horariosJson);
+  void setHorarios(String horariosJson) async{
+    print('Firing request for $username, $password');
+    String basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+    print(basicAuth);
+
+    Response r = await put(
+          'http://192.168.1.100:5000/horario',
+          body: horariosJson,
+          headers: {'authorization': basicAuth}
+        );
+      print('Res is ${r.body}');
+
 //    put('https://horariopucpr.herokuapp.com/horarios', body: horariosJson);
   }
 
