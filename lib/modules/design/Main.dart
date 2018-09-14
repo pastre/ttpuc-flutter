@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/api/Api.dart';
 import 'package:horariopucpr/modules/design/BottonNavigation.dart';
 import 'package:horariopucpr/modules/design/Screen.dart';
+import 'package:horariopucpr/modules/storage/Storage.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/telas/SettingsWidget.dart';
 
@@ -24,6 +25,15 @@ class MainScreen extends StatelessWidget{
     );
   }
 
+
+  void doLogout(BuildContext context){
+    print('Do logout');
+    Storage().clearData();
+    Storage().setLogin(false);
+    updateLogin();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(bottomNavigationBar: BottomNavBar(this.screen),
@@ -32,7 +42,7 @@ class MainScreen extends StatelessWidget{
         title: new Text('Horários PUCPR'),
         backgroundColor: PUC_COLOR,
         leading: IconButton(icon: new Icon(Icons.share), onPressed: (){print("Pressed share");},),
-        actions: <Widget>[IconButton(icon: new Icon(Icons.settings), onPressed: () => showConfig(context)
+        actions: <Widget>[IconButton(icon: new Icon(Icons.exit_to_app), onPressed: () => doLogout(context)
         )],
       ),
     );

@@ -78,8 +78,8 @@ class PickerState extends State<Picker>{
     String ret = json.encode(r);
 //    debugPrint('Response is $ret');
     storage.setHorarios(ret);
-    Navigator.pop(this.context);
-//  TODO  api.setHorarios(ret);
+//    Navigator.pop(this.context);
+    api.setHorarios(ret);
   }
 
   Widget buildScreen(BuildContext context){

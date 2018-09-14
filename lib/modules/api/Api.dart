@@ -37,7 +37,6 @@ class Api{
     return r.body;
   }
 
-
   Future<bool> _doCheckAuth() async {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('${this.username}:${this.password}'));
@@ -49,7 +48,6 @@ class Api{
     print(r.body);
     return json.decode(r.body)['status'] == 'success';
   }
-
 
   Future<String> nGetNotas() async{
     String body = await _doGet('notas');
@@ -68,6 +66,12 @@ class Api{
     Map<String, dynamic> resp = await json.decode(body);
     if(resp['status'] == 'success')
       return json.encode(resp['data']);
+  }
+
+  void setHorarios(String horariosJson){
+    print('Firing request');
+    put('0.0.0.0/horarios', body: horariosJson);
+//    put('https://horariopucpr.herokuapp.com/horarios', body: horariosJson);
   }
 
   Future<String> generateHorarios() async{
