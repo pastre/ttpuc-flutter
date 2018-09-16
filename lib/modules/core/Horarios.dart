@@ -131,9 +131,13 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
       String time = i['starttime'] + ' - ' + i['endtime'];
       String local = '';
       var professores = [];
-      for(var j in i['classrooms'])
+      for(var k  = 0; k < i['classrooms'].length; k++) {
+        var j = i['classrooms'][k];
         local += j['sala'] + ' - ' + j['lugar'];
-      print('Classrooms ${i['classrooms']}');
+        if(k != i['classrooms'].length - 1) local += '\n';
+      }
+      print('Local is $local');
+      if(local.startsWith(' - ')) local = local.replaceFirst(' - ', '');
       for(var j in i['teachers'])
         professores.add(j);
       cards.add(buildCard(i['subject'], time, professores,local ));
@@ -156,8 +160,8 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
 
   Widget cardTitle(String title){
     return Row(children: <Widget>[
-      Text(title),
-      eventButton(),
+      Expanded(child: Text(title, softWrap: true,),),
+      Center(child: eventButton()),
     ],
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,

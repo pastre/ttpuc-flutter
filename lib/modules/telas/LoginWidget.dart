@@ -30,6 +30,18 @@ class LoginState extends State<LoginWidget>{
 
   }
 
+  void stopLogin(String message){
+    setState(() {
+      this.isLoading = false;
+    });
+    LOGIN_SCAFFOLD_KEY.currentState.showSnackBar(
+        SnackBar(
+          duration: Duration(seconds: 4),
+          content: Text(message),
+        )
+    );
+  }
+
   void loginAction(isLogged)async{
     if(isLogged){
       String username = this.userCtrl.text, password = this.pwdCtrl.text;
@@ -40,15 +52,7 @@ class LoginState extends State<LoginWidget>{
       callback();
     }
     else {
-      setState(() {
-        this.isLoading = false;
-      });
-      LOGIN_SCAFFOLD_KEY.currentState.showSnackBar(
-          SnackBar(
-            duration: Duration(seconds: 4),
-            content: Text('Usuário ou senha incorretos. Tente novamente'),
-          )
-      );
+      stopLogin('Usuário ou senha incorretos. Tente novamente');
     }
   }
 
@@ -77,7 +81,14 @@ class LoginState extends State<LoginWidget>{
     setState((){isLoading = true;});
     //this.userCtrl.text = 'bruno.pastre';
     //this.pwdCtrl.text = 'asdqwe123!@#';
-    this.api.setCredentials(this.userCtrl.text, this.pwdCtrl.text).then((b) => this.loginAction(b));
+    this.api.setCredentials(this.userCtrl.text, this.pwdCtrl.text).then((b)
+    {
+      if(b){
+        this.loginAction(b);
+      }else{
+        stopLogin('Erro no servidor! Tente novamente logo mais');
+      }
+    });
   }
 
 

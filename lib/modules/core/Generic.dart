@@ -54,8 +54,7 @@ class GenericAppState<GenericAppWidget> extends State{
   bool hasLoaded(){
     // OVERRIDE THIS METHOD WHEN THE SCREEN IS READY TO BE PRESENTED
   }
-
-
+  
 
   void updateLocal(data){
     // OVERRIDE WITH STORAGE FUNCTION TO PERSIST DATA

@@ -81,7 +81,7 @@ class NotasState extends GenericAppState<NotasWidget>{
 
   @override
   Future apiCall() async {
-    return this.api.nGetNotas();
+    return this.api.getNotas();
   }
 
   @override

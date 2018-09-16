@@ -56,7 +56,8 @@ class AppState extends State<App>{
   @override
   Widget build(BuildContext context) {
     if(this.isLogged == null) this.isLogged = false;
-    return MaterialApp(home: this.isLogged ? MainScreen(updateLogin) : LoginWidget(updateLogin),
+//    return MaterialApp(home: this.isLogged ? MainScreen(updateLogin) : MainScreen(updateLogin),
+        return MaterialApp(home: this.isLogged ? MainScreen(updateLogin) : LoginWidget(updateLogin),
 
       //TODO:  theme: ,
     );

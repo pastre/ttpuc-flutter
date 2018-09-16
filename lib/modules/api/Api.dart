@@ -46,10 +46,14 @@ class Api{
     Response r = await get('https://horariopucpr.herokuapp.com/dadosPessoais',
         headers: {'authorization': basicAuth});
     print(r.body);
-    return json.decode(r.body)['status'] == 'success';
+    try {
+      return json.decode(r.body)['status'] == 'success';
+    }on FormatException{
+      return false;
+    }
   }
 
-  Future<String> nGetNotas() async{
+  Future<String> getNotas() async{
     String body = await _doGet('notas');
     Map<String, dynamic> resp = await json.decode(body);
     print('Resp is $resp');
@@ -61,26 +65,11 @@ class Api{
   }
 
   Future<String> getHorarios() async{
-
-    await assertData();
-    print('Basic get with $username, $password');
-    String basicAuth =
-        'Basic ' + base64Encode(utf8.encode('$username:$password'));
-    print(basicAuth);
-
-    Response r = await get('http://192.168.1.100:5000/horario',
-        headers: {'authorization': basicAuth});
-    String body = r.body;
-    Map<String, dynamic> resp = await json.decode(body);
-    if(resp['status'] == 'success')
-      return json.encode(resp['data']);
-    /**
     print('Called getHorarios()');
     String body = await _doGet('horario');
     Map<String, dynamic> resp = await json.decode(body);
     if(resp['status'] == 'success')
       return json.encode(resp['data']);
-        */
   }
 
   void setHorarios(String horariosJson) async{
@@ -90,7 +79,7 @@ class Api{
     print(basicAuth);
 
     Response r = await put(
-          'http://192.168.1.100:5000/horario',
+          'https://horariopucpr.herokuapp.com/horario',
           body: horariosJson,
           headers: {'authorization': basicAuth}
         );
