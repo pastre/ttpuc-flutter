@@ -59,8 +59,8 @@ class AppState extends State<App>{
     if(this.isLogged == null) this.isLogged = false;
 //    return MaterialApp(home: this.isLogged ? MainScreen(updateLogin) : MainScreen(updateLogin),
         return MaterialApp(home: this.isLogged ? MainScreen(updateLogin) : LoginWidget(updateLogin),
-title: 'Horários PUCPR',
-color: PUC_COLOR,
+        title: 'Horários PUCPR',
+        color: PUC_COLOR,
       //TODO:  theme: ,
     );
   }

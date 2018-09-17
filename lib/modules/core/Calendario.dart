@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/calendar/Calendar.dart';
-import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 
 class CalendarioWidget extends GenericAppWidget{
@@ -36,7 +35,7 @@ class CalendarioState extends GenericAppState<CalendarioWidget>{
 
   @override
   bool hasLoaded(){
-    return this.eventos.length != 0;
+    return this.eventos.length != 0 || true;
   }
 
 

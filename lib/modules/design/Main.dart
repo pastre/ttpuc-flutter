@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/api/Api.dart';
+import 'package:horariopucpr/modules/core/Usuario.dart';
 import 'package:horariopucpr/modules/design/BottonNavigation.dart';
 import 'package:horariopucpr/modules/design/Screen.dart';
 import 'package:horariopucpr/modules/storage/Storage.dart';
@@ -21,7 +22,7 @@ class MainScreen extends StatelessWidget{
     print('Showing confing');
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SettingsWidget(updateLogin)),
+      MaterialPageRoute(builder: (context) => UsuarioWidget(updateLogin)),
     );
   }
 
@@ -42,7 +43,7 @@ class MainScreen extends StatelessWidget{
         title: new Text('Horários PUCPR'),
         backgroundColor: PUC_COLOR,
         leading: IconButton(icon: new Icon(Icons.share), onPressed: (){print("Pressed share");},),
-        actions: <Widget>[IconButton(icon: new Icon(Icons.exit_to_app), onPressed: () => doLogout(context)
+        actions: <Widget>[IconButton(icon: new Icon(Icons.person), onPressed: () => showConfig(context)
         )],
       ),
     );
