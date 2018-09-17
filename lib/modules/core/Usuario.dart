@@ -31,10 +31,15 @@ class UsuarioState extends State<UsuarioWidget>{
   Widget build(BuildContext context) {
     print('Builded settings');
 //    return Text('carregando...');
-    return Scaffold(appBar: AppBar(title: Text('Ajustes'),
-      backgroundColor: PUC_COLOR,),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Ajustes'),
+        backgroundColor: PUC_COLOR,
+        actions: <Widget>[IconButton(icon: Icon(Icons.info_outline), onPressed: (){print('Pressed info');})],
+      ),
       body: this.buildScreen(context),
       backgroundColor: Colors.white,
+
     );
   }
 
