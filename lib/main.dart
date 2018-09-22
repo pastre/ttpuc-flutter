@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'modules/design/Main.dart';
@@ -17,6 +19,7 @@ class AppWrapper extends StatelessWidget{
     return new App();
   }
 }
+
 
 class App extends StatefulWidget{
   @override
