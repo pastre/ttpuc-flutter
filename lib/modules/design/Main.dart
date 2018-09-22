@@ -42,8 +42,8 @@ class MainScreen extends StatelessWidget{
         title: new Text('Horários PUCPR'),
         backgroundColor: PUC_COLOR,
         leading: IconButton(icon: new Icon(Icons.share), onPressed: (){print("Pressed share");},),
-//        actions: <Widget>[IconButton(icon: new Icon(Icons.person), onPressed: () => showConfig(context)
-        actions: <Widget>[IconButton(icon: new Icon(Icons.exit_to_app), onPressed: () => doLogout(context)
+        actions: <Widget>[IconButton(icon: new Icon(Icons.person), onPressed: () => showConfig(context)
+//        actions: <Widget>[IconButton(icon: new Icon(Icons.exit_to_app), onPressed: () => doLogout(context)
         )],
       ),
     );

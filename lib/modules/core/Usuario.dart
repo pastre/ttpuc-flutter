@@ -98,13 +98,13 @@ class UsuarioState extends State<UsuarioWidget>{
             ],
             mainAxisAlignment: MainAxisAlignment.center,
           ),
-          SizedBox(height: 8.0,),
-          Row(
-            children: <Widget>[
-              Text('Código do aluno: 101893127316')
-            ],
-            mainAxisAlignment: MainAxisAlignment.center,
-          ),
+//          SizedBox(height: 8.0,),
+//          Row(
+//            children: <Widget>[
+//              Text('Código do aluno: 101893127316')
+//            ],
+//            mainAxisAlignment: MainAxisAlignment.center,
+//          ),
           SizedBox(height: 8.0,),
         ],));
   }

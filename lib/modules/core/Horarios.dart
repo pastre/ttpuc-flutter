@@ -161,7 +161,7 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
   Widget cardTitle(String title){
     return Row(children: <Widget>[
       Expanded(child: Text(title, softWrap: true,),),
-//      Center(child: eventButton()),
+      Center(child: eventButton()),
     ],
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
