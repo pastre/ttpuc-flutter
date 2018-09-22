@@ -52,7 +52,6 @@ class UsuarioState extends State<UsuarioWidget>{
           getUserCard(),
           Divider(indent: 8.0,),
           getProgressoCurso(),
-          Divider(indent: 8.0,),
           getData(),
           Divider(indent: 8.0,),
           logoutBtt,
@@ -111,6 +110,23 @@ class UsuarioState extends State<UsuarioWidget>{
   }
 
   Widget getData(){
+    Icon MONEY_ICON = Icon(Icons.attach_money, color: PUC_COLOR,);
+    Icon COD_ICON =  Icon(Icons.person_pin, color: PUC_COLOR,);
+    Icon TIME_ICON = Icon(Icons.access_time, color: PUC_COLOR, );
+    return Column(children: <Widget>[
+      Row(children: <Widget>[
+        Expanded(
+          child: MONEY_ICON,
+        ),
+        COD_ICON,
+        Expanded(
+          child: TIME_ICON,
+        ),
+      ],),
+    ],);
+  }
+
+  Widget getData1(){
     return Column(
       children: <Widget>[
         SizedBox(height: 8.0,),
