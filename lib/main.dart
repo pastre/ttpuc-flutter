@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'modules/design/Main.dart';
@@ -17,6 +19,7 @@ class AppWrapper extends StatelessWidget{
     return new App();
   }
 }
+
 
 class App extends StatefulWidget{
   @override
@@ -59,8 +62,8 @@ class AppState extends State<App>{
     if(this.isLogged == null) this.isLogged = false;
 //    return MaterialApp(home: this.isLogged ? MainScreen(updateLogin) : MainScreen(updateLogin),
         return MaterialApp(home: this.isLogged ? MainScreen(updateLogin) : LoginWidget(updateLogin),
-title: 'Horários PUCPR',
-color: PUC_COLOR,
+        title: 'Horários PUCPR',
+        color: PUC_COLOR,
       //TODO:  theme: ,
     );
   }

@@ -52,8 +52,6 @@ class UsuarioState extends State<UsuarioWidget>{
           getUserCard(),
           Divider(indent: 8.0,),
           getProgressoCurso(),
-          SizedBox(height: 8.0,),
-//          Divider(indent: 8.0,),
           getData(),
           Divider(indent: 8.0,),
           logoutBtt,
