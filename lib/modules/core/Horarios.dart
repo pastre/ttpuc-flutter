@@ -35,7 +35,6 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
       _tabs.add(new Tab(text: this.dias[i], ));
     }
     tabController = new TabController(length: dias.length, vsync: this, initialIndex: 1, );
-
   }
 
   void setToday(){
@@ -161,20 +160,21 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
   Widget cardTitle(String title){
     return Row(children: <Widget>[
       Expanded(child: Text(title, softWrap: true,),),
-      Center(child: eventButton()),
+//      Center(child: eventButton()),
     ],
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
     );
   }
+//
+//  Widget eventButton(){
+//    return SizedBox(
+//      child: IconButton(
+//        icon: Icon(Icons.add, color: Colors.lightBlue,),
+//        onPressed: () => displayDialog(),
+//        iconSize: 20.0,),
+//      height: 25.0, width: 25.0,);
+//  }
 
-  Widget eventButton(){
-    return SizedBox(
-      child: IconButton(
-        icon: Icon(Icons.add, color: Colors.lightBlue,),
-        onPressed: () => print('asd'),
-        iconSize: 20.0,),
-      height: 25.0, width: 25.0,);
-  }
 
 }

@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:horariopucpr/modules/core/AtividadeDialog.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
+import 'package:horariopucpr/modules/utils/Utils.dart';
 
 class AgendaWidget extends GenericAppWidget{
   @override
@@ -20,7 +22,15 @@ class _AgendaState extends GenericAppState<AgendaWidget>{
 
   @override
   Widget buildScreen(BuildContext ctx) {
-    return new Scaffold(body: buildActivityList(),);
+    return new Scaffold(
+        body: buildActivityList(),
+        floatingActionButton: FloatingActionButton(
+            onPressed: displayDialog,
+            child: Icon(Icons.add),
+            backgroundColor: PUC_COLOR,
+            tooltip: 'Agende uma atividade',
+        ),
+    );
   }
 
   Widget buildActivityList(){
@@ -33,14 +43,12 @@ class _AgendaState extends GenericAppState<AgendaWidget>{
     ],);
   }
 
-
-
   Widget buildActivity(String dayName, String month, int day, String title, String description, Color color, bool isSelected){
     return ListTile(
       leading: buildActivityDate(dayName, month, day),
       title: buildActivityTitle(title, color),
       subtitle: Text(description),
-      trailing: Checkbox(value: isSelected, onChanged: (value){}),
+//      trailing: Checkbox(value: isSelected, onChanged: (value){}),
 
     );
   }
@@ -58,27 +66,40 @@ class _AgendaState extends GenericAppState<AgendaWidget>{
 
   Widget buildActivityTitle(String title, Color color){
 //    return Text(title, style: TextStyle(color: color),);
-
     return Row (
       children: <Widget>[
         Flexible(child: Text(title, overflow: TextOverflow.ellipsis,)),
-        SizedBox(
-          height: 6.0,
-          width: 20.0,
-          child:Container(
-            decoration: new BoxDecoration(
-              color: color,
-              border: Border.all(color: color, ),
-              shape: BoxShape.circle,
-//              borderRadius: BorderRadius.circular(8.0),
-            ),
-          ),
-        ),
+//        SizedBox(
+//          height: 6.0,
+//          width: 20.0,
+//          child:Container(
+//            decoration: new BoxDecoration(
+//              color: color,
+//              border: Border.all(color: color, ),
+//              shape: BoxShape.circle,
+////              borderRadius: BorderRadius.circular(8.0),
+//            ),
+//          ),
+//        ),
       ],
     );
   }
 
-
+  void displayDialog(){
+    List<String> options = new List<String>();
+//    for(var m in materias){
+//      options.add(m['subject']);
+//    }
+    options.add('asdasd');
+    options.add('asdasd');
+    options.add('asdasd');
+    options.add('asdasd');
+    options.add('asdasd');
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AtividadeWidget(options: options)),
+    );
+  }
 }
 
 
