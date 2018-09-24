@@ -29,29 +29,6 @@ class NotasState extends GenericAppState<NotasWidget>{
     _refreshController = new RefreshController();
   }
 
-  void refresh(a){
-    print('Refreshed! $a');
-    this.apiCall().then((data){
-
-    });
-    Future.delayed(Duration(milliseconds: 2000)).then((v){
-      print('Done $v ');
-      _refreshController.sendBack(true, RefreshStatus.completed);});
-  }
-
-
-  Future<String> refreshData() async {
-    String ret =  await this.apiCall();
-    print('Ret is $ret');
-    return ret;
-  }
-
-
-  void compareData(newData){
-    print('Comparing $newData ');
-    this.updateState(newData);
-  }
-
   @override
   Widget buildScreen(BuildContext ctx) {
     return  RefreshIndicator(
@@ -145,5 +122,17 @@ class NotasState extends GenericAppState<NotasWidget>{
     ],
     ),
     );
+  }
+
+  Future<String> refreshData() async {
+    String ret =  await this.apiCall();
+    print('Ret is $ret');
+    return ret;
+  }
+
+
+  void compareData(newData){
+    print('Comparing $newData ');
+    this.updateState(newData);
   }
 }

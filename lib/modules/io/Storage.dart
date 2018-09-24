@@ -25,10 +25,6 @@ class Storage{
     _set('notas', notasJson);
   }
 
-  Future<bool> isLogged() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('logged');
-  }
 
   Future<String> getHorarios() async{
     return await _get('horarios');
@@ -38,15 +34,6 @@ class Storage{
   }
 
 
-  void setEventos(String horariosJson){
-    _set('eventos', horariosJson);
-  }
-
-  Future<String> getEventos() async{
-    print('eventos loaded');
-    return await _get('eventos');
-  }
-
   Future<String> getUsername() async{
     return await _get('username');
   }
@@ -55,23 +42,34 @@ class Storage{
   }
 
 
+  Future<bool> isLogged() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('logged');
+  }
   void setLogin(bool isLogged) async{
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('logged', isLogged);
     return;
   }
-
   void setUsername(String username) async{
     print('Set username $username');
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('username', username);
     return;
   }
-
   void setPassword(String password) async{
     print('Set password $password');
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('password', password);
+    return;
+  }
+
+  Future<String> getAtividades() async{
+    return await _get('atividades');
+  }
+  void setAtividades(String atividadesJson) async{
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('atividades', atividadesJson);
     return;
   }
 

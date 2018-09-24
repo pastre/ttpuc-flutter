@@ -1,4 +1,7 @@
 
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/core/AtividadeDialog.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
@@ -15,23 +18,58 @@ class AgendaWidget extends GenericAppWidget{
 
 class _AgendaState extends GenericAppState<AgendaWidget>{
 
+  var atividades;
+
   @override
-  bool hasLoaded() {
-    return true;
+  void preinit() {
+    atividades = null;
   }
 
   @override
-  Widget buildScreen(BuildContext ctx) {
+  Widget buildScreen(BuildContext context) {
+    print('Atividades is $atividades');
     return new Scaffold(
-        body: buildActivityList(),
-        floatingActionButton: FloatingActionButton(
-            onPressed: displayDialog,
-            child: Icon(Icons.add),
-            backgroundColor: PUC_COLOR,
-            tooltip: 'Agende uma atividade',
-        ),
+      body: atividades.isEmpty? Text('Vazio!') :  buildActivityList(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: displayDialog,
+        child: Icon(Icons.add),
+        backgroundColor: PUC_COLOR,
+        tooltip: 'Agende uma atividade',
+      ),
     );
   }
+
+  @override
+  bool hasLoaded() {
+    return atividades != null;
+  }
+
+  @override
+  void updateLocal(data) {
+    this.storage.setAtividades(data);
+  }
+
+  @override
+  Future loadLocal() {
+    print('Loaded local!');
+    return this.storage.getAtividades();
+  }
+
+  @override
+  Future apiCall() async {
+    return this.api.getAtividades();
+  }
+
+  @override
+  void updateState(data) {
+    print('Setting state $data');
+    setState(() {
+      var ret =  json.decode(data);
+      this.atividades = ret['eventos'];
+      print('OBA');
+    });
+  }
+
 
   Widget buildActivityList(){
     return Column(children: <Widget>[

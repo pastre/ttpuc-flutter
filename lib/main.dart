@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'modules/design/Main.dart';
-import 'package:horariopucpr/modules/api/Api.dart';
-import 'package:horariopucpr/modules/storage/Storage.dart';
+import 'package:horariopucpr/modules/io/Api.dart';
+import 'package:horariopucpr/modules/io/Storage.dart';
 import 'modules/telas/LoginWidget.dart';
 
 

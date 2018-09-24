@@ -48,11 +48,6 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
     Widget tabBar =  buildTabBar();
     return new Scaffold(appBar: tabBar,
       body: tabBarView,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => setToday(),
-        child: Icon(Icons.today),
-        backgroundColor: PUC_COLOR,
-      ),
     );
   }
 
