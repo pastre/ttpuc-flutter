@@ -125,13 +125,16 @@ class Api {
     }
   }
 
-  addAtividade(String nome, String descricao, int timestamp, String materia) {
-    _doPost('agenda', {
+  Future addAtividade(String nome, String descricao, int timestamp, String materia) async {
+   String body =  await _doPost('agenda', {
       'nome': nome,
       'descricao': descricao,
-      'timestamp': timestamp,
+      'data': timestamp.toString(),
       'materia': materia
     });
+   Map<String, dynamic> resp = await json.decode(body);
+   if (resp['status'] == 'success') return json.encode(resp['data']);
+
   }
 
   Future<String> getAtividades() async{

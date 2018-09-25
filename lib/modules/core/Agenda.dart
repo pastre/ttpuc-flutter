@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:convert';
 
@@ -7,19 +6,33 @@ import 'package:horariopucpr/modules/core/AtividadeDialog.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 
-class AgendaWidget extends GenericAppWidget{
+class AgendaWidget extends GenericAppWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-      return new _AgendaState();
+    return new AgendaState();
   }
 
 }
 
-class _AgendaState extends GenericAppState<AgendaWidget>{
+class AgendaState extends GenericAppState<AgendaWidget> {
 
   var atividades;
-
+  List<String> weekdays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+  List<String> months = [
+    'Jan',
+    'Fev',
+    'Mar',
+    'Abr',
+    'Mai',
+    'Jun',
+    'Jul',
+    'Ago',
+    'Set',
+    'Out',
+    'Nov',
+    'Dez',
+  ];
   @override
   void preinit() {
     atividades = null;
@@ -29,7 +42,7 @@ class _AgendaState extends GenericAppState<AgendaWidget>{
   Widget buildScreen(BuildContext context) {
     print('Atividades is $atividades');
     return new Scaffold(
-      body: atividades.isEmpty? Text('Vazio!') :  buildActivityList(),
+      body: atividades.isEmpty ? Text('Vazio!') : buildActivityList(),
       floatingActionButton: FloatingActionButton(
         onPressed: displayDialog,
         child: Icon(Icons.add),
@@ -64,24 +77,64 @@ class _AgendaState extends GenericAppState<AgendaWidget>{
   void updateState(data) {
     print('Setting state $data');
     setState(() {
-      var ret =  json.decode(data);
+      var ret = json.decode(data);
       this.atividades = ret['eventos'];
-      print('OBA');
     });
   }
 
 
-  Widget buildActivityList(){
-    return Column(children: <Widget>[
-      buildActivity('Ter', 'AGO', 21, 'TDE - Estatistica', 'Fazer pesquisa doida', Colors.green, false),
+  Widget buildActivityList() {
+    List<Widget>  options = [];
+    for (var atividade in atividades) {
+      String nome = atividade['nome'],
+          desc = atividade['descricao'],
+          materia = atividade['materia'];
+      DateTime timestamp = DateTime.fromMillisecondsSinceEpoch(
+          atividade['data']);
+      options.add(buildActivity(
+          weekdays[timestamp.weekday - 1].toUpperCase(),
+          months[timestamp.month - 1].toUpperCase(),
+          timestamp.day,
+          nome + ' - ' + materia,
+          desc,
+          Colors.orange,
+          false));
+      options.add(Divider());
+    }
+
+    return ListView(children: options, );
+    return Column(children: <Widget>
+      buildActivity(
+          'Ter',
+          'AGO',
+          21,
+          'TDE - Estatistica',
+          'Fazer pesquisa doida',
+          Colors.green,
+          false),
       Divider(),
-      buildActivity('TER', 'AGO', 21, 'Pré-Relatório - Sistemas Digitais II', 'Experimento 26', Colors.blueAccent, true),
+      buildActivity(
+          'TER',
+          'AGO',
+          21,
+          'Pré-Relatório - Sistemas Digitais II',
+          'Experimento 26',
+          Colors.blueAccent,
+          true),
       Divider(),
-      buildActivity('Ter', 'AGO', 21, 'Prova - Banco de Dados', 'Estudar tretas', Colors.pink, false),
+      buildActivity(
+          'Ter',
+          'AGO',
+          21,
+          'Prova - Banco de Dados',
+          'Estudar tretas',
+          Colors.pink,
+          false),
     ],);
   }
 
-  Widget buildActivity(String dayName, String month, int day, String title, String description, Color color, bool isSelected){
+  Widget buildActivity(String dayName, String month, int day, String title,
+      String description, Color color, bool isSelected) {
     return ListTile(
       leading: buildActivityDate(dayName, month, day),
       title: buildActivityTitle(title, color),
@@ -91,7 +144,7 @@ class _AgendaState extends GenericAppState<AgendaWidget>{
     );
   }
 
-  Widget buildActivityDate(String dayName, String month, int day,){
+  Widget buildActivityDate(String dayName, String month, int day,) {
     TextStyle style = TextStyle(color: Colors.grey);
     return Column(
       children: <Widget>[
@@ -102,9 +155,9 @@ class _AgendaState extends GenericAppState<AgendaWidget>{
     );
   }
 
-  Widget buildActivityTitle(String title, Color color){
+  Widget buildActivityTitle(String title, Color color) {
 //    return Text(title, style: TextStyle(color: color),);
-    return Row (
+    return Row(
       children: <Widget>[
         Flexible(child: Text(title, overflow: TextOverflow.ellipsis,)),
 //        SizedBox(
@@ -123,7 +176,7 @@ class _AgendaState extends GenericAppState<AgendaWidget>{
     );
   }
 
-  void displayDialog(){
+  void displayDialog() {
     List<String> options = new List<String>();
 //    for(var m in materias){
 //      options.add(m['subject']);
@@ -135,7 +188,8 @@ class _AgendaState extends GenericAppState<AgendaWidget>{
     options.add('asdasd');
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => AtividadeWidget(options: options)),
+      MaterialPageRoute(builder: (context) =>
+          AtividadeWidget(options: options, agenda: this,)),
     );
   }
 }

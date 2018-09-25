@@ -3,17 +3,19 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:horariopucpr/modules/core/Agenda.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 
 class AtividadeWidget extends GenericAppWidget {
   List<String> options;
+  AgendaState agenda;
 
-  AtividadeWidget({this.options});
+  AtividadeWidget({this.options, this.agenda});
 
   @override
   State<StatefulWidget> createState() {
-    return AtividadeState();
+    return AtividadeState(agenda: agenda);
   }
 }
 
@@ -23,6 +25,10 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
   TextEditingController descController = new TextEditingController();
   Widget _selectedDayIndex, _selectedMateriaIndex;
   FixedExtentScrollController _c = new FixedExtentScrollController();
+
+  AgendaState agenda;
+
+  AtividadeState({this.agenda});
 
   //-----------------------------------------------------//
   var states = ['Carrregando', 'Sem atividades', 'Com atividades'];
@@ -243,11 +249,17 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
         nome = this.nomeController.value.text,
         desc = this.descController.value.text;
     var splitted = dia.split(' ');
+    print('Splitted is $splitted');
     int time = DateTime(
             2018, months.indexOf(splitted.last) + 1, int.parse(splitted[1]))
         .millisecondsSinceEpoch;
     splitted = materia.split(' ');
     materia = splitted[0];
+
+    this.api.addAtividade(nome, desc, time, materia ).then((val){
+      print('Value is $val');
+      this.agenda.updateState(val);
+    });
     print(
         'DAY: $time\n MATERIA: $materia \nNOME: $nome \nDESC $desc\nSplitted $splitted');
   }
