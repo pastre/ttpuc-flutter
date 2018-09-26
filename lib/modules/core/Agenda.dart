@@ -131,7 +131,6 @@ class AgendaState extends GenericAppState<AgendaWidget> {
   }
 
   Widget buildActivityTitle(String title, Color color) {
-//    return Text(title, style: TextStyle(color: color),);
     return Row(
       children: <Widget>[
         Flexible(child: Text(title, overflow: TextOverflow.ellipsis,)),
