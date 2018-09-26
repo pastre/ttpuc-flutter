@@ -113,8 +113,9 @@ class AgendaState extends GenericAppState<AgendaWidget> {
       leading: buildActivityDate(dayName, month, day),
       title: buildActivityTitle(title, color),
       subtitle: Text(description),
-//      trailing: Checkbox(value: isSelected, onChanged: (value){}),
+//      trailing: Container(child: Row(children: <Widget>[Icon(Icons.edit), Icon(Icons.delete)],), height: 30.0, width: 80.0, padding: EdgeInsets.only(right: 1.0),),
 
+      
     );
   }
 
@@ -134,18 +135,6 @@ class AgendaState extends GenericAppState<AgendaWidget> {
     return Row(
       children: <Widget>[
         Flexible(child: Text(title, overflow: TextOverflow.ellipsis,)),
-//        SizedBox(
-//          height: 6.0,
-//          width: 20.0,
-//          child:Container(
-//            decoration: new BoxDecoration(
-//              color: color,
-//              border: Border.all(color: color, ),
-//              shape: BoxShape.circle,
-////              borderRadius: BorderRadius.circular(8.0),
-//            ),
-//          ),
-//        ),
       ],
     );
   }
