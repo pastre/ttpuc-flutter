@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/materiasPicker/Picker.dart';
+import 'package:horariopucpr/modules/smaller_screens/EscolheMaterias.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 

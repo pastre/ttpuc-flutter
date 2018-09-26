@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/core/AtividadeDialog.dart';
+//import 'package:horariopucpr/modules/smaller_screens/AtividadeDialog.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 
@@ -75,7 +76,7 @@ class AgendaState extends GenericAppState<AgendaWidget> {
 
   @override
   void updateState(data) {
-    print('Setting state $data');
+    print('Setting state to  $data');
     setState(() {
       var ret = json.decode(data);
       this.atividades = ret['eventos'];
@@ -103,34 +104,7 @@ class AgendaState extends GenericAppState<AgendaWidget> {
     }
 
     return ListView(children: options, );
-    return Column(children: <Widget>
-      buildActivity(
-          'Ter',
-          'AGO',
-          21,
-          'TDE - Estatistica',
-          'Fazer pesquisa doida',
-          Colors.green,
-          false),
-      Divider(),
-      buildActivity(
-          'TER',
-          'AGO',
-          21,
-          'Pré-Relatório - Sistemas Digitais II',
-          'Experimento 26',
-          Colors.blueAccent,
-          true),
-      Divider(),
-      buildActivity(
-          'Ter',
-          'AGO',
-          21,
-          'Prova - Banco de Dados',
-          'Estudar tretas',
-          Colors.pink,
-          false),
-    ],);
+
   }
 
   Widget buildActivity(String dayName, String month, int day, String title,

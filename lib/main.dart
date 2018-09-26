@@ -5,7 +5,7 @@ import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'modules/design/Main.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
 import 'package:horariopucpr/modules/io/Storage.dart';
-import 'modules/telas/LoginWidget.dart';
+import 'package:horariopucpr/modules/smaller_screens/Login.dart';
 
 
 void main() {
