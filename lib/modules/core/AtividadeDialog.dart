@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/core/Agenda.dart';
+import 'package:horariopucpr/modules/smaller_screens/LoadingScreen.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 
@@ -25,14 +26,19 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
   TextEditingController descController = new TextEditingController();
   Widget _selectedDayIndex, _selectedMateriaIndex;
   FixedExtentScrollController _c = new FixedExtentScrollController();
-
-  AgendaState agenda;
-
-  AtividadeState({this.agenda});
-
   //-----------------------------------------------------//
   var states = ['Carrregando', 'Sem atividades', 'Com atividades'];
 
+  AgendaState agenda;
+  AtividadeState({this.agenda});
+
+  bool isLoading = false;
+
+
+  @override
+  void preinit() {
+    isLoading = false;
+  }
 
   List<String> months = [
     'Janeiro',
@@ -52,11 +58,13 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
 
   @override
   Widget build(BuildContext ctx) {
-    return buildMain();
+    if(isLoading == null) isLoading = false;
+    return  buildMain();
   }
 
 
   Widget buildMain(){
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: PUC_COLOR,
@@ -66,7 +74,7 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
         ),
       ),
       body: Container(
-        child: Column(
+        child:  isLoading ? LoadingWidget() : Column(
           children: buildOptions(),
         ),
         margin: EdgeInsets.only(left: 8.0, right: 8.0),
@@ -255,10 +263,15 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
         .millisecondsSinceEpoch;
     splitted = materia.split(' ');
     materia = splitted[0];
-
+    setState(() {
+      isLoading = true;
+    });
+    print('asdasdasddadadsadasd');
     this.api.addAtividade(nome, desc, time, materia ).then((val){
       print('Value is $val');
-      this.agenda.updateState(val);
+      this.storage.setAtividades(val);
+      this.agenda.fetchData();
+      Navigator.pop(this.context);
     });
     print(
         'DAY: $time\n MATERIA: $materia \nNOME: $nome \nDESC $desc\nSplitted $splitted');
