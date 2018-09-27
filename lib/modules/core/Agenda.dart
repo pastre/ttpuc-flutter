@@ -2,8 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/core/AtividadeDialog.dart';
-//import 'package:horariopucpr/modules/smaller_screens/AtividadeDialog.dart';
+import 'package:horariopucpr/modules/smaller_screens/AtividadeDialog.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 

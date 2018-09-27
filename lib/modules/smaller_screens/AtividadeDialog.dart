@@ -27,19 +27,7 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
   Widget _selectedDayIndex, _selectedMateriaIndex;
   FixedExtentScrollController _c = new FixedExtentScrollController();
   //-----------------------------------------------------//
-  var states = ['Carrregando', 'Sem atividades', 'Com atividades'];
-
-  AgendaState agenda;
-  AtividadeState({this.agenda});
-
-  bool isLoading = false;
-
-
-  @override
-  void preinit() {
-    isLoading = false;
-  }
-
+  var materias = [];
   List<String> months = [
     'Janeiro',
     'Fevereiro',
@@ -54,14 +42,44 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
     'Novembro',
     'Dezembro',
   ];
+  AgendaState agenda;
+  AtividadeState({this.agenda});
+
+  bool isLoading = false;
 
 
   @override
-  Widget build(BuildContext ctx) {
+  void preinit() {
+    isLoading = false;
+    materias = [];
+  }
+
+  @override
+  Widget buildScreen(BuildContext ctx) {
     if(isLoading == null) isLoading = false;
     return  buildMain();
   }
 
+  @override
+  bool hasLoaded() {
+    return this.materias.isNotEmpty;
+  }
+
+  @override
+  void updateLocal(data) {
+    this.storage.setMaterias(data);
+  }
+
+  @override
+  Future loadLocal() {
+    return this.storage.getMaterias();
+  }
+
+
+  @override
+  Future apiCall() {
+    return this.api.getMaterias();
+  }
 
   Widget buildMain(){
 
@@ -82,7 +100,6 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
       backgroundColor: Colors.white,
     );
   }
-
 
   List<Widget> buildOptions() {
     InputDecoration decorateTextField(String name, String helper) {
@@ -266,7 +283,6 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
     setState(() {
       isLoading = true;
     });
-    print('asdasdasddadadsadasd');
     this.api.addAtividade(nome, desc, time, materia ).then((val){
       print('Value is $val');
       this.storage.setAtividades(val);

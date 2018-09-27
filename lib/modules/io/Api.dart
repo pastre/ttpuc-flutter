@@ -143,4 +143,10 @@ class Api {
     if (resp['status'] == 'success') return json.encode(resp['data']);
   }
 
+  Future<String> getMaterias() async{
+    String body = await _doGet('agenda');
+    Map<String, dynamic> resp = await json.decode(body);
+    if (resp['status'] == 'success') return json.encode(resp['data']);
+  }
+
 }
