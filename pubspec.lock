@@ -106,6 +106,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.1"
+  flutter_slidable:
+    dependency: "direct main"
+    description:
+      name: flutter_slidable
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.7"
   flutter_spinkit:
     dependency: "direct main"
     description:
@@ -467,5 +474,5 @@ packages:
     source: hosted
     version: "2.1.15"
 sdks:
-  dart: ">=2.0.0 <=2.1.0-dev.1.0.flutter-ccb16f7282"
+  dart: ">=2.0.0 <=2.1.0-dev.0.0.flutter-be6309690f"
   flutter: ">=0.1.4 <2.0.0"

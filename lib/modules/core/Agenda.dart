@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/smaller_screens/AtividadeDialog.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
-
+import 'package:flutter_slidable/flutter_slidable.dart';
 class AgendaWidget extends GenericAppWidget {
   @override
   State<StatefulWidget> createState() {
@@ -109,19 +109,15 @@ class AgendaState extends GenericAppState<AgendaWidget> {
 
   Widget buildActivity(String dayName, String month, int day, String title,
       String description, Color color, bool isSelected) {
-    return ListTile(
+    return buildSlideable(ListTile(
       leading: buildActivityDate(dayName, month, day),
       title: buildActivityTitle(title, color),
       subtitle: Text(description),
 //      trailing: Container(child: Row(children: <Widget>[Icon(Icons.edit), Icon(Icons.delete)],), height: 30.0, width: 80.0, padding: EdgeInsets.only(right: 1.0),),
-    );
+    ), month, day, title, description);
   }
 
-  Widget buildActivityDate(
-    String dayName,
-    String month,
-    int day,
-  ) {
+  Widget buildActivityDate(String dayName, String month, int day,) {
     TextStyle style = TextStyle(color: Colors.grey);
     return Column(
       children: <Widget>[
@@ -140,15 +136,48 @@ class AgendaState extends GenericAppState<AgendaWidget> {
       ],
     );
   }
-
   Widget buildActivityTitle(String title, Color color) {
     return Row(
       children: <Widget>[
         Flexible(
             child: Text(
-          title,
-          overflow: TextOverflow.ellipsis,
-        )),
+              title,
+            )),
+      ],
+    );
+  }
+  Widget buildSlideable(Widget listTile, month, day, title, description){
+    return new Slidable(
+      delegate: new SlidableDrawerDelegate(),
+      actionExtentRatio: 0.25,
+      child: listTile,
+      actions: <Widget>[
+        new IconSlideAction(
+          caption: 'Editar',
+          color: Colors.blue,
+          icon: Icons.edit,
+          onTap: () => _showSnackBar('Editar',  month, day, title, description),
+        ),
+//        new IconSlideAction(
+//          caption: 'Share',
+//          color: Colors.indigo,
+//          icon: Icons.share,
+//          onTap: () => _showSnackBar('Share'),
+//        ),
+      ],
+      secondaryActions: <Widget>[
+//        new IconSlideAction(
+//          caption: 'More',
+//          color: Colors.black45,
+//          icon: Icons.more_horiz,
+//          onTap: () => _showSnackBar('More'),
+//        ),
+        new IconSlideAction(
+          caption: 'Deletar',
+          color: Colors.red,
+          icon: Icons.delete,
+          onTap: () => _showSnackBar('Deletar' , month, day, title, description),
+        ),
       ],
     );
   }
@@ -205,5 +234,9 @@ class AgendaState extends GenericAppState<AgendaWidget> {
                 agenda: this,
               )),
     );
+  }
+
+  _showSnackBar(String s, month, day, title, description) {
+    print('$s $month, $day, $title, $description');
   }
 }
