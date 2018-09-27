@@ -12,11 +12,9 @@ class AgendaWidget extends GenericAppWidget {
     // TODO: implement createState
     return new AgendaState();
   }
-
 }
 
 class AgendaState extends GenericAppState<AgendaWidget> {
-
   var atividades;
   List<String> weekdays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
   List<String> months = [
@@ -33,6 +31,7 @@ class AgendaState extends GenericAppState<AgendaWidget> {
     'Nov',
     'Dez',
   ];
+
   @override
   void preinit() {
     atividades = null;
@@ -41,8 +40,10 @@ class AgendaState extends GenericAppState<AgendaWidget> {
   @override
   Widget buildScreen(BuildContext context) {
     print('Atividades is $atividades');
+    var tmp = json.encode(atividades);
+    print('Tmp is $tmp');
     return new Scaffold(
-      body: atividades.isEmpty ? Text('Vazio!') : buildActivityList(),
+      body: atividades.isEmpty ? buildEmpty() : buildActivityList(),
       floatingActionButton: FloatingActionButton(
         onPressed: displayDialog,
         child: Icon(Icons.add),
@@ -82,15 +83,14 @@ class AgendaState extends GenericAppState<AgendaWidget> {
     });
   }
 
-
   Widget buildActivityList() {
-    List<Widget>  options = [];
+    List<Widget> options = [];
     for (var atividade in atividades) {
       String nome = atividade['nome'],
           desc = atividade['descricao'],
           materia = atividade['materia'];
-      DateTime timestamp = DateTime.fromMillisecondsSinceEpoch(
-          atividade['data']);
+      DateTime timestamp =
+          DateTime.fromMillisecondsSinceEpoch(atividade['data']);
       options.add(buildActivity(
           weekdays[timestamp.weekday - 1].toUpperCase(),
           months[timestamp.month - 1].toUpperCase(),
@@ -102,8 +102,9 @@ class AgendaState extends GenericAppState<AgendaWidget> {
       options.add(Divider());
     }
 
-    return ListView(children: options, );
-
+    return ListView(
+      children: options,
+    );
   }
 
   Widget buildActivity(String dayName, String month, int day, String title,
@@ -113,18 +114,29 @@ class AgendaState extends GenericAppState<AgendaWidget> {
       title: buildActivityTitle(title, color),
       subtitle: Text(description),
 //      trailing: Container(child: Row(children: <Widget>[Icon(Icons.edit), Icon(Icons.delete)],), height: 30.0, width: 80.0, padding: EdgeInsets.only(right: 1.0),),
-
-      
     );
   }
 
-  Widget buildActivityDate(String dayName, String month, int day,) {
+  Widget buildActivityDate(
+    String dayName,
+    String month,
+    int day,
+  ) {
     TextStyle style = TextStyle(color: Colors.grey);
     return Column(
       children: <Widget>[
-        Text(dayName, style: style,),
-        Text(month, style: style,),
-        Text('$day', style: style,),
+        Text(
+          dayName,
+          style: style,
+        ),
+        Text(
+          month,
+          style: style,
+        ),
+        Text(
+          '$day',
+          style: style,
+        ),
       ],
     );
   }
@@ -132,9 +144,47 @@ class AgendaState extends GenericAppState<AgendaWidget> {
   Widget buildActivityTitle(String title, Color color) {
     return Row(
       children: <Widget>[
-        Flexible(child: Text(title, overflow: TextOverflow.ellipsis,)),
+        Flexible(
+            child: Text(
+          title,
+          overflow: TextOverflow.ellipsis,
+        )),
       ],
     );
+  }
+
+  Widget buildEmpty() {
+    return Container(
+        child: Center(
+      child: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 16.0,
+          ),
+          Icon(
+            Icons.info,
+            color: Colors.grey.withAlpha(150),
+            size: 64.0,
+          ),
+          Text(
+            'Ops!',
+            style: TextStyle(fontSize: 32.0, color: Colors.grey.withAlpha(150)),
+          ),
+          Text('Parece que você não agendou nenhuma atividade ',
+              style:
+                  TextStyle(fontSize: 16.0, color: Colors.grey.withAlpha(150))),
+//           Container(
+//              child: Center(
+//                child: Text(
+//                  'Não tem problema!\nUse o botão a baixo para adicionar novas atividades, como provas ou trabalhos',
+//                ),
+//              ),
+//             margin: EdgeInsets.only(right: 8.0, left: 8.0),
+//
+//            ),
+        ],
+      ),
+    ));
   }
 
   void displayDialog() {
@@ -149,10 +199,11 @@ class AgendaState extends GenericAppState<AgendaWidget> {
     options.add('asdasd');
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) =>
-          AtividadeWidget(options: options, agenda: this,)),
+      MaterialPageRoute(
+          builder: (context) => AtividadeWidget(
+                options: options,
+                agenda: this,
+              )),
     );
   }
 }
-
-

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:horariopucpr/modules/io/Storage.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
+import 'package:horariopucpr/modules/smaller_screens/LoadingScreen.dart';
 
 
 
@@ -42,7 +43,7 @@ class GenericAppState<GenericAppWidget> extends State{
     print("Builded");
     if(!this.hasLoaded()){
       this.fetchData();
-      return new Text('Carregando...');
+      return new Scaffold(body: LoadingWidget(),);
     }
     return this.buildScreen(ctx);
   }

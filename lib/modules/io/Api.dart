@@ -30,7 +30,6 @@ class Api {
     print('Basic get with $username, $password');
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
-//    print(basicAuth);
 
     Response r = await get('https://horariopucpr.herokuapp.com/$url',
         headers: {'authorization': basicAuth});
@@ -42,13 +41,25 @@ class Api {
     print('Basic post with $username, $password');
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
-    print(basicAuth);
 
     Response r = await post('https://horariopucpr.herokuapp.com/$url',
         headers: {'authorization': basicAuth}, body: body);
 
     return r.body;
   }
+
+  _doPut(String url, var body) async {
+    await assertData();
+    print('Basic put with $username, $password');
+    String basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+
+    Response r = await put('https://horariopucpr.herokuapp.com/$url',
+        headers: {'authorization': basicAuth}, body: body);
+
+    return r.body;
+  }
+
 
   Future<bool> _doCheckAuth() async {
     String basicAuth = 'Basic ' +
@@ -144,7 +155,7 @@ class Api {
   }
 
   Future<String> getMaterias() async{
-    String body = await _doGet('agenda');
+    String body = await _doGet('agenda/materias');
     Map<String, dynamic> resp = await json.decode(body);
     if (resp['status'] == 'success') return json.encode(resp['data']);
   }

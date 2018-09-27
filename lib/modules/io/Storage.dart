@@ -80,10 +80,9 @@ class Storage{
 
   void setMaterias(data) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setBool('materias', data);
+    prefs.setString('materias', data);
     return;
   }
-
   Future<String> getMaterias() async {
     return await _get('materias');
   }

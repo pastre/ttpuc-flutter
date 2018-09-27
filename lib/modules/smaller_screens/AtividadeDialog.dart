@@ -54,6 +54,12 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
     materias = [];
   }
 
+
+  @override
+  Widget build(BuildContext ctx) {
+    return super.build(ctx);
+  }
+
   @override
   Widget buildScreen(BuildContext ctx) {
     if(isLoading == null) isLoading = false;
@@ -75,12 +81,19 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
     return this.storage.getMaterias();
   }
 
-
   @override
   Future apiCall() {
     return this.api.getMaterias();
   }
 
+  @override
+  void updateState(data) {
+    setState(() {
+      print('Data is $data');
+      var ret =  json.decode(data);
+      this.materias = ret['materias'];
+    });
+  }
   Widget buildMain(){
 
     return Scaffold(
@@ -157,32 +170,14 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
 
   Widget buildMateriasSelector() {
     // TODO Pegar isso da memoria
-    List<Widget> options = [
-      Text(
-        'asdasd',
-        overflow: TextOverflow.ellipsis,
-      ),
-      Text(
-        'asdasd1',
-        overflow: TextOverflow.ellipsis,
-      ),
-      Text(
-        'asdasd',
-        overflow: TextOverflow.ellipsis,
-      ),
-      Text(
-        'asdasd',
-        overflow: TextOverflow.ellipsis,
-      ),
-      Text(
-        'asdasd',
-        overflow: TextOverflow.ellipsis,
-      ),
-      Text(
-        'asdasd',
-        overflow: TextOverflow.ellipsis,
-      ),
-    ];
+    List<Widget> options = [];
+    for(var m in materias)
+      options.add(
+        Text(
+          m,
+          overflow: TextOverflow.ellipsis,
+        ),);
+
     return CupertinoPicker(
         children: options,
         itemExtent: 20.0,
