@@ -60,6 +60,21 @@ class Api {
     return r.body;
   }
 
+  _doDelete(String url) async{
+    await assertData();
+    print('Basic put with $username, $password');
+    url = Uri.encodeFull(url);
+    print('URL IS $url');
+    String basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+
+//    Response r = await delete('https://horariopucpr.herokuapp.com/$url',
+//        headers: {'authorization': basicAuth}, );
+    Response r = await delete('https://horariopucpr.herokuapp.com/$url',
+        headers: {'authorization': basicAuth}, );
+
+    return r.body;
+  }
 
   Future<bool> _doCheckAuth() async {
     String basicAuth = 'Basic ' +
@@ -146,6 +161,15 @@ class Api {
    Map<String, dynamic> resp = await json.decode(body);
    if (resp['status'] == 'success') return json.encode(resp['data']);
 
+  }
+
+  Future<String> deleteAtividade(timestamp, materia, descricao, nome) async{
+    print('Params is timestamp $timestamp, materia $materia, descricao $descricao, nome $nome');
+    String url = 'agenda/$timestamp/$materia/$nome/$descricao';
+    print('Url is $url');
+    String body =  await _doDelete(url);
+    Map<String, dynamic> resp = await json.decode(body);
+    if (resp['status'] == 'success') return json.encode(resp['data']);
   }
 
   Future<String> getAtividades() async{

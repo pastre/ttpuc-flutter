@@ -268,23 +268,21 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
         materia = formatText(_selectedMateriaIndex.toString().replaceAll(' overflow: ellipsis',  '')),
         nome = this.nomeController.value.text,
         desc = this.descController.value.text;
-    print('materia is $materia');
     var splitted = dia.split(' ');
-    print('Splitted is $splitted');
     int time = DateTime(
             2018, months.indexOf(splitted.last) + 1, int.parse(splitted[1]))
         .millisecondsSinceEpoch;
     splitted = materia.split(' ');
-//    materia = splitted[0];
-//    setState(() {
-//      isLoading = true;
-//    });
-//    this.api.addAtividade(nome, desc, time, materia ).then((val){
-//      print('Value is $val');
-//      this.storage.setAtividades(val);
-//      this.agenda.fetchData();
-//      Navigator.pop(this.context);
-//    });
+    materia = splitted[0];
+    setState(() {
+      isLoading = true;
+    });
+    this.api.addAtividade(nome, desc, time, materia ).then((val){
+      print('Atividades is $val');
+      this.storage.setAtividades(val);
+      this.agenda.fetchData();
+      Navigator.pop(this.context);
+    });
     print(
         'DAY: $time\nMATERIA: $materia \nNOME: $nome \nDESC $desc');
   }

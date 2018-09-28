@@ -236,7 +236,17 @@ class AgendaState extends GenericAppState<AgendaWidget> {
     );
   }
 
-  _showSnackBar(String s, month, day, title, description) {
+  _showSnackBar(String s, month, day, String title, String description) {
+    month = month[0].toUpperCase() + month.substring(1).toString().toLowerCase();
+    print('Month is $month');
+    month = months.indexOf(month);
+    print('Month is $month');
+    int timestamp = DateTime(2018, month + 1, day).millisecondsSinceEpoch;
+    String nome = title.split(' - ')[0], materia =  title.split(' - ')[1];
+    this.api.deleteAtividade(timestamp, materia, description, nome).then((val){
+      this.storage.setAtividades(val);
+      this.fetchData();
+    });
     print('$s $month, $day, $title, $description');
   }
 }
