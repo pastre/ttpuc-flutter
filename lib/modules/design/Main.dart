@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/api/Api.dart';
+import 'package:horariopucpr/modules/io/Api.dart';
 import 'package:horariopucpr/modules/core/Usuario.dart';
 import 'package:horariopucpr/modules/design/BottonNavigation.dart';
 import 'package:horariopucpr/modules/design/Screen.dart';
-import 'package:horariopucpr/modules/storage/Storage.dart';
+import 'package:horariopucpr/modules/io/Storage.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 
 class MainScreen extends StatelessWidget{

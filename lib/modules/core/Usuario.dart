@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/api/Api.dart';
+import 'package:horariopucpr/modules/io/Api.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
-import 'package:horariopucpr/modules/storage/Storage.dart';
+import 'package:horariopucpr/modules/io/Storage.dart';
 
 
 class UsuarioWidget extends StatefulWidget{
@@ -118,10 +118,10 @@ class UsuarioState extends State<UsuarioWidget>{
         Expanded(
           child: MONEY_ICON,
         ),
-        COD_ICON,
-        Expanded(
-          child: TIME_ICON,
-        ),
+        Expanded(child: COD_ICON,),
+//        Expanded(
+//          child: TIME_ICON,
+//        ),
       ],),
     ],);
   }

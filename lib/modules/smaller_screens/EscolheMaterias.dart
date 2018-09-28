@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/api/Api.dart';
-import 'package:horariopucpr/modules/storage/Storage.dart';
+import 'package:horariopucpr/modules/io/Api.dart';
+import 'package:horariopucpr/modules/io/Storage.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 
 class Picker extends StatefulWidget{
