@@ -152,12 +152,12 @@ class AgendaState extends GenericAppState<AgendaWidget> {
       actionExtentRatio: 0.25,
       child: listTile,
       actions: <Widget>[
-        new IconSlideAction(
-          caption: 'Editar',
-          color: Colors.blue,
-          icon: Icons.edit,
-          onTap: () => _showSnackBar('Editar',  month, day, title, description),
-        ),
+//        new IconSlideAction(
+//          caption: 'Editar',
+//          color: Colors.blue,
+//          icon: Icons.edit,
+//          onTap: () => _showSnackBar('Editar',  month, day, title, description),
+//        ),
 //        new IconSlideAction(
 //          caption: 'Share',
 //          color: Colors.indigo,

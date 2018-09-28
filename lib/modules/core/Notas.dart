@@ -132,7 +132,7 @@ class NotasState extends GenericAppState<NotasWidget>{
 
 
   void compareData(newData){
-    print('Comparing $newData ');
+    this.storage.setNotas(newData);
     this.updateState(newData);
   }
 }
