@@ -7,10 +7,21 @@ import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 
 class HorariosWidget extends GenericAppWidget{
-  HorariosWidget({ List<ListTile> key }) : super(list: key);
+  HorariosState state;
+
+  HorariosWidget(){
+    this.state =  new HorariosState();
+  }
+
   @override
   State<StatefulWidget> createState() {
-    return HorariosState();
+    this.state = new HorariosState();
+    return this.state;
+  }
+
+  void setToday(){
+    print('Set today!!');
+    this.state.setToday();
   }
 }
 
@@ -21,11 +32,29 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
   var dias =  ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ];
   List<Tab> _tabs = <Tab>[];
   TabController tabController;
-
+  int todayInt;
 
   @override
   Widget build(BuildContext ctx) {
     return super.build(ctx);
+  }
+
+
+  @override
+  void reassemble() {
+    print('reassemble');
+  }
+
+
+
+  @override
+  void deactivate() {
+    print('Deacivated');
+  }
+
+  @override
+  void dispose() {
+    print('Disposed');
   }
 
   @override
@@ -33,13 +62,20 @@ class HorariosState extends GenericAppState<HorariosWidget> with TickerProviderS
     materias = [];
     for(var i = 0; i < this.dias.length; i++){
       _tabs.add(new Tab(text: this.dias[i], ));
+      todayInt =  DateTime
+        .now()
+        .weekday - 1;
     }
-    tabController = new TabController(length: dias.length, vsync: this, initialIndex: 1, );
+    tabController = new TabController(length: dias.length, vsync: this, initialIndex: todayInt, );
   }
 
   void setToday(){
-    var  now = DateTime.now().weekday;
-    tabController.animateTo(now - 1);
+    try {
+      print('YAAAAY Tab controler is $tabController');
+      tabController.animateTo(todayInt);
+    }catch (e){
+      print(e);
+    }
   }
 
   @override
