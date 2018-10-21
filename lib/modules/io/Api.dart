@@ -4,6 +4,9 @@ import 'dart:convert';
 import 'package:horariopucpr/modules/io/Storage.dart';
 import 'package:http/http.dart';
 
+//String domain = 'http://192.168.25.14:5000/';
+String domain = 'https://horariopucpr.herokuapp.com/';
+
 class Api {
   Storage s = new Storage();
   String username = '', password = '';
@@ -31,7 +34,7 @@ class Api {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
 
-    Response r = await get('https://horariopucpr.herokuapp.com/$url',
+    Response r = await get('$domain$url',
         headers: {'authorization': basicAuth});
     return r.body;
   }
@@ -42,7 +45,7 @@ class Api {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
 
-    Response r = await post('https://horariopucpr.herokuapp.com/$url',
+    Response r = await post('$domain$url',
         headers: {'authorization': basicAuth}, body: body);
 
     return r.body;
@@ -54,7 +57,7 @@ class Api {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
 
-    Response r = await put('https://horariopucpr.herokuapp.com/$url',
+    Response r = await put('$domain$url',
         headers: {'authorization': basicAuth}, body: body);
 
     return r.body;
@@ -70,7 +73,7 @@ class Api {
 
 //    Response r = await delete('https://horariopucpr.herokuapp.com/$url',
 //        headers: {'authorization': basicAuth}, );
-    Response r = await delete('https://horariopucpr.herokuapp.com/$url',
+    Response r = await delete('$domain$url',
         headers: {'authorization': basicAuth}, );
 
     return r.body;
@@ -82,7 +85,7 @@ class Api {
     print('${this.username}:${this.password}');
 
     print("Fired request for login $username $password");
-    Response r = await get('https://horariopucpr.herokuapp.com/dadosPessoais',
+    Response r = await get(domain + 'dadosPessoais',
         headers: {'authorization': basicAuth});
     print(r.body);
     try {
@@ -118,8 +121,6 @@ class Api {
     Response r = await put('https://horariopucpr.herokuapp.com/horario',
         body: horariosJson, headers: {'authorization': basicAuth});
     print('Res is ${r.body}');
-
-//    put('https://horariopucpr.herokuapp.com/horarios', body: horariosJson);
   }
 
   Future<String> generateHorarios() async {
@@ -141,7 +142,7 @@ class Api {
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
     print(basicAuth);
     print('loading eventos');
-    Response r = await get('https://horariopucpr.herokuapp.com/agenda',
+    Response r = await get(domain + 'agenda',
         headers: {'authorization': basicAuth});
 
     Map<String, dynamic> resp = await json.decode(r.body);

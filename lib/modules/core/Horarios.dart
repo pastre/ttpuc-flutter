@@ -35,6 +35,8 @@ class HorariosState extends GenericAppState<HorariosWidget>
   TabController tabController;
   int todayInt;
 
+  bool isBuilding;
+
   @override
   Widget build(BuildContext ctx) {
     return super.build(ctx);
@@ -43,6 +45,7 @@ class HorariosState extends GenericAppState<HorariosWidget>
   @override
   void preinit() {
     materias = [];
+    isBuilding = false;
     for (var i = 0; i < this.dias.length; i++) {
       _tabs.add(new Tab(text: this.dias[i],));
       todayInt = DateTime
@@ -53,6 +56,7 @@ class HorariosState extends GenericAppState<HorariosWidget>
     }
     tabController = new TabController(
       length: dias.length, vsync: this, initialIndex: todayInt,);
+
   }
 
   void setToday() {
@@ -112,10 +116,14 @@ class HorariosState extends GenericAppState<HorariosWidget>
   }
 
   void buildMaterias() {
-    Navigator.push(
-        this.context,
-        MaterialPageRoute(builder: (context) => Picker())).then((value) {
-      this.fetchData();
+    if(!this.isBuilding)
+      Navigator.push(
+          this.context,
+          MaterialPageRoute(builder: (context) => Picker())).then((value) {
+        this.fetchData();
+      });
+    this.setState((){
+      this.isBuilding = true;
     });
   }
 
@@ -127,7 +135,6 @@ class HorariosState extends GenericAppState<HorariosWidget>
   }
 
   Widget buildTabBar() {
-    print('Tabs is $_tabs');
     TabBar tabBar = new TabBar(tabs: _tabs,
       controller: tabController,
       labelColor: PUC_COLOR,
