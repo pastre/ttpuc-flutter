@@ -56,7 +56,6 @@ class HorariosState extends GenericAppState<HorariosWidget>
     }
     tabController = new TabController(
       length: dias.length, vsync: this, initialIndex: todayInt,);
-
   }
 
   void setToday() {
@@ -116,15 +115,19 @@ class HorariosState extends GenericAppState<HorariosWidget>
   }
 
   void buildMaterias() {
-    if(!this.isBuilding)
+    if (!this.isBuilding)
       Navigator.push(
           this.context,
           MaterialPageRoute(builder: (context) => Picker())).then((value) {
         this.fetchData();
+        this.setState((){
+          this.isBuilding = false;
+        });
       });
-    this.setState((){
+    this.setState(() {
       this.isBuilding = true;
-    });
+    }
+    );
   }
 
   Widget buildTabView() {
@@ -135,7 +138,8 @@ class HorariosState extends GenericAppState<HorariosWidget>
   }
 
   Widget buildTabBar() {
-    TabBar tabBar = new TabBar(tabs: _tabs,
+    TabBar tabBar = new TabBar(
+      tabs: _tabs,
       controller: tabController,
       labelColor: PUC_COLOR,
       unselectedLabelColor: PUC_COLOR,
@@ -146,7 +150,14 @@ class HorariosState extends GenericAppState<HorariosWidget>
 
   Widget buildCardList(String key) {
     if (materias.contains(PLACEHOLDER)) {
-      return MaterialButton(child: Text('Aguardando insercao das materias'),
+
+      return MaterialButton(child: Column(children: <Widget>[
+        Icon(Icons.error_outline, size: 64.0, color: PUC_COLOR,),
+        Text('Ops! Não conseguimos montar a sua grade!'),
+        Text('Clique aqui para resolver isso')
+      ],
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,),
         onPressed: buildMaterias,);
     }
     var cards = <Card>[];
@@ -171,8 +182,11 @@ class HorariosState extends GenericAppState<HorariosWidget>
     if (cards.isEmpty)
       return Container(child: Column(children: <Widget>[
         Icon(Icons.directions_bike, color: Colors.grey, size: 64.0,),
-        Text('  Você não tem aulas hoje\nAproveite para dar um rolê :)', style: TextStyle(color: Colors.grey),),
-      ],crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center,),);
+        Text('  Você não tem aulas hoje\nAproveite para dar um rolê :)',
+          style: TextStyle(color: Colors.grey),),
+      ],
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,),);
 
     return ListView.builder(
       itemBuilder: (_, int) => cards[int], itemCount: cards.length,);
@@ -193,21 +207,11 @@ class HorariosState extends GenericAppState<HorariosWidget>
   Widget cardTitle(String title) {
     return Row(children: <Widget>[
       Expanded(child: Text(title, softWrap: true,),),
-//      Center(child: eventButton()),
     ],
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
     );
   }
-//
-//  Widget eventButton(){
-//    return SizedBox(
-//      child: IconButton(
-//        icon: Icon(Icons.add, color: Colors.lightBlue,),
-//        onPressed: () => displayDialog(),
-//        iconSize: 20.0,),
-//      height: 25.0, width: 25.0,);
-//  }
 
 
 }
