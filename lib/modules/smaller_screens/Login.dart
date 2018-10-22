@@ -86,7 +86,7 @@ class LoginState extends State<LoginWidget>{
       if(b){
         this.loginAction(b);
       }else{
-        stopLogin('Erro no servidor! Tente novamente logo mais');
+        stopLogin('Erro no servidor! Verifique suas credenciais');
       }
     });
   }
