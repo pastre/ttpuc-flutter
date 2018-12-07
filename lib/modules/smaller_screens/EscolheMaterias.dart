@@ -34,7 +34,8 @@ class PickerState extends State<Picker> {
       body: buildScreen(context),
       appBar: AppBar(
         title: Text('Montando sua grade'),
-        automaticallyImplyLeading: false,
+//        automaticallyImplyLeading: false,
+        leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){Navigator.pop(context);}),
         backgroundColor: PUC_COLOR,
         actions: <Widget>[
           IconButton(onPressed: () {

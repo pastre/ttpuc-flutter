@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
+import 'package:horariopucpr/modules/smaller_screens/EscolheMaterias.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/io/Storage.dart';
 
@@ -35,17 +36,15 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
     this.userData = null;
   }
 
-  @override
-  Widget build(BuildContext ctx) {
-    // TODO: implement build
-    return this.buildScreen(ctx);
-  }
+//  @override
+//  Widget build(BuildContext ctx) {
+//    //TODO: PEGAR PROGRESSO NO CURSO
+//    return this.buildScreen(ctx);
+//  }
 
   @override
   Widget buildScreen(BuildContext context) {
-    print('User data iiisss${this.userData}',);
     Widget logoutBtt = this.buildLogoutButton(context);
-    print('Builded settings');
     return Scaffold(
       appBar: AppBar(
         title: Text('Ajustes'),
@@ -61,7 +60,7 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
           children: <Widget>[
             getUserCard(),
             Divider(indent: 8.0,),
-            getProgressoCurso(),
+            //getProgressoCurso(),
             getData(),
             Divider(indent: 8.0,),
             logoutBtt,
@@ -91,6 +90,10 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
   @override
   void updateState(data) {
     setState(() {
+      if(data == null){
+        print('Null data');
+        return;
+      }
       this.userData = json.decode(data);
     });
   }
@@ -145,7 +148,7 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
   Widget getData() {
     Icon MONEY_ICON = Icon(Icons.attach_money, color: PUC_COLOR,);
     Icon COD_ICON = Icon(Icons.person_pin, color: PUC_COLOR,);
-    Icon TIME_ICON = Icon(Icons.access_time, color: PUC_COLOR,);
+    Icon CALENDAR_ICON = Icon(Icons.calendar_today, color: PUC_COLOR,);
     return Column(children: <Widget>[
       Row(children: <Widget>[
         Expanded(
@@ -153,8 +156,8 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
               Widget col = Column(
                 children: <Widget>[
                   Row(children: <Widget>[Text('Saldo da impressora self-service:')], crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center,),
-                  Row(children: <Widget>[Text(this.userData['saldo'])], crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center,)
-                ], );
+                  Row(children: <Widget>[Text(this.userData['saldo'])], crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center,),
+                 ], );
               this.doAlert(col);
             }
             ),),
@@ -167,8 +170,17 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
               ], );
             this.doAlert(col);
           }
-          ),
-        ),
+          ),),
+        Expanded(
+          child: IconButton(icon: CALENDAR_ICON, onPressed: () {
+            Widget col = Column(
+              children: <Widget>[
+                Row(children: <Widget>[Text('Saldo da impressora self-service:')], crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center,),
+                Row(children: <Widget>[Text(this.userData['saldo'])], crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center,),
+              ], );
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Picker()));
+          }
+          ),),
       ],),
     ],);
   }

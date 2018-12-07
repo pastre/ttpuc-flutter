@@ -150,21 +150,6 @@ class HorariosState extends GenericAppState<HorariosWidget>
     }
   }
 
-  void buildMaterias() {
-//    if (!this.isBuilding)
-//      Navigator.push(
-//          this.context,
-//          MaterialPageRoute(builder: (context) => Picker())).then((value) {
-//        this.fetchData();
-//        this.setState((){
-//          this.isBuilding = false;
-//        });
-//      });
-//    this.setState(() {
-//      this.isBuilding = true;
-//    }
-//    );
-  }
 
   Widget buildTabView() {
     return new TabBarView(
@@ -185,17 +170,7 @@ class HorariosState extends GenericAppState<HorariosWidget>
   }
 
   Widget buildCardList(String key) {
-    if (materias.contains(PLACEHOLDER)) {
 
-      return MaterialButton(child: Column(children: <Widget>[
-        Icon(Icons.error_outline, size: 64.0, color: PUC_COLOR,),
-        Text('Ops! Não conseguimos montar a sua grade!'),
-        Text('Clique aqui para resolver isso')
-      ],
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,),
-        onPressed: buildMaterias,);
-    }
     var cards = <Card>[];
 //    print('Materias is $materias');
     for (var i in materias) {
