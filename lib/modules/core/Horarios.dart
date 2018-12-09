@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/smaller_screens/EscolheMaterias.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 
@@ -59,57 +58,14 @@ class HorariosState extends GenericAppState<HorariosWidget>
       length: dias.length, vsync: this, initialIndex: todayInt,);
   }
 
-  void setToday() {
-    try {
-      print('YAAAAY Tab controler is $tabController');
-      tabController.animateTo(todayInt);
-    } catch (e) {
-      print(e);
-    }
-  }
 
   @override
   Widget buildScreen(BuildContext ctx) {
-    Widget tabBar = buildTabBar();
-    Widget w2 = buildEmpty();
-    return new Scaffold(appBar: this.hasMaterias ? tabBar: null,
-      body: this.hasMaterias ? tabBar: w2,
+    return new Scaffold(appBar: this.hasMaterias ?  buildTabBar() : null,
+      body: this.hasMaterias ? buildTabView(): buildEmpty(),
     );
   }
 
-  Widget buildEmpty() {
-    return Container(
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 16.0,
-              ),
-              Icon(
-                Icons.info,
-                color: Colors.grey.withAlpha(150),
-                size: 64.0,
-              ),
-              Text(
-                'Ops!',
-                style: TextStyle(fontSize: 32.0, color: Colors.grey.withAlpha(150)),
-              ),
-              Text('Parece que você não gerou a sua grade\nVá ao seu perfil de usuário para fazer isso',
-                  style:
-                  TextStyle(fontSize: 16.0, color: Colors.grey.withAlpha(150))),
-//           Container(
-//              child: Center(
-//                child: Text(
-//                  'Não tem problema!\nUse o botão a baixo para adicionar novas atividades, como provas ou trabalhos',
-//                ),
-//              ),
-//             margin: EdgeInsets.only(right: 8.0, left: 8.0),
-//
-//            ),
-            ],
-          ),
-        ));
-  }
 
   @override
   bool hasLoaded() {
@@ -148,6 +104,39 @@ class HorariosState extends GenericAppState<HorariosWidget>
         this.materias = ret;
       });
     }
+  }
+  Widget buildEmpty() {
+    return Container(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 16.0,
+              ),
+              Icon(
+                Icons.info,
+                color: Colors.grey.withAlpha(150),
+                size: 64.0,
+              ),
+              Text(
+                'Ops!',
+                style: TextStyle(fontSize: 32.0, color: Colors.grey.withAlpha(150)),
+              ),
+              Text('Parece que você não gerou a sua grade\nVá ao seu perfil de usuário para fazer isso',
+                  style:
+                  TextStyle(fontSize: 16.0, color: Colors.grey.withAlpha(150))),
+//           Container(
+//              child: Center(
+//                child: Text(
+//                  'Não tem problema!\nUse o botão a baixo para adicionar novas atividades, como provas ou trabalhos',
+//                ),
+//              ),
+//             margin: EdgeInsets.only(right: 8.0, left: 8.0),
+//
+//            ),
+            ],
+          ),
+        ));
   }
 
 
@@ -222,6 +211,14 @@ class HorariosState extends GenericAppState<HorariosWidget>
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
     );
+  }
+  void setToday() {
+    try {
+      print('YAAAAY Tab controler is $tabController');
+      tabController.animateTo(todayInt);
+    } catch (e) {
+      print(e);
+    }
   }
 
 

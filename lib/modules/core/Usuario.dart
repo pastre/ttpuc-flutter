@@ -36,11 +36,6 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
     this.userData = null;
   }
 
-//  @override
-//  Widget build(BuildContext ctx) {
-//    //TODO: PEGAR PROGRESSO NO CURSO
-//    return this.buildScreen(ctx);
-//  }
 
   @override
   Widget buildScreen(BuildContext context) {

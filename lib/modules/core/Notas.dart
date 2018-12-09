@@ -65,6 +65,10 @@ class NotasState extends GenericAppState<NotasWidget> {
   @override
   void updateState(data) {
     setState(() {
+      if(data == null){
+        print('NULL DATA');
+        return;
+      }
       var ret = json.decode(data);
       this.list = ret;
       print('OBA');
