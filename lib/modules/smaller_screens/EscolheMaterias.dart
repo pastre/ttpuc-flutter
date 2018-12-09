@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
 import 'package:horariopucpr/modules/io/Storage.dart';
+import 'package:horariopucpr/modules/smaller_screens/LoadingScreen.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 
 class Picker extends StatefulWidget {
@@ -34,14 +35,15 @@ class PickerState extends State<Picker> {
       body: buildScreen(context),
       appBar: AppBar(
         title: Text('Montando sua grade'),
-        automaticallyImplyLeading: false,
+//        automaticallyImplyLeading: false,
+        leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){Navigator.pop(context);}),
         backgroundColor: PUC_COLOR,
         actions: <Widget>[
           IconButton(onPressed: () {
             print('Pressed info!');
             showModalBottomSheet(context: this.context,builder: (BuildContext context){
               return Text('Estamos tentando montar a sua grade automaticamente\n'+
-              'Qualquer conflito será mostrado nesta página, e pedimos que você escolha a matéria certa\n'+
+              'Qualquer dúvida que o sistema tenha será mostrada nesta página, e pedimos que você escolha a matéria certa\n'+
               'Esse processo só precisa ser feito uma vez', );
             });
           }, icon: Icon(Icons.info_outline),)
@@ -52,7 +54,7 @@ class PickerState extends State<Picker> {
 
   int startTime(i) {
     var tmp = i['starttime'].split(':');
-//    print('Tmp is $tmp');
+//    print('Tmp is $tmp');py
     var ret = int.parse(tmp[0]) * 100 + int.parse(tmp[1]);
     print('Ret is $ret');
     return ret;
@@ -102,7 +104,7 @@ class PickerState extends State<Picker> {
   }
 
   Widget buildScreen(BuildContext context) {
-    if (resp.isEmpty) return Text('Loading');
+    if (resp.isEmpty) return LoadingWidget();
     List<Conflito> conflitos = buildConflitos();
     List<ListTile> tiles = new List<ListTile>();
     for (Conflito c in conflitos)

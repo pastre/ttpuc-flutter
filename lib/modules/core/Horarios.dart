@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/smaller_screens/EscolheMaterias.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 
@@ -35,7 +34,8 @@ class HorariosState extends GenericAppState<HorariosWidget>
   TabController tabController;
   int todayInt;
 
-  bool isBuilding;
+
+  bool hasMaterias;
 
   @override
   Widget build(BuildContext ctx) {
@@ -45,7 +45,7 @@ class HorariosState extends GenericAppState<HorariosWidget>
   @override
   void preinit() {
     materias = [];
-    isBuilding = false;
+    hasMaterias = true;
     for (var i = 0; i < this.dias.length; i++) {
       _tabs.add(new Tab(text: this.dias[i],));
       todayInt = DateTime
@@ -58,23 +58,14 @@ class HorariosState extends GenericAppState<HorariosWidget>
       length: dias.length, vsync: this, initialIndex: todayInt,);
   }
 
-  void setToday() {
-    try {
-      print('YAAAAY Tab controler is $tabController');
-      tabController.animateTo(todayInt);
-    } catch (e) {
-      print(e);
-    }
-  }
 
   @override
   Widget buildScreen(BuildContext ctx) {
-    Widget tabBarView = buildTabView();
-    Widget tabBar = buildTabBar();
-    return new Scaffold(appBar: tabBar,
-      body: tabBarView,
+    return new Scaffold(appBar: this.hasMaterias ?  buildTabBar() : null,
+      body: this.hasMaterias ? buildTabView(): buildEmpty(),
     );
   }
+
 
   @override
   bool hasLoaded() {
@@ -103,9 +94,10 @@ class HorariosState extends GenericAppState<HorariosWidget>
     var ret = json.decode(data)['horarios']; // TODO: Checar se data é null
     print('Setting state ${ret}');
     if (ret.isEmpty) {
-      this.materias.add(PLACEHOLDER);
-      print('Empty!!!');
-      buildMaterias();
+      setState((){
+        this.materias.add(PLACEHOLDER);
+        this.hasMaterias = false;
+      });
     } else {
       print('Setting state with materias $ret');
       setState(() {
@@ -113,22 +105,40 @@ class HorariosState extends GenericAppState<HorariosWidget>
       });
     }
   }
-
-  void buildMaterias() {
-    if (!this.isBuilding)
-      Navigator.push(
-          this.context,
-          MaterialPageRoute(builder: (context) => Picker())).then((value) {
-        this.fetchData();
-        this.setState((){
-          this.isBuilding = false;
-        });
-      });
-    this.setState(() {
-      this.isBuilding = true;
-    }
-    );
+  Widget buildEmpty() {
+    return Container(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 16.0,
+              ),
+              Icon(
+                Icons.info,
+                color: Colors.grey.withAlpha(150),
+                size: 64.0,
+              ),
+              Text(
+                'Ops!',
+                style: TextStyle(fontSize: 32.0, color: Colors.grey.withAlpha(150)),
+              ),
+              Text('Parece que você não gerou a sua grade\nVá ao seu perfil de usuário para fazer isso',
+                  style:
+                  TextStyle(fontSize: 16.0, color: Colors.grey.withAlpha(150))),
+//           Container(
+//              child: Center(
+//                child: Text(
+//                  'Não tem problema!\nUse o botão a baixo para adicionar novas atividades, como provas ou trabalhos',
+//                ),
+//              ),
+//             margin: EdgeInsets.only(right: 8.0, left: 8.0),
+//
+//            ),
+            ],
+          ),
+        ));
   }
+
 
   Widget buildTabView() {
     return new TabBarView(
@@ -149,17 +159,7 @@ class HorariosState extends GenericAppState<HorariosWidget>
   }
 
   Widget buildCardList(String key) {
-    if (materias.contains(PLACEHOLDER)) {
 
-      return MaterialButton(child: Column(children: <Widget>[
-        Icon(Icons.error_outline, size: 64.0, color: PUC_COLOR,),
-        Text('Ops! Não conseguimos montar a sua grade!'),
-        Text('Clique aqui para resolver isso')
-      ],
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,),
-        onPressed: buildMaterias,);
-    }
     var cards = <Card>[];
 //    print('Materias is $materias');
     for (var i in materias) {
@@ -211,6 +211,14 @@ class HorariosState extends GenericAppState<HorariosWidget>
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
     );
+  }
+  void setToday() {
+    try {
+      print('YAAAAY Tab controler is $tabController');
+      tabController.animateTo(todayInt);
+    } catch (e) {
+      print(e);
+    }
   }
 
 

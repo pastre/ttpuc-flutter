@@ -86,4 +86,16 @@ class Storage{
   Future<String> getMaterias() async {
     return await _get('materias');
   }
+
+  void setUserData(userDataJson) async{
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('userData', userDataJson);
+  }
+
+
+  Future<String> getUserData() async{
+    return await _get('userData');
+  }
+
+
 }

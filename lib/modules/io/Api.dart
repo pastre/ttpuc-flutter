@@ -87,7 +87,7 @@ class Api {
     print("Fired request for login $username $password");
     Response r = await get(domain + 'dadosPessoais',
         headers: {'authorization': basicAuth});
-    print(r.body);
+    print('Return from login is $r.body');
     try {
       return json.decode(r.body)['status'] == 'success';
     } on FormatException {
@@ -181,6 +181,12 @@ class Api {
 
   Future<String> getMaterias() async{
     String body = await _doGet('agenda/materias');
+    Map<String, dynamic> resp = await json.decode(body);
+    if (resp['status'] == 'success') return json.encode(resp['data']);
+  }
+
+  Future<String> getUserData() async {
+    String body = await _doGet('userData');
     Map<String, dynamic> resp = await json.decode(body);
     if (resp['status'] == 'success') return json.encode(resp['data']);
   }
