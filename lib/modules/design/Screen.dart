@@ -34,6 +34,9 @@ class _ScreenState extends State<Screen> {
       possibleScreens[i] = SCREENS[i].screenWidget;
     }
     this.currentScreen = possibleScreens[1];
+
+    print('Construtor ta la');
+
   }
 
   @override
@@ -42,6 +45,12 @@ class _ScreenState extends State<Screen> {
   }
 
   void updateScreen(value) {
+
+
+//    for (var i = 0; i < SCREENS.length; i++)
+//      print('Local data from ${SCREENS[i].nome} is ${possibleScreens[i].loadLocal()}');
+
+    print('ARRIBA');
     this.setState(() {
       bool updateHorario = false;
       if (possibleScreens[value] is HorariosWidget && this.currentScreen is HorariosWidget)

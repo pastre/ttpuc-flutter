@@ -81,10 +81,10 @@ class LoginState extends State<LoginWidget>{
     setState((){isLoading = true;});
     //this.userCtrl.text = 'bruno.pastre';
     //this.pwdCtrl.text = 'asdqwe123!@#';
-    this.api.setCredentials(this.userCtrl.text, this.pwdCtrl.text).then((b)
+    this.api.setCredentials(this.userCtrl.text, this.pwdCtrl.text).then((loginOk)
     {
-      if(b){
-        this.loginAction(b);
+      if(loginOk){
+        this.loginAction(loginOk);
       }else{
         stopLogin('Erro no servidor! Verifique suas credenciais');
       }

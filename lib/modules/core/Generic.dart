@@ -9,13 +9,14 @@ import 'package:horariopucpr/modules/smaller_screens/LoadingScreen.dart';
 
 
 abstract class GenericAppWidget extends StatefulWidget{
-  List<ListTile> list;
-  GenericAppWidget({this.list});
+  var state;
+  GenericAppWidget({this.state});
 
-  List<ListTile> get getList => this.list;
 
-  void call(){
 
+  @override
+  State<StatefulWidget> createState() {
+    return this.state;
   }
 }
 
