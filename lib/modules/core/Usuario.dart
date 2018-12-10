@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
+import 'package:horariopucpr/modules/core/Horarios.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
 import 'package:horariopucpr/modules/smaller_screens/EscolheMaterias.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
@@ -11,22 +12,25 @@ import 'package:horariopucpr/modules/io/Storage.dart';
 
 class UsuarioWidget extends GenericAppWidget {
   VoidCallback callback;
-
-  UsuarioWidget(VoidCallback callback) {
+  HorariosWidget horarios;
+  UsuarioWidget(VoidCallback callback, HorariosWidget horarios) {
     this.callback = callback;
+    this.horarios = horarios;
   }
 
   @override
   State<StatefulWidget> createState() {
-    return new UsuarioState(callback);
+    return new UsuarioState(callback, this.horarios);
   }
 }
 
 class UsuarioState extends GenericAppState<UsuarioWidget> {
   VoidCallback callback;
+  HorariosWidget horarios;
 
-  UsuarioState(VoidCallback callback) {
+  UsuarioState(VoidCallback callback, HorariosWidget horarios) {
     this.callback = callback;
+    this.horarios = horarios;
   }
 
   Map<String, dynamic> userData;
@@ -173,7 +177,7 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
                 Row(children: <Widget>[Text('Saldo da impressora self-service:')], crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center,),
                 Row(children: <Widget>[Text(this.userData['saldo'])], crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center,),
               ], );
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Picker()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Picker(this.horarios)));
           }
           ),),
       ],),

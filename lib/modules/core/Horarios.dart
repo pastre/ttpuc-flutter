@@ -22,6 +22,11 @@ class HorariosWidget extends GenericAppWidget {
     print('Set today!!');
     this.state.setToday();
   }
+
+  void updateChild(){
+    print('Updating child!!!');
+    this.state.forceUpdate();
+  }
 }
 
 
@@ -99,6 +104,7 @@ class HorariosState extends GenericAppState<HorariosWidget>
         this.hasMaterias = false;
       });
     } else {
+      this.hasMaterias = true;
       print('Setting state with materias $ret');
       setState(() {
         this.materias = ret;
@@ -222,4 +228,8 @@ class HorariosState extends GenericAppState<HorariosWidget>
   }
 
 
+  void forceUpdate() {
+    print('Forcing setState');
+    setState((){this.materias = [];});
+  }
 }

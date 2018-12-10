@@ -21,7 +21,7 @@ class MainScreen extends StatelessWidget{
     print('Showing confing');
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => UsuarioWidget(updateLogin)),
+      MaterialPageRoute(builder: (context) => UsuarioWidget(updateLogin, this.screen.getHorarios())),
     );
   }
 

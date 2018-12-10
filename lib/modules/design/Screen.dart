@@ -19,6 +19,10 @@ class Screen extends StatefulWidget {
     this.state.updateScreen(value);
   }
 
+
+  HorariosWidget getHorarios(){
+    return this.state.getHorarios();
+  }
 }
 
 class _ScreenState extends State<Screen> {
@@ -51,6 +55,13 @@ class _ScreenState extends State<Screen> {
         (this.currentScreen as HorariosWidget).setToday();
       print('New screen is $currentScreen, updateHorar: $updateHorario');
     });
+  }
+
+  HorariosWidget getHorarios() {
+    for (var i = 0; i < possibleScreens.length; i++) {
+      if(possibleScreens[i] is HorariosWidget)
+        return possibleScreens[i];
+    }
   }
 
 }

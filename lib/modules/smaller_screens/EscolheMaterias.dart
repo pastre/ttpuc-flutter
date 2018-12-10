@@ -1,21 +1,32 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:horariopucpr/modules/core/Horarios.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
 import 'package:horariopucpr/modules/io/Storage.dart';
 import 'package:horariopucpr/modules/smaller_screens/LoadingScreen.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 
 class Picker extends StatefulWidget {
+
+  HorariosWidget horario;
+  Picker(HorariosWidget horario){
+    this.horario = horario;
+  }
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return new PickerState();
+    return new PickerState(this.horario);
   }
 }
 
 class PickerState extends State<Picker> {
 
   var resp, dups, api, result, storage;
+  HorariosWidget horario;
+  PickerState(HorariosWidget horario){
+    this.horario = horario;
+  }
 
   @override
   void initState() {
@@ -36,7 +47,7 @@ class PickerState extends State<Picker> {
       appBar: AppBar(
         title: Text('Montando sua grade'),
 //        automaticallyImplyLeading: false,
-        leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){Navigator.pop(context);}),
+        leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){Navigator.pop(context);this.horario.updateChild();}),
         backgroundColor: PUC_COLOR,
         actions: <Widget>[
           IconButton(onPressed: () {
@@ -100,6 +111,7 @@ class PickerState extends State<Picker> {
 //    debugPrint('Response is $ret');
     storage.setHorarios(ret);
     api.setHorarios(ret);
+    this.horario.updateChild();
     Navigator.pop(this.context);
   }
 
