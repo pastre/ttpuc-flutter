@@ -5,59 +5,37 @@ import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 import "package:pull_to_refresh/pull_to_refresh.dart";
+import 'package:flutter/scheduler.dart';
 
-class NotasWidget extends GenericAppWidget{
+
+class NotasWidget extends GenericAppWidget {
   NotasWidget({ List<ListTile> key }) : super(list: key);
+
   @override
   State<StatefulWidget> createState() {
     return NotasState();
   }
 }
 
-class NotasState extends GenericAppState<NotasWidget>{
+class NotasState extends GenericAppState<NotasWidget> {
 
   var list;
-  RefreshController _refreshController;
   @override
   Widget build(BuildContext ctx) {
     return super.build(ctx);
   }
 
   @override
-  void preinit(){
+  void preinit() {
     list = [];
-    _refreshController = new RefreshController();
-  }
-
-  void refresh(a){
-    print('Refreshed! $a');
-    this.apiCall().then((data){
-
-    });
-    Future.delayed(Duration(milliseconds: 2000)).then((v){
-      print('Done $v ');
-      _refreshController.sendBack(true, RefreshStatus.completed);});
-  }
-
-
-  Future<String> refreshData() async {
-    String ret =  await this.apiCall();
-    print('Ret is $ret');
-    return ret;
-  }
-
-
-  void compareData(newData){
-    print('Comparing $newData ');
-    this.updateState(newData);
   }
 
   @override
   Widget buildScreen(BuildContext ctx) {
-    return  RefreshIndicator(
-        child: _buildList(ctx),
-        onRefresh: () => refreshData().then((newData) => compareData(newData)),
-        color: PUC_COLOR,
+    return RefreshIndicator(
+      child: _buildList(ctx),
+      onRefresh: () => refreshData().then((newData) => compareData(newData)),
+      color: PUC_COLOR,
 
     );
   }
@@ -87,56 +65,61 @@ class NotasState extends GenericAppState<NotasWidget>{
   @override
   void updateState(data) {
     setState(() {
-      var ret =  json.decode(data);
+      if(data == null){
+        print('NULL DATA');
+        return;
+      }
+      var ret = json.decode(data);
       this.list = ret;
       print('OBA');
     });
   }
 
-  Widget _buildList(context){
+  Widget _buildList(context) {
     List<Widget> list = new List<Widget>();
-    for (var i in this.list){
-      if(i['faltaspresencas'] == '--/--%') continue;
-      var maxFaltas = int.parse(i['hahr'].split("/")[0].replaceAll(' ', '')) * 0.25;
+    for (var i in this.list) {
+      if (i['faltaspresencas'] == '--/--%') continue;
+      var maxFaltas = int.parse(i['hahr'].split("/")[0].replaceAll(' ', '')) *
+          0.25;
       int nFaltas = int.parse(i["faltaspresencas"].split('/')[0]);
-      list.add(this.buildTableCell(i['disciplina'], i['nota1'], i['nota2'], i['nota3'], i['nota4'],(maxFaltas - nFaltas).round()));
+      list.add(this.buildTableCell(
+          i['disciplina'], i['nota1'], i['nota2'], i['nota3'], i['nota4'],
+          (maxFaltas - nFaltas).round()));
     }
     return new ListView.builder(
       itemCount: list.length,
-      itemBuilder: (context, int){
+      itemBuilder: (context, int) {
         return list[int];
       },
     );
   }
 
-  Widget buildTableCell(materia, n1, n2, n3, n4, faltas){
+  Widget buildTableCell(materia, n1, n2, n3, n4, faltas) {
     String subt = 'Nota 1: $n1  Nota 2: $n2';
     if (n3 != '--/--') subt += '\nNota 3: $n3';
-    if(n4 != '--/--') subt += '  Nota 4: $n4';
-
+    if (n4 != '--/--') subt += '  Nota 4: $n4';
 
 
     return new Stack(children: <Widget>[
       ListTile(
         title: Text('$materia'),
-        subtitle:  buildText(n1, n2, n3, n4, faltas),
+        subtitle: buildText(n1, n2, n3, n4, faltas),
         isThreeLine: true,
       ),
       Divider(height: 1.0, indent: 16.0,)
     ],
     );
-
   }
 
-  Widget buildText(n1, n2, n3, n4, faltas){
-    MaterialColor corFaltas =  Colors.lightBlue;
-    if(faltas <= 4){
+  Widget buildText(n1, n2, n3, n4, faltas) {
+    MaterialColor corFaltas = Colors.lightBlue;
+    if (faltas <= 4) {
       corFaltas = Colors.red;
     }
 
     String subt = 'Nota 1: $n1  Nota 2: $n2\n';
     if (n3 != '--/--') subt += 'Nota 3: $n3';
-    if(n4 != '--/--') subt += '  Nota 4: $n4';
+    if (n4 != '--/--') subt += '  Nota 4: $n4';
     subt += 'Você ainda pode faltar ';
     return new RichText(text: TextSpan(children: <TextSpan>[
       TextSpan(text: subt, style: TextStyle(color: SUBTEXT_COLOR)),
@@ -145,5 +128,17 @@ class NotasState extends GenericAppState<NotasWidget>{
     ],
     ),
     );
+  }
+
+  Future<String> refreshData() async {
+    String ret = await this.apiCall();
+    print('Ret is $ret');
+    return ret;
+  }
+
+
+  void compareData(newData) {
+    this.storage.setNotas(newData);
+    this.updateState(newData);
   }
 }

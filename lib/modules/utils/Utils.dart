@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:horariopucpr/modules/core/Agenda.dart';
 import 'package:horariopucpr/modules/core/Horarios.dart';
 import 'package:horariopucpr/modules/core/Notas.dart';
 
@@ -8,7 +9,7 @@ Color PUC_COLOR = Color(0xFFA00503);
 List<ScreenOption> SCREENS = [
   ScreenOption(nome: 'Horarios', icon: Icon(Icons.subject), screenWidget: HorariosWidget()),
   ScreenOption(nome: 'Notas', icon: Icon(Icons.book), screenWidget: NotasWidget()),
-//  ScreenOption(nome: 'Agenda', icon: Icon(Icons.calendar_view_day), screenWidget: AgendaWidget()),
+  ScreenOption(nome: 'Agenda', icon: Icon(Icons.calendar_view_day), screenWidget: AgendaWidget()),
 //  ScreenOption(nome: 'Eu', icon: Icon(Icons.person), screenWidget: Placeholder()),
 ];
 

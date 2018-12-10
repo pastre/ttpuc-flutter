@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/core/Calendario.dart';
-import 'package:horariopucpr/modules/telas/PlaceholderWidget.dart';
-import 'package:horariopucpr/modules/core/Notas.dart';
+import 'package:horariopucpr/modules/core/Horarios.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 
 
-class Screen extends StatefulWidget{
+class Screen extends StatefulWidget {
   _ScreenState state;
-  Screen(){
-    this.state  = new _ScreenState();
+
+  Screen() {
+    this.state = new _ScreenState();
   }
 
   @override
@@ -16,17 +15,22 @@ class Screen extends StatefulWidget{
     return this.state;
   }
 
-  void updateState(value){
+  void updateState(value) {
     this.state.updateScreen(value);
   }
 
+
+  HorariosWidget getHorarios(){
+    return this.state.getHorarios();
+  }
 }
 
-class _ScreenState extends State<Screen>{
+class _ScreenState extends State<Screen> {
   var possibleScreens, currentScreen;
-  _ScreenState(){
+
+  _ScreenState() {
     possibleScreens = Map<int, Widget>();
-    for(var i = 0;i < SCREENS.length; i++){
+    for (var i = 0; i < SCREENS.length; i++) {
       possibleScreens[i] = SCREENS[i].screenWidget;
     }
     this.currentScreen = possibleScreens[1];
@@ -37,8 +41,27 @@ class _ScreenState extends State<Screen>{
     return this.currentScreen;
   }
 
-  void updateScreen(value){
-    this.setState((){this.currentScreen = possibleScreens[value];});
+  void updateScreen(value) {
+    this.setState(() {
+      bool updateHorario = false;
+      if (possibleScreens[value] is HorariosWidget && this.currentScreen is HorariosWidget)
+        updateHorario = true;
+      else
+        updateHorario = false;
+
+      this.currentScreen = possibleScreens[value];
+
+      if(this.currentScreen is HorariosWidget && updateHorario)
+        (this.currentScreen as HorariosWidget).setToday();
+      print('New screen is $currentScreen, updateHorar: $updateHorario');
+    });
+  }
+
+  HorariosWidget getHorarios() {
+    for (var i = 0; i < possibleScreens.length; i++) {
+      if(possibleScreens[i] is HorariosWidget)
+        return possibleScreens[i];
+    }
   }
 
 }

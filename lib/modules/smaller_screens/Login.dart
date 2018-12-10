@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:horariopucpr/modules/api/Api.dart';
-import 'package:horariopucpr/modules/storage/Storage.dart';
+import 'package:horariopucpr/modules/io/Api.dart';
+import 'package:horariopucpr/modules/io/Storage.dart';
 
 class LoginWidget extends StatefulWidget{
   VoidCallback callback;
@@ -86,7 +86,7 @@ class LoginState extends State<LoginWidget>{
       if(b){
         this.loginAction(b);
       }else{
-        stopLogin('Erro no servidor! Tente novamente logo mais');
+        stopLogin('Erro no servidor! Verifique suas credenciais');
       }
     });
   }
