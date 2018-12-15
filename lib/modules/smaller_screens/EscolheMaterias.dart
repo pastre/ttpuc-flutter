@@ -116,7 +116,9 @@ class PickerState extends State<Picker> {
   }
 
   Widget buildScreen(BuildContext context) {
-    if (resp.isEmpty) return LoadingWidget();
+    if (resp.isEmpty) return LoadingWidget(message: 'Estamos tentando montar a sua grade automaticamente\n'+
+        'Qualquer dúvida que o sistema tenha será mostrada nesta página, e pedimos que você escolha a matéria certa\n'+
+        'Esse processo só precisa ser feito uma vez',);
     List<Conflito> conflitos = buildConflitos();
     List<ListTile> tiles = new List<ListTile>();
     for (Conflito c in conflitos)
@@ -262,6 +264,10 @@ class _ConflitoState extends State<Conflito> {
 
   List<Widget> makeRadios() {
     List<Widget> ret = new List<Widget>();
+    ret.add(Row(children: <Widget>[
+        Text('Qual a sua materia?', style: TextStyle(color: Colors.grey, fontSize: 20.0, fontStyle: FontStyle.italic),),
+        Divider(indent: 30.0,),
+      ]));
     for (var i = 0; i < widget.conflito.length; i++) {
       ret.add(buildRadio(i));
     }
@@ -269,15 +275,15 @@ class _ConflitoState extends State<Conflito> {
     return ret;
   }
 
-  Widget buildList(BuildContext context) {
-    return new ListView.builder(itemBuilder: (BuildContext context, int index) {
-      return new Card(child: ListTile(
-        title: Text("asd"),
-        subtitle: Text('qwe'),
-      )
-      );
-    }, shrinkWrap: true,);
-  }
+//  Widget buildList(BuildContext context) {
+//    return new ListView.builder(itemBuilder: (BuildContext context, int index) {
+//
+//      return new Card(child: ListTile(
+//        title: Text("asd"),
+//        subtitle: Text('qwe'),
+//      ), );
+//    }, shrinkWrap: true, );
+//  }
 
   @override
   Widget build(BuildContext context) {

@@ -227,6 +227,6 @@ class HorariosState extends GenericAppState<HorariosWidget>
 
   void forceUpdate() {
     print('Forcing setState');
-    setState((){this.materias = [];});
+//    setState((){this.materias = [];});
   }
 }
