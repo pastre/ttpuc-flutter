@@ -14,7 +14,7 @@ class LoadingWidget extends StatelessWidget{
         child:Column(children: <Widget>[
           SpinKitThreeBounce(
               color: Colors.grey),
-          this.message != null ? Text(this.message, style: TextStyle(color: Colors.grey),) : null,
+          this.message != null ? Text(this.message, style: TextStyle(color: Colors.grey),) : SizedBox(height: 1.0, width: 1.0,),
         ], mainAxisAlignment: MainAxisAlignment.center,), ),color: Colors.white,
     );
   }

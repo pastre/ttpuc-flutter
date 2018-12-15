@@ -8,7 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0f4edf89-5e34-4f27-881f-e0436da90fe2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/modules/smaller_screens/Login.dart" afterPath="$PROJECT_DIR$/lib/modules/smaller_screens/Login.dart" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart" afterPath="$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -24,11 +24,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Login.dart" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/Login.dart">
+      <file leaf-file-name="LoadingScreen.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="167" column="24" lean-forward="true" selection-start-line="167" selection-start-column="24" selection-end-line="167" selection-end-column="24" />
+            <state relative-caret-position="34">
+              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -46,7 +46,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>text</find>
       <find>Pronto</find>
       <find>login</find>
       <find>192</find>
@@ -76,6 +75,7 @@
       <find>estamps</find>
       <find>Load</find>
       <find>force</find>
+      <find>build</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -134,11 +134,11 @@
         <option value="$PROJECT_DIR$/lib/modules/core/Notas.dart" />
         <option value="$PROJECT_DIR$/lib/modules/core/Agenda.dart" />
         <option value="$PROJECT_DIR$/lib/modules/io/Io.dart" />
-        <option value="$PROJECT_DIR$/lib/modules/core/Generic.dart" />
         <option value="$PROJECT_DIR$/lib/modules/smaller_screens/EscolheMaterias.dart" />
         <option value="$PROJECT_DIR$/lib/modules/core/Horarios.dart" />
-        <option value="$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart" />
         <option value="$PROJECT_DIR$/lib/modules/smaller_screens/Login.dart" />
+        <option value="$PROJECT_DIR$/lib/modules/core/Generic.dart" />
+        <option value="$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart" />
       </list>
     </option>
   </component>
@@ -428,7 +428,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1544844755959" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1544845187126" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -476,7 +476,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1544844755959" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1544845187126" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -815,7 +815,14 @@
       <option name="project" value="LOCAL" />
       <updated>1544458085634</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Dismiss keyboard when touched outside field">
+      <created>1544844775975</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1544844775975</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -940,67 +947,11 @@
     <MESSAGE value="Auto load timetable after generating it" />
     <MESSAGE value="Deleted unecessary file" />
     <MESSAGE value="Created generic state" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created generic state" />
+    <MESSAGE value="Dismiss keyboard when touched outside field" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dismiss keyboard when touched outside field" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/modules/core/Generic.dart</url>
-          <line>82</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/modules/core/Generic.dart</url>
-          <line>83</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/modules/core/Generic.dart</url>
-          <line>84</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/modules/core/Generic.dart</url>
-          <line>85</line>
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/modules/core/Generic.dart</url>
-          <line>86</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/modules/core/Generic.dart</url>
-          <line>87</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/modules/core/Generic.dart</url>
-          <line>88</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/modules/core/Generic.dart</url>
-          <line>89</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/modules/core/Generic.dart</url>
-          <line>90</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/modules/core/Generic.dart</url>
-          <line>91</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/modules/core/Generic.dart</url>
-          <line>92</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="43" />
     </breakpoint-manager>
     <watches-manager />
@@ -1149,14 +1100,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/modules/core/Notas.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-590">
-          <caret line="81" column="26" lean-forward="false" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/io/Api.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -1176,14 +1119,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/io/Io.dart" />
-    <entry file="file://$PROJECT_DIR$/lib/modules/core/Generic.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="90" column="29" lean-forward="false" selection-start-line="90" selection-start-column="29" selection-end-line="90" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/core/Horarios.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
@@ -1210,14 +1145,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="19" column="3" lean-forward="true" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/core/Agenda.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1232,6 +1159,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
           <caret line="167" column="24" lean-forward="true" selection-start-line="167" selection-start-column="24" selection-end-line="167" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/modules/core/Generic.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="15" column="3" lean-forward="false" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/modules/core/Notas.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="25" column="34" lean-forward="true" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
