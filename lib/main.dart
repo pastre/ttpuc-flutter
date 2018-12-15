@@ -26,8 +26,6 @@ class App extends StatefulWidget{
   State<StatefulWidget> createState() {
     return new AppState();
   }
-
-
 }
 typedef void MyCallback(BuildContext val);
 

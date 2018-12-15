@@ -9,7 +9,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 class AgendaWidget extends GenericAppWidget {
 
 
-  AgendaWidget(): super(state: AgendaState());
+  AgendaWidget(): super(state: AgendaState(), name: "Agenda");
   @override
   State<StatefulWidget> createState() {
     return new AgendaState();

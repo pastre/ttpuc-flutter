@@ -9,19 +9,21 @@ import 'package:horariopucpr/modules/utils/Utils.dart';
 class MainScreen extends StatelessWidget{
   Screen screen;
   VoidCallback updateLogin;
-
+  UsuarioWidget userWidget;
   MainScreen(VoidCallback updateLogin){
     this.screen = Screen();
     this.updateLogin = updateLogin;
+    this.userWidget = UsuarioWidget(updateLogin, this.screen.getHorarios());
     print('Loaded main screen');
     Api().assertData();
+
   }
 
   void showConfig(context){
     print('Showing confing');
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => UsuarioWidget(updateLogin, this.screen.getHorarios())),
+      MaterialPageRoute(builder: (context) => this.userWidget),
     );
   }
 
