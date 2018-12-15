@@ -7,9 +7,11 @@ import 'package:horariopucpr/modules/core/Generic.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 class AgendaWidget extends GenericAppWidget {
+
+
+  AgendaWidget(): super(state: AgendaState(), name: "Agenda");
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return new AgendaState();
   }
 }

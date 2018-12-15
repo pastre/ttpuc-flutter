@@ -6,11 +6,7 @@ import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 
 class HorariosWidget extends GenericAppWidget {
-  HorariosState state;
-
-  HorariosWidget() {
-    this.state = new HorariosState();
-  }
+  HorariosWidget(): super(state: HorariosState(), name: 'Horarios');
 
   @override
   State<StatefulWidget> createState() {
@@ -22,6 +18,7 @@ class HorariosWidget extends GenericAppWidget {
     print('Set today!!');
     this.state.setToday();
   }
+
 
   void updateChild(){
     print('Updating child!!!');

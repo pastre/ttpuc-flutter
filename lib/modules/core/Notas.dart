@@ -9,7 +9,9 @@ import 'package:flutter/scheduler.dart';
 
 
 class NotasWidget extends GenericAppWidget {
-  NotasWidget({ List<ListTile> key }) : super(list: key);
+//  NotasWidget({ List<ListTile> key }) : super(list: key);
+
+  NotasWidget(): super(state: NotasState(), name: 'Notas');
 
   @override
   State<StatefulWidget> createState() {

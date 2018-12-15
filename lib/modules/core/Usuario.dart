@@ -13,9 +13,11 @@ import 'package:horariopucpr/modules/io/Storage.dart';
 class UsuarioWidget extends GenericAppWidget {
   VoidCallback callback;
   HorariosWidget horarios;
-  UsuarioWidget(VoidCallback callback, HorariosWidget horarios) {
+  UsuarioWidget(VoidCallback callback, HorariosWidget horarios) :
+        super(state: UsuarioState(callback, horarios), name: "Usuario") {
     this.callback = callback;
     this.horarios = horarios;
+    print('Instantiated usuario');
   }
 
   @override
