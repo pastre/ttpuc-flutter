@@ -12,7 +12,7 @@ class AtividadeWidget extends GenericAppWidget {
   List<String> options;
   AgendaState agenda;
 
-  AtividadeWidget({this.options, this.agenda});
+  AtividadeWidget({this.options, this.agenda}) : super(state: AtividadeState(agenda: agenda));
 
   @override
   State<StatefulWidget> createState() {
