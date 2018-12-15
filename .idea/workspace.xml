@@ -7,15 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f4edf89-5e34-4f27-881f-e0436da90fe2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/horariopucpr.iml" afterPath="$PROJECT_DIR$/horariopucpr.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/modules/core/Horarios.dart" afterPath="$PROJECT_DIR$/lib/modules/core/Horarios.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/modules/smaller_screens/EscolheMaterias.dart" afterPath="$PROJECT_DIR$/lib/modules/smaller_screens/EscolheMaterias.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart" afterPath="$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pubspec.lock" afterPath="$PROJECT_DIR$/pubspec.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/modules/smaller_screens/Login.dart" afterPath="$PROJECT_DIR$/lib/modules/smaller_screens/Login.dart" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -31,45 +24,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Agenda.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/modules/core/Agenda.dart">
+      <file leaf-file-name="Login.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/Login.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoadingScreen.dart" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="17" column="54" lean-forward="false" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EscolheMaterias.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/EscolheMaterias.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="274" column="15" lean-forward="true" selection-start-line="274" selection-start-column="15" selection-end-line="274" selection-end-column="15" />
-              <folding>
-                <element signature="e#0#22#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Horarios.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/modules/core/Horarios.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="223" column="5" lean-forward="true" selection-start-line="223" selection-start-column="5" selection-end-line="223" selection-end-column="5" />
+            <state relative-caret-position="368">
+              <caret line="167" column="24" lean-forward="true" selection-start-line="167" selection-start-column="24" selection-end-line="167" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -168,7 +127,6 @@
         <option value="$PROJECT_DIR$/lib/modules/core/AtividadeDialog.dart" />
         <option value="$PROJECT_DIR$/lib/modules/io/Api.dart" />
         <option value="$PROJECT_DIR$/lib/modules/io/Storage.dart" />
-        <option value="$PROJECT_DIR$/lib/modules/smaller_screens/Login.dart" />
         <option value="$PROJECT_DIR$/lib/main.dart" />
         <option value="$PROJECT_DIR$/lib/modules/design/Main.dart" />
         <option value="$PROJECT_DIR$/lib/modules/design/Screen.dart" />
@@ -180,6 +138,7 @@
         <option value="$PROJECT_DIR$/lib/modules/smaller_screens/EscolheMaterias.dart" />
         <option value="$PROJECT_DIR$/lib/modules/core/Horarios.dart" />
         <option value="$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart" />
+        <option value="$PROJECT_DIR$/lib/modules/smaller_screens/Login.dart" />
       </list>
     </option>
   </component>
@@ -469,7 +428,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1544843970136" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1544844755959" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -517,7 +476,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1544843970136" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1544844755959" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1142,14 +1101,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/io/Evento.dart" />
-    <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/Login.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="18" column="15" lean-forward="false" selection-start-line="18" selection-start-column="15" selection-end-line="18" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/flutter/flutter/packages/flutter/lib/src/widgets/framework.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
@@ -1198,14 +1149,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/modules/core/Usuario.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/core/Notas.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-590">
@@ -1241,16 +1184,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/modules/core/Agenda.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/core/Horarios.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
@@ -1269,10 +1202,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/modules/core/Usuario.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="23" column="39" lean-forward="true" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" column="54" lean-forward="false" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
+        <state relative-caret-position="306">
+          <caret line="19" column="3" lean-forward="true" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/modules/core/Agenda.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/Login.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="167" column="24" lean-forward="true" selection-start-line="167" selection-start-column="24" selection-end-line="167" selection-end-column="24" />
           <folding />
         </state>
       </provider>

@@ -150,7 +150,7 @@ class LoginState extends State<LoginWidget>{
     return Scaffold(
       key: LOGIN_SCAFFOLD_KEY,
       backgroundColor: PUC_COLOR,
-      body: Center(
+      body: GestureDetector( child: Center(
         child: ListView(
           shrinkWrap: true,
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
@@ -168,7 +168,8 @@ class LoginState extends State<LoginWidget>{
             loginButton,
           ],
         ),
-      ),
+      ),behavior: HitTestBehavior.deferToChild,
+        onTap: (){FocusScope.of(context).requestFocus(new FocusNode());}, )
     );
   }
 
