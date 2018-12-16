@@ -281,7 +281,7 @@ class NotaState extends State<NotaWidget> with SingleTickerProviderStateMixin {
       return Column(
         children: <Widget>[
           getAvFinal(),
-          double.parse(this.widget.mediaFinal) > 5
+          double.parse(this.widget.mediaFinal) >= 5
               ? getApprovedText()
               : getReprovedText()
         ],
@@ -291,7 +291,7 @@ class NotaState extends State<NotaWidget> with SingleTickerProviderStateMixin {
       return Column(
         children: <Widget>[
           getMedia(),
-          double.parse(this.widget.media) > 7
+          double.parse(this.widget.media) >= 7
               ? getApprovedText()
               : getPrevFinal()
         ],
