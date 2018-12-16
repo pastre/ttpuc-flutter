@@ -25,3 +25,10 @@ class ScreenOption{
   Widget screenWidget;
   ScreenOption({this.nome, this.icon, this.screenWidget,});
 }
+
+bool isNumeric(String s) {
+  if(s == null) {
+    return false;
+  }
+  return double.parse(s, (e) => null) != null;
+}
