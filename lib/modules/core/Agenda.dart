@@ -47,7 +47,7 @@ class AgendaState extends GenericAppState<AgendaWidget> {
     var tmp = json.encode(atividades);
     print('Tmp is $tmp');
     return new Scaffold(
-      body: atividades.isEmpty ? buildEmpty() : buildActivityList(),
+      body: this.loadingDelete ? LoadingWidget(message: 'Deletando atividade...',) : atividades.isEmpty ? buildEmpty() : buildActivityList(),
       floatingActionButton: FloatingActionButton(
         onPressed: displayDialog,
         child: Icon(Icons.add),
@@ -119,7 +119,6 @@ class AgendaState extends GenericAppState<AgendaWidget> {
       leading: buildActivityDate(dayName, month, day),
       title: buildActivityTitle(title, color),
       subtitle: Text(description),
-//      trailing: Container(child: Row(children: <Widget>[Icon(Icons.edit), Icon(Icons.delete)],), height: 30.0, width: 80.0, padding: EdgeInsets.only(right: 1.0),),
     ), agendaId);
   }
 
@@ -227,11 +226,6 @@ class AgendaState extends GenericAppState<AgendaWidget> {
 //    for(var m in materias){
 //      options.add(m['subject']);
 //    }
-    options.add('asdasd');
-    options.add('asdasd');
-    options.add('asdasd');
-    options.add('asdasd');
-    options.add('asdasd');
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -243,10 +237,16 @@ class AgendaState extends GenericAppState<AgendaWidget> {
   }
 
   void deleteEvent(String action, eventId) {
-
+    this.setState((){
+      this.loadingDelete = true;
+    });
     this.api.deleteAtividade(eventId).then((val){
       this.storage.setAtividades(val);
       this.fetchData();
+    }).then((a){
+      this.setState((){
+        this.loadingDelete = false;
+      });
     });
   }
 }

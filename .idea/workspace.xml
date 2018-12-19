@@ -26,49 +26,26 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.4479042">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="AtividadeDialog.dart" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/AtividadeDialog.dart">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="148">
-                  <caret line="262" column="43" lean-forward="true" selection-start-line="262" selection-start-column="43" selection-end-line="262" selection-end-column="43" />
-                  <folding>
-                    <element signature="e#4474#5048#0" />
-                    <element signature="e#5079#5503#0" />
-                    <element signature="e#6334#6560#0" />
-                    <element signature="e#6584#7995#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Agenda.dart" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/lib/modules/core/Agenda.dart">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="289">
-                  <caret line="25" column="10" lean-forward="true" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="AtividadeDialog.dart" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/AtividadeDialog.dart">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="229">
-                  <caret line="261" column="27" lean-forward="true" selection-start-line="261" selection-start-column="27" selection-end-line="261" selection-end-column="27" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="AtividadeDialog.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/AtividadeDialog.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="114" column="61" selection-start-line="114" selection-start-column="61" selection-end-line="114" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Agenda.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/modules/core/Agenda.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="213">
+              <caret line="49" column="79" selection-start-line="49" selection-start-column="79" selection-end-line="49" selection-end-column="79" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -80,9 +57,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>res</find>
-      <find>Res is</find>
-      <find>Res is e</find>
       <find>set</find>
       <find>pop</find>
       <find>PLACEhol</find>
@@ -104,12 +78,15 @@
       <find>Não</find>
       <find>DAY</find>
       <find>dele</find>
-      <find>delete</find>
       <find>Deletar</find>
       <find>materia</find>
       <find>precisa de</find>
       <find>pronto</find>
       <find>scaff</find>
+      <find>delete</find>
+      <find>loadingDelete</find>
+      <find>Loading</find>
+      <find>sua</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -709,7 +686,14 @@
       <option name="project" value="LOCAL" />
       <updated>1545190973671</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Fixed CupertinoSelector errors, prevented non-named activities being added">
+      <created>1545193591414</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1545193591414</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -741,12 +725,12 @@
       <window_info id="Image Layers" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="bottom" id="Flutter Performance" order="12" side_tool="true" />
-      <window_info anchor="bottom" x="356" y="426" width="1278" height="460" id="Run" order="13" sideWeight="0.47121534" visible="true" weight="0.4135255" />
+      <window_info anchor="bottom" x="356" y="426" width="1278" height="460" id="Run" order="13" sideWeight="0.47121534" weight="0.4135255" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4978678" weight="0.3277592" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32218507" />
       <window_info id="Captures" order="4" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1098081" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3248337" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.3248337" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="right" id="Flutter Inspector" order="8" weight="0.510661" />
@@ -790,7 +774,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Adicionado ícone e nome do app" />
     <MESSAGE value="Comentado features ainda nao desenvolvidas para release em producao" />
     <MESSAGE value="Primeira versao da develop" />
     <MESSAGE value="Tela de atividades" />
@@ -815,7 +798,8 @@
     <MESSAGE value="Melhorada estrutura da agenda, alterado metodo para PUT, pronto para disponibilziar estrutura de cod" />
     <MESSAGE value="Tela de &quot;Sobre&quot; rascunhada, precisa ser mais bonita" />
     <MESSAGE value="Fixed text message style" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed text message style" />
+    <MESSAGE value="Fixed CupertinoSelector errors, prevented non-named activities being added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed CupertinoSelector errors, prevented non-named activities being added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1043,21 +1027,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/AtividadeDialog.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="262" column="43" lean-forward="true" selection-start-line="262" selection-start-column="43" selection-end-line="262" selection-end-column="43" />
-          <folding>
-            <element signature="e#4474#5048#0" />
-            <element signature="e#5079#5503#0" />
-            <element signature="e#6334#6560#0" />
-            <element signature="e#6584#7995#0" />
-          </folding>
+        <state relative-caret-position="230">
+          <caret line="114" column="61" selection-start-line="114" selection-start-column="61" selection-end-line="114" selection-end-column="61" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/core/Agenda.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="25" column="10" lean-forward="true" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
+        <state relative-caret-position="213">
+          <caret line="49" column="79" selection-start-line="49" selection-start-column="79" selection-end-line="49" selection-end-column="79" />
         </state>
       </provider>
     </entry>

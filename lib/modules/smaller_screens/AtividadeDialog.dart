@@ -112,7 +112,7 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
       ),
       body: Container(
         child: isLoading
-            ? LoadingWidget()
+            ? LoadingWidget(message:'Adicionando atividade...',)
             : Column(
                 children: buildOptions(),
               ),
