@@ -20,7 +20,7 @@ class AgendaWidget extends GenericAppWidget {
 class AgendaState extends GenericAppState<AgendaWidget> {
   var atividades;
   bool loadingDelete = false;
-  List<String> weekdays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+  Map<int, String> weekdays = {1: 'Seg', 2: 'Ter', 3: 'Qua', 4: 'Qui', 5: 'Sex', 6: 'Sáb', 7: 'Dom'};
   List<String> months = [
     'Jan',
     'Fev',
@@ -96,7 +96,7 @@ class AgendaState extends GenericAppState<AgendaWidget> {
       DateTime timestamp =
           DateTime.fromMillisecondsSinceEpoch(atividade['data']);
       options.add(buildActivity(
-          weekdays[timestamp.weekday - 1].toUpperCase(),
+          weekdays[timestamp.weekday ].toUpperCase(),
           months[timestamp.month - 1].toUpperCase(),
           timestamp.day,
           nome + ' - ' + materia,
