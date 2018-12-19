@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/smaller_screens/AtividadeDialog.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
+import 'package:horariopucpr/modules/smaller_screens/LoadingScreen.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 class AgendaWidget extends GenericAppWidget {
@@ -18,6 +19,7 @@ class AgendaWidget extends GenericAppWidget {
 
 class AgendaState extends GenericAppState<AgendaWidget> {
   var atividades;
+  bool loadingDelete = false;
   List<String> weekdays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
   List<String> months = [
     'Jan',
@@ -100,7 +102,9 @@ class AgendaState extends GenericAppState<AgendaWidget> {
           nome + ' - ' + materia,
           desc,
           Colors.orange,
-          false));
+          false,
+          atividade['id'],
+      ));
       options.add(Divider());
     }
 
@@ -110,13 +114,13 @@ class AgendaState extends GenericAppState<AgendaWidget> {
   }
 
   Widget buildActivity(String dayName, String month, int day, String title,
-      String description, Color color, bool isSelected) {
+      String description, Color color, bool isSelected, agendaId) {
     return buildSlideable(ListTile(
       leading: buildActivityDate(dayName, month, day),
       title: buildActivityTitle(title, color),
       subtitle: Text(description),
 //      trailing: Container(child: Row(children: <Widget>[Icon(Icons.edit), Icon(Icons.delete)],), height: 30.0, width: 80.0, padding: EdgeInsets.only(right: 1.0),),
-    ), month, day, title, description);
+    ), agendaId);
   }
 
   Widget buildActivityDate(String dayName, String month, int day,) {
@@ -148,7 +152,7 @@ class AgendaState extends GenericAppState<AgendaWidget> {
       ],
     );
   }
-  Widget buildSlideable(Widget listTile, month, day, title, description){
+  Widget buildSlideable(Widget listTile,agendaId){
     return new Slidable(
       delegate: new SlidableDrawerDelegate(),
       actionExtentRatio: 0.25,
@@ -178,7 +182,7 @@ class AgendaState extends GenericAppState<AgendaWidget> {
           caption: 'Deletar',
           color: Colors.red,
           icon: Icons.delete,
-          onTap: () => _showSnackBar('Deletar' , month, day, title, description),
+          onTap: () => deleteEvent('Deletar' , agendaId),
         ),
       ],
     );
@@ -238,17 +242,11 @@ class AgendaState extends GenericAppState<AgendaWidget> {
     );
   }
 
-  _showSnackBar(String s, month, day, String title, String description) {
-    month = month[0].toUpperCase() + month.substring(1).toString().toLowerCase();
-    print('Month is $month');
-    month = months.indexOf(month);
-    print('Month is $month');
-    int timestamp = DateTime(2018, month + 1, day).millisecondsSinceEpoch;
-    String nome = title.split(' - ')[0], materia =  title.split(' - ')[1];
-    this.api.deleteAtividade(timestamp, materia, description, nome).then((val){
+  void deleteEvent(String action, eventId) {
+
+    this.api.deleteAtividade(eventId).then((val){
       this.storage.setAtividades(val);
       this.fetchData();
     });
-    print('$s $month, $day, $title, $description');
   }
 }

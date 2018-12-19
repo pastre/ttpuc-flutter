@@ -272,8 +272,9 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
     int time = DateTime(
             2018, months.indexOf(splitted.last) + 1, int.parse(splitted[1]))
         .millisecondsSinceEpoch;
+    print('Materia is $materia');
     splitted = materia.split(' ');
-    materia = splitted[0];
+//    materia = splitted[0];
     setState(() {
       isLoading = true;
     });
@@ -284,6 +285,6 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
       Navigator.pop(this.context);
     });
     print(
-        'DAY: $time\nMATERIA: $materia \nNOME: $nome \nDESC $desc');
+        'DAY: $time\nMATERIA: $materia \nNOME: $nome \nDESC $desc $splitted');
   }
 }

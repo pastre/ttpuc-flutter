@@ -153,7 +153,7 @@ class Api {
   }
 
   Future addAtividade(String nome, String descricao, int timestamp, String materia) async {
-   String body =  await _doPost('agenda', {
+   String body =  await _doPut('agenda', {
       'nome': nome,
       'descricao': descricao,
       'data': timestamp.toString(),
@@ -164,9 +164,8 @@ class Api {
 
   }
 
-  Future<String> deleteAtividade(timestamp, materia, descricao, nome) async{
-    print('Params is timestamp $timestamp, materia $materia, descricao $descricao, nome $nome');
-    String url = 'agenda/$timestamp/$materia/$nome/$descricao';
+  Future<String> deleteAtividade(agendaId) async{
+    String url = 'agenda/$agendaId';
     print('Url is $url');
     String body =  await _doDelete(url);
     Map<String, dynamic> resp = await json.decode(body);
