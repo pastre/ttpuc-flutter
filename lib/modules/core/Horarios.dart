@@ -6,7 +6,7 @@ import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 
 class HorariosWidget extends GenericAppWidget {
-  HorariosWidget(): super(state: HorariosState(), name: 'Horarios');
+  HorariosWidget() : super(state: HorariosState(), name: 'Horarios');
 
   @override
   State<StatefulWidget> createState() {
@@ -19,13 +19,11 @@ class HorariosWidget extends GenericAppWidget {
     this.state.setToday();
   }
 
-
-  void updateChild(){
+  void updateChild() {
     print('Updating child!!!');
     this.state.forceUpdate();
   }
 }
-
 
 class HorariosState extends GenericAppState<HorariosWidget>
     with TickerProviderStateMixin {
@@ -35,7 +33,6 @@ class HorariosState extends GenericAppState<HorariosWidget>
   List<Tab> _tabs = <Tab>[];
   TabController tabController;
   int todayInt;
-
 
   bool hasMaterias;
 
@@ -49,25 +46,26 @@ class HorariosState extends GenericAppState<HorariosWidget>
     materias = [];
     hasMaterias = true;
     for (var i = 0; i < this.dias.length; i++) {
-      _tabs.add(new Tab(text: this.dias[i],));
-      todayInt = DateTime
-          .now()
-          .weekday - 1 == 6 ? 0 : DateTime
-          .now()
-          .weekday - 1;
+      _tabs.add(new Tab(
+        text: this.dias[i],
+      ));
+      todayInt =
+          DateTime.now().weekday - 1 == 6 ? 0 : DateTime.now().weekday - 1;
     }
     tabController = new TabController(
-      length: dias.length, vsync: this, initialIndex: todayInt,);
-  }
-
-
-  @override
-  Widget buildScreen(BuildContext ctx) {
-    return new Scaffold(appBar: this.hasMaterias ?  buildTabBar() : null,
-      body: this.hasMaterias ? buildTabView(): buildEmpty(),
+      length: dias.length,
+      vsync: this,
+      initialIndex: todayInt,
     );
   }
 
+  @override
+  Widget buildScreen(BuildContext ctx) {
+    return new Scaffold(
+      appBar: this.hasMaterias ? buildTabBar() : null,
+      body: this.hasMaterias ? buildTabView() : buildEmpty(),
+    );
+  }
 
   @override
   bool hasLoaded() {
@@ -96,7 +94,7 @@ class HorariosState extends GenericAppState<HorariosWidget>
     var ret = json.decode(data)['horarios']; // TODO: Checar se data é null
     print('Setting state ${ret}');
     if (ret.isEmpty) {
-      setState((){
+      setState(() {
         this.materias.add(PLACEHOLDER);
         this.hasMaterias = false;
       });
@@ -108,25 +106,27 @@ class HorariosState extends GenericAppState<HorariosWidget>
       });
     }
   }
+
   Widget buildEmpty() {
     return Container(
         child: Center(
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 16.0,
-              ),
-              Icon(
-                Icons.info,
-                color: Colors.grey.withAlpha(150),
-                size: 64.0,
-              ),
-              Text(
-                'Ops!',
-                style: TextStyle(fontSize: 32.0, color: Colors.grey.withAlpha(150)),
-              ),
-              Text('Parece que você não gerou a sua grade\nVá ao seu perfil de usuário para fazer isso',
-                  style:
+      child: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 16.0,
+          ),
+          Icon(
+            Icons.info,
+            color: Colors.grey.withAlpha(150),
+            size: 64.0,
+          ),
+          Text(
+            'Ops!',
+            style: TextStyle(fontSize: 32.0, color: Colors.grey.withAlpha(150)),
+          ),
+          Text(
+              'Parece que você não gerou a sua grade\nVá ao seu perfil de usuário para fazer isso',
+              style:
                   TextStyle(fontSize: 16.0, color: Colors.grey.withAlpha(150))),
 //           Container(
 //              child: Center(
@@ -137,11 +137,10 @@ class HorariosState extends GenericAppState<HorariosWidget>
 //             margin: EdgeInsets.only(right: 8.0, left: 8.0),
 //
 //            ),
-            ],
-          ),
-        ));
+        ],
+      ),
+    ));
   }
-
 
   Widget buildTabView() {
     return new TabBarView(
@@ -162,7 +161,6 @@ class HorariosState extends GenericAppState<HorariosWidget>
   }
 
   Widget buildCardList(String key) {
-
     var cards = <Card>[];
 //    print('Materias is $materias');
     for (var i in materias) {
@@ -178,43 +176,65 @@ class HorariosState extends GenericAppState<HorariosWidget>
       }
       print('Local is $local');
       if (local.startsWith(' - ')) local = local.replaceFirst(' - ', '');
-      for (var j in i['teachers'])
-        professores.add(j);
+      for (var j in i['teachers']) professores.add(j);
       cards.add(buildCard(i['subject'], time, professores, local));
     }
     if (cards.isEmpty)
-      return Container(child: Column(children: <Widget>[
-        Icon(Icons.directions_bike, color: Colors.grey, size: 64.0,),
-        Text('  Você não tem aulas hoje\nAproveite para dar um rolê :)',
-          style: TextStyle(color: Colors.grey),),
-      ],
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,),);
+      return Container(
+        child: Column(
+          children: <Widget>[
+            Icon(
+              Icons.directions_bike,
+              color: Colors.grey,
+              size: 64.0,
+            ),
+            Text(
+              '  Você não tem aulas hoje\nAproveite para dar um rolê :)',
+              style: TextStyle(color: Colors.grey),
+            ),
+          ],
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+        ),
+      );
 
     return ListView.builder(
-      itemBuilder: (_, int) => cards[int], itemCount: cards.length,);
+      itemBuilder: (_, int) => cards[int],
+      itemCount: cards.length,
+    );
   }
 
   Widget buildCard(title, horario, professores, sala) {
     String sbt = '$horario\n';
-    for (String professor in professores)
-      sbt += '$professor\n';
+    for (String professor in professores) sbt += '$professor\n';
     sbt += sala;
-    return Card(child: ListTile(
-      title: cardTitle(title),
-      subtitle: Text(sbt, style: TextStyle(color: Colors.grey),),),
+    return Card(
+      child: ListTile(
+        title: cardTitle(title),
+        subtitle: Text(
+          sbt,
+          style: TextStyle(color: Colors.grey),
+        ),
+      ),
       elevation: 2.0,
     );
   }
 
   Widget cardTitle(String title) {
-    return Row(children: <Widget>[
-      Expanded(child: Text(title, softWrap: true,),),
-    ],
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: Text(
+            title,
+            softWrap: true,
+          ),
+        ),
+      ],
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
     );
   }
+
   void setToday() {
     try {
       print('YAAAAY Tab controler is $tabController');
@@ -223,7 +243,6 @@ class HorariosState extends GenericAppState<HorariosWidget>
       print(e);
     }
   }
-
 
   void forceUpdate() {
     print('Forcing setState');
