@@ -79,7 +79,21 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
                         )
                       ],
 //                      mainAxisAlignment: MainAxisAlignment.start,
-//                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                    ),
+                    Divider(),
+                    Column(
+                      children: <Widget>[
+                        Text('Vindo ai: '),
+//                        SizedBox(height: 2.0,),
+                        Column(
+                          children: getNextSteps(),
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                        )
+                      ],
+//                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                     ),
                     Divider(),
                     Text('Por favor, inclua a versão se for enviar algum erro para o desenvolvedor!', overflow: TextOverflow.clip,)

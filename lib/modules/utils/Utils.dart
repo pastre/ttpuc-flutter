@@ -37,8 +37,24 @@ List<Widget> getNotasDev(){
   TextStyle style = TextStyle();
   return <Widget>[
     Text('\t├Versao atualizada', overflow: TextOverflow.clip,),
-    Text('\t├Versao melhorada'),
-    Text('\t├Coisas novas'),
-    Text('\t└Novidades implementadas'),
+    Text('\t├Versao melhorada', overflow: TextOverflow.clip,),
+    Text('\t├Coisas novas', overflow: TextOverflow.clip,),
+    Text('\t└Novidades implementadas', overflow: TextOverflow.clip,),
   ];
 }
+
+List<Widget> getNextSteps(){
+  TextStyle style = TextStyle();
+  return <Widget>[
+    Text('\t├Colocar uma foto no perfil', overflow: TextOverflow.clip,),
+//    Text('\t├Criar um "grupo da sala" com as matérias no horário', overflow: TextOverflow.clip,),
+    Text('\t├Conectar no Wi-Fi da PUC sozinho', overflow: TextOverflow.clip,),
+    Text('\t├Buscar professores', overflow: TextOverflow.clip,),
+    Text('\t├Botão de compartilhar o app', overflow: TextOverflow.clip,),
+    Text('\t├Editar e arquivar Atividades', overflow: TextOverflow.clip,),
+    Text('\t└Mostrar progresso no curso', overflow: TextOverflow.clip,),
+    SizedBox(height: 4.0,),
+    Text('Sugestões são sempre bem-vindas!', overflow: TextOverflow.clip,),
+  ];
+}
+
