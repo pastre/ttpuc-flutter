@@ -369,7 +369,7 @@ class NotaState extends State<NotaWidget> with SingleTickerProviderStateMixin {
 
   Widget getPrevFinal() {
     return Text(
-        'Você precisa de ${10 - (double.parse(this.widget.media))} na final');
+        'Você precisa de ${10 - (double.parse(this.widget.media))} na final', style: TextStyle(color: SUBTEXT_COLOR));
   }
 
   Widget getFaltasText() {
