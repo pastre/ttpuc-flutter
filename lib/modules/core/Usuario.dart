@@ -82,7 +82,7 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
 //                      crossAxisAlignment: CrossAxisAlignment.start,
                     ),
                     Divider(),
-                    Text('Por favor, inclua a versão \nquando for enviar algum erro para o desenvolvedor!', overflow: TextOverflow.ellipsis,)
+                    Text('Por favor, inclua a versão se for enviar algum erro para o desenvolvedor!', overflow: TextOverflow.clip,)
                   ],
                   crossAxisAlignment: CrossAxisAlignment.start,
 //                  mainAxisAlignment: MainAxisAlignment.start,
