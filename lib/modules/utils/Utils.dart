@@ -32,3 +32,13 @@ bool isNumeric(String s) {
   }
   return double.parse(s, (e) => null) != null;
 }
+
+List<Widget> getNotasDev(){
+  TextStyle style = TextStyle();
+  return <Widget>[
+    Text('\t├Versao atualizada', overflow: TextOverflow.clip,),
+    Text('\t├Versao melhorada'),
+    Text('\t├Coisas novas'),
+    Text('\t└Novidades implementadas'),
+  ];
+}
