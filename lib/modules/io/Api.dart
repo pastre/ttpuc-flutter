@@ -164,6 +164,18 @@ class Api {
 
   }
 
+  Future<String> updateAtividade(String nome, String materia, String descricao, int timestamp, agendaId) async{
+    String url = 'agenda/$agendaId';
+    String body =  await _doPost(url, {
+      'nome': nome,
+      'descricao': descricao,
+      'data': timestamp.toString(),
+      'materia': materia
+    });
+    Map<String, dynamic> resp = await json.decode(body);
+    if (resp['status'] == 'success') return json.encode(resp['data']);
+  }
+
   Future<String> deleteAtividade(agendaId) async{
     String url = 'agenda/$agendaId';
     print('Url is $url');

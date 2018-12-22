@@ -4,8 +4,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
 import 'package:horariopucpr/modules/io/Storage.dart';
-import 'package:horariopucpr/modules/smaller_screens/AtividadeDialog.dart';
+import 'package:horariopucpr/modules/smaller_screens/AdicionaAtividade.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
+import 'package:horariopucpr/modules/smaller_screens/AtualizaAtividade.dart';
 import 'package:horariopucpr/modules/smaller_screens/LoadingScreen.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -109,7 +110,8 @@ class AgendaState extends GenericAppState<AgendaWidget> {
             materia = atividades[index]['materia'];
         DateTime timestamp =
             DateTime.fromMillisecondsSinceEpoch(atividades[index]['data']);
-        return Evento(nome, materia, desc, timestamp, atividades[index]['id'], this);
+        return Evento(
+            nome, materia, desc, timestamp, atividades[index]['id'], this);
       },
       itemCount: atividades.length,
     );
@@ -148,11 +150,9 @@ class AgendaState extends GenericAppState<AgendaWidget> {
           builder: (context) => AtividadeWidget(
                 options: options,
                 agenda: this,
-              )
-      ),
+              )),
     );
   }
-
 }
 
 class Evento extends StatefulWidget {
@@ -163,7 +163,8 @@ class Evento extends StatefulWidget {
   var agendaId;
   AgendaState state;
 
-  Evento(this.nome, this.materia, this.desc, this.timestamp, this.agendaId, this.state);
+  Evento(this.nome, this.materia, this.desc, this.timestamp, this.agendaId,
+      this.state);
 
   String get dayName => weekdays[timestamp.weekday].toUpperCase();
 
@@ -180,21 +181,31 @@ class Evento extends StatefulWidget {
 }
 
 class EventoState extends State<Evento> {
-
-  bool isLoading = false;
-
+  bool isDeleting = false, isUpdating = false;
 
   @override
   void initState() {
-    isLoading = false;
+    isDeleting = false;
+    isUpdating = false;
   }
 
   @override
   Widget build(BuildContext context) {
-    return this.isLoading ? LoadingWidget(message: 'Deletando atividade', bgColor: Colors.white10,) : activity();
+    print('Is updating... $isUpdating');
+    return this.isDeleting
+        ? LoadingWidget(
+            message: 'Deletando atividade',
+            bgColor: Colors.white10,
+          )
+        : this.isUpdating
+            ? LoadingWidget(
+                message: 'Atualizando atividade',
+                bgColor: Colors.white10,
+              )
+            : activity();
   }
 
-  Widget activity(){
+  Widget activity() {
     TextStyle style = TextStyle(color: Colors.grey);
     return new Slidable(
       delegate: new SlidableDrawerDelegate(),
@@ -220,11 +231,12 @@ class EventoState extends State<Evento> {
           children: <Widget>[
             Flexible(
                 child: Text(
-                  this.widget.materia,
-                )),
+              this.widget.nome + ' - ' + this.widget.materia,
+            )),
           ],
         ),
         subtitle: Text(this.widget.desc),
+        onTap: () => this.updateScreen(),
       ),
       actions: <Widget>[],
       secondaryActions: <Widget>[
@@ -239,17 +251,50 @@ class EventoState extends State<Evento> {
   }
 
   delete(a, b) {
-    this.setState((){
-      isLoading = true;
+    this.setState(() {
+      isDeleting = true;
     });
-    this.widget.state.api.deleteAtividade(this.widget.agendaId).then((val){
+    this.widget.state.api.deleteAtividade(this.widget.agendaId).then((val) {
       this.widget.state.storage.setAtividades(val);
-    }).then((a){
-
+    }).then((a) {
       this.widget.updateActivities();
-      this.setState((){
-        isLoading = false;
+      this.setState(() {
+        isDeleting = false;
       });
+    });
+  }
+
+  doUpdate(String nome, String materia, String desc, int timestamp) {
+    print('Updating... $nome $materia $desc $timestamp');
+    this.setState(() {
+      this.isUpdating = true;
+    });
+    Api()
+        .updateAtividade(nome, materia, desc, timestamp, this.widget.agendaId)
+        .then((val) {
+      print('Atividades updated!!! is $val');
+      Storage().setAtividades(val);
+      this.widget.state.fetchData();
+      this.setState(() {
+        this.isUpdating = false;
+      });
+    });
+  }
+
+  updateScreen() {
+    print('UPDATE ${this.widget.agendaId}');
+    Storage().getMaterias().then((materias) {
+      Navigator.push(
+          this.context,
+          MaterialPageRoute(
+              builder: (ctx) => AtualizaAtividade(
+                  this.widget.nome,
+                  this.widget.materia,
+                  this.widget.desc,
+                  this.widget.timestamp,
+                  this.widget.agendaId,
+                  json.decode(materias)['materias'],
+                  doUpdate)));
     });
   }
 }

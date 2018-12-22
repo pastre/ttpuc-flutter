@@ -178,9 +178,9 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
   }
 
   Widget buildMateriasSelector() {
-    // TODO Pegar isso da memoria
-    List<Widget> options = [];
-    for (var m in materias)
+      // TODO Pegar isso da memoria
+      List<Widget> options = [];
+      for (var m in materias)
       options.add(
         Text(
           m,
