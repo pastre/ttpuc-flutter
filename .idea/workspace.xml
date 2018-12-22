@@ -11,7 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0f4edf89-5e34-4f27-881f-e0436da90fe2" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/core/Horarios.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/core/Horarios.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/core/Agenda.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/core/Agenda.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/utils/Utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/utils/Utils.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -25,34 +27,47 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="Horarios.dart" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/lib/modules/core/Horarios.dart">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="306">
-                  <caret line="233" column="51" selection-start-line="233" selection-start-column="51" selection-end-line="233" selection-end-column="51" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="Horarios.dart" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/lib/modules/core/Horarios.dart">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="368">
-                  <caret line="250" selection-start-line="250" selection-end-line="250" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Utils.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/modules/utils/Utils.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1207">
+              <caret line="74" column="2" selection-start-line="74" selection-start-column="2" selection-end-line="74" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Agenda.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/modules/core/Agenda.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="406">
+              <caret line="248" column="37" selection-start-line="248" selection-start-column="37" selection-end-line="248" selection-end-column="37" />
+              <folding>
+                <element signature="e#450#604#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoadingScreen.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="17" column="74" selection-start-line="17" selection-start-column="74" selection-end-line="17" selection-end-column="74" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Usuario.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/modules/core/Usuario.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1479">
+              <caret line="96" column="22" selection-start-line="96" selection-start-column="22" selection-end-line="96" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -146,24 +161,24 @@
         <option value="$PROJECT_DIR$/lib/modules/io/Io.dart" />
         <option value="$PROJECT_DIR$/lib/modules/smaller_screens/EscolheMaterias.dart" />
         <option value="$PROJECT_DIR$/lib/modules/smaller_screens/Login.dart" />
-        <option value="$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart" />
         <option value="$PROJECT_DIR$/lib/modules/core/Generic.dart" />
         <option value="$PROJECT_DIR$/lib/modules/utils/Expandable.dart" />
         <option value="$PROJECT_DIR$/test/widget_test.dart" />
         <option value="$PROJECT_DIR$/lib/main.dart" />
         <option value="$PROJECT_DIR$/lib/modules/io/Api.dart" />
-        <option value="$PROJECT_DIR$/lib/modules/utils/Utils.dart" />
         <option value="$PROJECT_DIR$/lib/modules/core/Notas.dart" />
         <option value="$PROJECT_DIR$/lib/modules/smaller_screens/AtividadeDialog.dart" />
-        <option value="$PROJECT_DIR$/lib/modules/core/Agenda.dart" />
-        <option value="$PROJECT_DIR$/lib/modules/core/Usuario.dart" />
         <option value="$PROJECT_DIR$/lib/modules/core/Horarios.dart" />
+        <option value="$PROJECT_DIR$/lib/modules/core/Usuario.dart" />
+        <option value="$PROJECT_DIR$/lib/modules/utils/Utils.dart" />
+        <option value="$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart" />
+        <option value="$PROJECT_DIR$/lib/modules/core/Agenda.dart" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="531" />
-    <option name="y" value="293" />
+    <option name="x" value="301" />
+    <option name="y" value="99" />
     <option name="width" value="974" />
     <option name="height" value="938" />
   </component>
@@ -173,6 +188,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -221,9 +239,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -714,7 +729,21 @@
       <option name="project" value="LOCAL" />
       <updated>1545195286427</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Reformated code">
+      <created>1545195669618</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1545195669618</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Adicionado proximos passos">
+      <created>1545196329078</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1545196329078</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -746,11 +775,11 @@
       <window_info id="Image Layers" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="bottom" id="Flutter Performance" order="12" side_tool="true" />
-      <window_info anchor="bottom" x="356" y="426" width="1278" height="460" id="Run" order="13" sideWeight="0.47121534" visible="true" weight="0.4135255" />
+      <window_info active="true" anchor="bottom" x="356" y="426" width="1278" height="460" id="Run" order="13" sideWeight="0.47121534" visible="true" weight="0.27383593" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4978678" weight="0.3277592" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32218507" />
       <window_info id="Captures" order="4" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1098081" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1098081" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3248337" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Favorites" order="7" side_tool="true" />
@@ -795,8 +824,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Tela de atividades" />
-    <MESSAGE value="Nova tela de horarios" />
     <MESSAGE value="Clicar no botao de horario coloca no dia de hoje" />
     <MESSAGE value="Telas sem horarios mais bonitas" />
     <MESSAGE value="Nao faz mais push duplicados,informacoes na tela de escolher materias" />
@@ -820,11 +847,13 @@
     <MESSAGE value="Fixed CupertinoSelector errors, prevented non-named activities being added" />
     <MESSAGE value="Added loading screen to add/delete activities" />
     <MESSAGE value="Added right text overflow" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added right text overflow" />
+    <MESSAGE value="Reformated code" />
+    <MESSAGE value="Adicionado proximos passos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionado proximos passos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="57" />
+      <option name="time" value="63" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -940,13 +969,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/io/Io.dart" />
-    <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/EscolheMaterias.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="267">
@@ -1018,13 +1040,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/modules/utils/Utils.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="15" column="72" lean-forward="true" selection-start-line="15" selection-start-column="72" selection-end-line="15" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/Login.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
@@ -1032,31 +1047,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/AtividadeDialog.dart">
+    <entry file="file://$PROJECT_DIR$/lib/modules/core/Horarios.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="114" column="61" selection-start-line="114" selection-start-column="61" selection-end-line="114" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/modules/core/Agenda.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="56" column="6" selection-start-line="56" selection-start-column="6" selection-end-line="56" selection-end-column="6" />
+        <state relative-caret-position="348">
+          <caret line="248" column="40" lean-forward="true" selection-start-line="248" selection-start-column="40" selection-end-line="248" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/core/Usuario.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="91" column="8" selection-start-line="91" selection-start-column="8" selection-end-line="91" selection-end-column="8" />
+        <state relative-caret-position="1479">
+          <caret line="96" column="22" selection-start-line="96" selection-start-column="22" selection-end-line="96" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/modules/core/Horarios.dart">
+    <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/AtividadeDialog.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="233" column="51" selection-start-line="233" selection-start-column="51" selection-end-line="233" selection-end-column="51" />
+        <state relative-caret-position="-374">
+          <caret line="28" column="69" lean-forward="true" selection-start-line="28" selection-start-column="69" selection-end-line="28" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/modules/utils/Utils.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1207">
+          <caret line="74" column="2" selection-start-line="74" selection-start-column="2" selection-end-line="74" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/modules/smaller_screens/LoadingScreen.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" column="74" selection-start-line="17" selection-start-column="74" selection-end-line="17" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/modules/core/Agenda.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="248" column="37" selection-start-line="248" selection-start-column="37" selection-end-line="248" selection-end-column="37" />
+          <folding>
+            <element signature="e#450#604#0" />
+          </folding>
         </state>
       </provider>
     </entry>

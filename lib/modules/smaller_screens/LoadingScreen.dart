@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 class LoadingWidget extends StatelessWidget{
 
   String message;
-
-  LoadingWidget({this.message});
+  Color bgColor;
+  LoadingWidget({this.message, this.bgColor = Colors.white});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class LoadingWidget extends StatelessWidget{
           SpinKitThreeBounce(
               color: Colors.grey),
           this.message != null ? Text(this.message, style: TextStyle(color: Colors.grey),) : SizedBox(height: 1.0, width: 1.0,),
-        ], mainAxisAlignment: MainAxisAlignment.center,), ),color: Colors.white,
+        ], mainAxisAlignment: MainAxisAlignment.center,), ),color: bgColor,
     );
   }
 }

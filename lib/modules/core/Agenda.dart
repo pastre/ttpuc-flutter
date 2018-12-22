@@ -2,15 +2,17 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:horariopucpr/modules/io/Api.dart';
+import 'package:horariopucpr/modules/io/Storage.dart';
 import 'package:horariopucpr/modules/smaller_screens/AtividadeDialog.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 import 'package:horariopucpr/modules/smaller_screens/LoadingScreen.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+
 class AgendaWidget extends GenericAppWidget {
+  AgendaWidget() : super(state: AgendaState(), name: "Agenda");
 
-
-  AgendaWidget(): super(state: AgendaState(), name: "Agenda");
   @override
   State<StatefulWidget> createState() {
     return new AgendaState();
@@ -20,7 +22,15 @@ class AgendaWidget extends GenericAppWidget {
 class AgendaState extends GenericAppState<AgendaWidget> {
   var atividades;
   bool loadingDelete = false;
-  Map<int, String> weekdays = {1: 'Seg', 2: 'Ter', 3: 'Qua', 4: 'Qui', 5: 'Sex', 6: 'Sáb', 7: 'Dom'};
+  Map<int, String> weekdays = {
+    1: 'Seg',
+    2: 'Ter',
+    3: 'Qua',
+    4: 'Qui',
+    5: 'Sex',
+    6: 'Sáb',
+    7: 'Dom'
+  };
   List<String> months = [
     'Jan',
     'Fev',
@@ -47,7 +57,11 @@ class AgendaState extends GenericAppState<AgendaWidget> {
     var tmp = json.encode(atividades);
     print('Tmp is $tmp');
     return new Scaffold(
-      body: this.loadingDelete ? LoadingWidget(message: 'Deletando atividade...',) : atividades.isEmpty ? buildEmpty() : buildActivityList(),
+      body: this.loadingDelete
+          ? LoadingWidget(
+              message: 'Deletando atividade...',
+            )
+          : atividades.isEmpty ? buildEmpty() : buildActivityList(),
       floatingActionButton: FloatingActionButton(
         onPressed: displayDialog,
         child: Icon(Icons.add),
@@ -88,102 +102,16 @@ class AgendaState extends GenericAppState<AgendaWidget> {
   }
 
   Widget buildActivityList() {
-    List<Widget> options = [];
-    for (var atividade in atividades) {
-      String nome = atividade['nome'],
-          desc = atividade['descricao'],
-          materia = atividade['materia'];
-      DateTime timestamp =
-          DateTime.fromMillisecondsSinceEpoch(atividade['data']);
-      options.add(buildActivity(
-          weekdays[timestamp.weekday ].toUpperCase(),
-          months[timestamp.month - 1].toUpperCase(),
-          timestamp.day,
-          nome + ' - ' + materia,
-          desc,
-          Colors.orange,
-          false,
-          atividade['id'],
-      ));
-      options.add(Divider());
-    }
-
-    return ListView(
-      children: options,
-    );
-  }
-
-  Widget buildActivity(String dayName, String month, int day, String title,
-      String description, Color color, bool isSelected, agendaId) {
-    return buildSlideable(ListTile(
-      leading: buildActivityDate(dayName, month, day),
-      title: buildActivityTitle(title, color),
-      subtitle: Text(description),
-    ), agendaId);
-  }
-
-  Widget buildActivityDate(String dayName, String month, int day,) {
-    TextStyle style = TextStyle(color: Colors.grey);
-    return Column(
-      children: <Widget>[
-        Text(
-          dayName,
-          style: style,
-        ),
-        Text(
-          month,
-          style: style,
-        ),
-        Text(
-          '$day',
-          style: style,
-        ),
-      ],
-    );
-  }
-  Widget buildActivityTitle(String title, Color color) {
-    return Row(
-      children: <Widget>[
-        Flexible(
-            child: Text(
-              title,
-            )),
-      ],
-    );
-  }
-  Widget buildSlideable(Widget listTile,agendaId){
-    return new Slidable(
-      delegate: new SlidableDrawerDelegate(),
-      actionExtentRatio: 0.25,
-      child: listTile,
-      actions: <Widget>[
-//        new IconSlideAction(
-//          caption: 'Editar',
-//          color: Colors.blue,
-//          icon: Icons.edit,
-//          onTap: () => _showSnackBar('Editar',  month, day, title, description),
-//        ),
-//        new IconSlideAction(
-//          caption: 'Share',
-//          color: Colors.indigo,
-//          icon: Icons.share,
-//          onTap: () => _showSnackBar('Share'),
-//        ),
-      ],
-      secondaryActions: <Widget>[
-//        new IconSlideAction(
-//          caption: 'More',
-//          color: Colors.black45,
-//          icon: Icons.more_horiz,
-//          onTap: () => _showSnackBar('More'),
-//        ),
-        new IconSlideAction(
-          caption: 'Deletar',
-          color: Colors.red,
-          icon: Icons.delete,
-          onTap: () => deleteEvent('Deletar' , agendaId),
-        ),
-      ],
+    return ListView.builder(
+      itemBuilder: (BuildContext ctx, int index) {
+        String nome = atividades[index]['nome'],
+            desc = atividades[index]['descricao'],
+            materia = atividades[index]['materia'];
+        DateTime timestamp =
+            DateTime.fromMillisecondsSinceEpoch(atividades[index]['data']);
+        return Evento(nome, materia, desc, timestamp, atividades[index]['id'], this);
+      },
+      itemCount: atividades.length,
     );
   }
 
@@ -207,15 +135,6 @@ class AgendaState extends GenericAppState<AgendaWidget> {
           Text('Parece que você não agendou nenhuma atividade ',
               style:
                   TextStyle(fontSize: 16.0, color: Colors.grey.withAlpha(150))),
-//           Container(
-//              child: Center(
-//                child: Text(
-//                  'Não tem problema!\nUse o botão a baixo para adicionar novas atividades, como provas ou trabalhos',
-//                ),
-//              ),
-//             margin: EdgeInsets.only(right: 8.0, left: 8.0),
-//
-//            ),
         ],
       ),
     ));
@@ -223,29 +142,113 @@ class AgendaState extends GenericAppState<AgendaWidget> {
 
   void displayDialog() {
     List<String> options = new List<String>();
-//    for(var m in materias){
-//      options.add(m['subject']);
-//    }
     Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => AtividadeWidget(
                 options: options,
                 agenda: this,
-              )),
+              )
+      ),
     );
   }
 
-  void deleteEvent(String action, eventId) {
+}
+
+class Evento extends StatefulWidget {
+  String nome;
+  String desc;
+  String materia;
+  DateTime timestamp;
+  var agendaId;
+  AgendaState state;
+
+  Evento(this.nome, this.materia, this.desc, this.timestamp, this.agendaId, this.state);
+
+  String get dayName => weekdays[timestamp.weekday].toUpperCase();
+
+  String get month => months[timestamp.month - 1].toUpperCase();
+
+  int get day => timestamp.day;
+
+  @override
+  State createState() => EventoState();
+
+  void updateActivities() {
+    state.fetchData();
+  }
+}
+
+class EventoState extends State<Evento> {
+
+  bool isLoading = false;
+
+
+  @override
+  void initState() {
+    isLoading = false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return this.isLoading ? LoadingWidget(message: 'Deletando atividade', bgColor: Colors.white10,) : activity();
+  }
+
+  Widget activity(){
+    TextStyle style = TextStyle(color: Colors.grey);
+    return new Slidable(
+      delegate: new SlidableDrawerDelegate(),
+      actionExtentRatio: 0.25,
+      child: ListTile(
+        leading: Column(
+          children: <Widget>[
+            Text(
+              this.widget.dayName,
+              style: style,
+            ),
+            Text(
+              this.widget.month,
+              style: style,
+            ),
+            Text(
+              '${this.widget.day}',
+              style: style,
+            ),
+          ],
+        ),
+        title: Row(
+          children: <Widget>[
+            Flexible(
+                child: Text(
+                  this.widget.materia,
+                )),
+          ],
+        ),
+        subtitle: Text(this.widget.desc),
+      ),
+      actions: <Widget>[],
+      secondaryActions: <Widget>[
+        new IconSlideAction(
+          caption: 'Deletar',
+          color: Colors.red,
+          icon: Icons.delete,
+          onTap: () => delete('Deletar', this.widget.agendaId),
+        ),
+      ],
+    );
+  }
+
+  delete(a, b) {
     this.setState((){
-      this.loadingDelete = true;
+      isLoading = true;
     });
-    this.api.deleteAtividade(eventId).then((val){
-      this.storage.setAtividades(val);
-      this.fetchData();
+    this.widget.state.api.deleteAtividade(this.widget.agendaId).then((val){
+      this.widget.state.storage.setAtividades(val);
     }).then((a){
+
+      this.widget.updateActivities();
       this.setState((){
-        this.loadingDelete = false;
+        isLoading = false;
       });
     });
   }
