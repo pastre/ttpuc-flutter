@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:horariopucpr/modules/io/Storage.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
-import 'package:horariopucpr/modules/smaller_screens/LoadingScreen.dart';
+import 'package:horariopucpr/modules/login/LoadingScreen.dart';
 
 
 

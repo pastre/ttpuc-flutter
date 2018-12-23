@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
-import 'modules/design/Main.dart';
+import 'package:horariopucpr/modules/core/Main.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
 import 'package:horariopucpr/modules/io/Storage.dart';
-import 'package:horariopucpr/modules/smaller_screens/Login.dart';
+import 'package:horariopucpr/modules/login/Login.dart';
 
 
 void main() {
@@ -40,7 +40,6 @@ class AppState extends State<App>{
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     this.isLogged = false;
     this.api = Api();

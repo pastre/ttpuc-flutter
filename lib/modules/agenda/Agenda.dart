@@ -4,10 +4,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
 import 'package:horariopucpr/modules/io/Storage.dart';
-import 'package:horariopucpr/modules/smaller_screens/AdicionaAtividade.dart';
+import 'package:horariopucpr/modules/agenda/AdicionaAtividade.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
-import 'package:horariopucpr/modules/smaller_screens/AtualizaAtividade.dart';
-import 'package:horariopucpr/modules/smaller_screens/LoadingScreen.dart';
+import 'package:horariopucpr/modules/agenda/AtualizaAtividade.dart';
+import 'package:horariopucpr/modules/login/LoadingScreen.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 

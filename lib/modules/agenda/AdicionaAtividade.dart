@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/core/Agenda.dart';
-import 'package:horariopucpr/modules/smaller_screens/LoadingScreen.dart';
+import 'package:horariopucpr/modules/agenda/Agenda.dart';
+import 'package:horariopucpr/modules/login/LoadingScreen.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 
@@ -178,7 +178,6 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
   }
 
   Widget buildMateriasSelector() {
-      // TODO Pegar isso da memoria
       List<Widget> options = [];
       for (var m in materias)
       options.add(

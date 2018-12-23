@@ -99,7 +99,6 @@ class AtualizaAtividadeState extends State<AtualizaAtividade> {
     }
 
     Widget buildMateriasSelector() {
-      // TODO Pegar isso da memoria
       List<Widget> options = [];
       for (var i in this.widget.materias)
         options.add(

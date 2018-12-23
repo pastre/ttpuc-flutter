@@ -15,12 +15,12 @@ class HorariosWidget extends GenericAppWidget {
   }
 
   void setToday() {
-    print('Set today!!');
+//    print('Set today!!');
     this.state.setToday();
   }
 
   void updateChild() {
-    print('Updating child!!!');
+//    print('Updating child!!!');
     this.state.forceUpdate();
   }
 }
@@ -79,7 +79,7 @@ class HorariosState extends GenericAppState<HorariosWidget>
 
   @override
   Future loadLocal() async {
-    print('Loding datalocal...');
+//    print('Loding datalocal...');
     return this.storage.getHorarios();
   }
 
@@ -90,9 +90,9 @@ class HorariosState extends GenericAppState<HorariosWidget>
 
   @override
   void updateState(data) {
-    print('Updating state');
+//    print('Updating state');
     var ret = json.decode(data)['horarios']; // TODO: Checar se data é null
-    print('Setting state ${ret}');
+//    print('Setting state ${ret}');
     if (ret.isEmpty) {
       setState(() {
         this.materias.add(PLACEHOLDER);
@@ -163,21 +163,30 @@ class HorariosState extends GenericAppState<HorariosWidget>
   Widget buildCardList(String key) {
     var cards = <Card>[];
 //    print('Materias is $materias');
-    for (var i in materias) {
-      if (!i['day'].contains(key)) continue;
-//      print('I is $i');
-      String time = i['starttime'] + ' - ' + i['endtime'];
-      String local = '';
+    for (var mat in materias) {
+      if (!mat['day'].contains(key)) continue;
+      print('I is $mat');
+      String time = mat['starttime'] + ' - ' + mat['endtime'];
+      String messageGroupKey = '${mat['subject']}';
+      String local = ''; // Local que a aula acontece
       var professores = [];
-      for (var k = 0; k < i['classrooms'].length; k++) {
-        var j = i['classrooms'][k];
+
+      for (var k = 0; k < mat['classrooms'].length; k++) {
+        var j = mat['classrooms'][k];
         local += j['sala'] + ' - ' + j['lugar'];
-        if (k != i['classrooms'].length - 1) local += '\n';
+        if (k != mat['classrooms'].length - 1) local += '\n';
       }
-      print('Local is $local');
+
       if (local.startsWith(' - ')) local = local.replaceFirst(' - ', '');
-      for (var j in i['teachers']) professores.add(j);
-      cards.add(buildCard(i['subject'], time, professores, local));
+
+      for (var j in mat['teachers'])
+        professores.add(j);
+
+      for(Map<String, dynamic> j in mat['classes'])
+        messageGroupKey += j['curso'] + j['periodo'] + j['turma'] + j['turno'];
+
+
+      cards.add(buildCard(mat['subject'], time, professores, local, messageGroupKey));
     }
     if (cards.isEmpty)
       return Container(
@@ -204,7 +213,7 @@ class HorariosState extends GenericAppState<HorariosWidget>
     );
   }
 
-  Widget buildCard(title, horario, professores, sala) {
+  Widget buildCard(title, horario, professores, sala, messsageGroupKey) {
     String sbt = '$horario\n';
     for (String professor in professores) sbt += '$professor\n';
     sbt += sala;
@@ -214,7 +223,7 @@ class HorariosState extends GenericAppState<HorariosWidget>
         subtitle: Text(
           sbt,
           style: TextStyle(color: Colors.grey),
-        ),
+        ),onTap: () => showDiscussion(messsageGroupKey),
       ),
       elevation: 2.0,
     );
@@ -237,7 +246,7 @@ class HorariosState extends GenericAppState<HorariosWidget>
 
   void setToday() {
     try {
-      print('YAAAAY Tab controler is $tabController');
+//      print('YAAAAY Tab controler is $tabController');
       tabController.animateTo(todayInt);
     } catch (e) {
       print(e);
@@ -245,7 +254,12 @@ class HorariosState extends GenericAppState<HorariosWidget>
   }
 
   void forceUpdate() {
-    print('Forcing setState');
+//    print('Forcing setState');
 //    setState((){this.materias = [];});
+  }
+
+  showDiscussion(messsageGroupKey) {
+
+
   }
 }

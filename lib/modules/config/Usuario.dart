@@ -3,9 +3,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
-import 'package:horariopucpr/modules/core/Horarios.dart';
+import 'package:horariopucpr/modules/horarios/Horarios.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
-import 'package:horariopucpr/modules/smaller_screens/EscolheMaterias.dart';
+import 'package:horariopucpr/modules/horarios/EscolheMaterias.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/io/Storage.dart';
 
@@ -111,7 +111,10 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
             Divider(
               indent: 8.0,
             ),
-            //getProgressoCurso(),
+            getProgressoCurso(),
+            Divider(
+              indent: 8.0,
+            ),
             getData(),
             Divider(
               indent: 8.0,

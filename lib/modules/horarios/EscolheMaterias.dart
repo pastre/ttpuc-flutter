@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/core/Horarios.dart';
+import 'package:horariopucpr/modules/horarios/Horarios.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
 import 'package:horariopucpr/modules/io/Storage.dart';
-import 'package:horariopucpr/modules/smaller_screens/LoadingScreen.dart';
+import 'package:horariopucpr/modules/login/LoadingScreen.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 
 class Picker extends StatefulWidget {
-
   HorariosWidget horario;
-  Picker(HorariosWidget horario){
+
+  Picker(HorariosWidget horario) {
     this.horario = horario;
   }
 
@@ -21,10 +21,10 @@ class Picker extends StatefulWidget {
 }
 
 class PickerState extends State<Picker> {
-
   var resp, dups, api, result, storage;
   HorariosWidget horario;
-  PickerState(HorariosWidget horario){
+
+  PickerState(HorariosWidget horario) {
     this.horario = horario;
   }
 
@@ -47,17 +47,29 @@ class PickerState extends State<Picker> {
       appBar: AppBar(
         title: Text('Montando sua grade'),
 //        automaticallyImplyLeading: false,
-        leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){Navigator.pop(context);this.horario.updateChild();}),
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+              this.horario.updateChild();
+            }),
         backgroundColor: PUC_COLOR,
         actions: <Widget>[
-          IconButton(onPressed: () {
-            print('Pressed info!');
-            showModalBottomSheet(context: this.context,builder: (BuildContext context){
-              return Text('Estamos tentando montar a sua grade automaticamente\n'+
-              'Qualquer dúvida que o sistema tenha será mostrada nesta página, e pedimos que você escolha a matéria certa\n'+
-              'Esse processo só precisa ser feito uma vez', );
-            });
-          }, icon: Icon(Icons.info_outline),)
+          IconButton(
+            onPressed: () {
+//              print('Pressed info!');
+              showModalBottomSheet(
+                  context: this.context,
+                  builder: (BuildContext context) {
+                    return Text(
+                      'Estamos tentando montar a sua grade automaticamente\n' +
+                          'Qualquer dúvida que o sistema tenha será mostrada nesta página, e pedimos que você escolha a matéria certa\n' +
+                          'Esse processo só precisa ser feito uma vez',
+                    );
+                  });
+            },
+            icon: Icon(Icons.info_outline),
+          )
         ],
       ),
     );
@@ -98,7 +110,7 @@ class PickerState extends State<Picker> {
         int s = startTime(k);
 //        print('Days $day $d $s $starttime ${(s == starttime) && (day > d)}');
         if ((s == starttime) && (day > d)) {
-          print('Achei um lugar');
+//          print('Achei um lugar');
           list.insert(j, toAppend);
           found = true;
           break;
@@ -116,26 +128,40 @@ class PickerState extends State<Picker> {
   }
 
   Widget buildScreen(BuildContext context) {
-    if (resp.isEmpty) return LoadingWidget(message: 'Estamos tentando montar a sua grade automaticamente\n'+
-        'Qualquer dúvida que o sistema tenha será mostrada nesta página, e pedimos que você escolha a matéria certa\n'+
-        'Esse processo só precisa ser feito uma vez',);
+    if (resp.isEmpty)
+      return LoadingWidget(
+        message: 'Estamos tentando montar a sua grade automaticamente\n' +
+            'Qualquer dúvida que o sistema tenha será mostrada nesta página, e pedimos que você escolha a matéria certa\n' +
+            'Esse processo só precisa ser feito uma vez',
+      );
     List<Conflito> conflitos = buildConflitos();
     List<ListTile> tiles = new List<ListTile>();
     for (Conflito c in conflitos)
-      tiles.add(ListTile(title: c,));
+      tiles.add(ListTile(
+        title: c,
+      ));
 //    tiles.add(ListTile(title: MaterialButton(onPressed: (){done(conflitos);}, child: Text('Pronto'),),));
-    tiles.add(ListTile(title: Material(color: PUC_COLOR,
-      borderRadius: BorderRadius.circular(30.0),
-      elevation: 5.0,
-      child: MaterialButton(
-        onPressed: () {
-          done(conflitos);
-        },
-        child: Text('Pronto', style: TextStyle(color: Colors.white),),
+    tiles.add(
+      ListTile(
+        title: Material(
+          color: PUC_COLOR,
+          borderRadius: BorderRadius.circular(30.0),
+          elevation: 5.0,
+          child: MaterialButton(
+            onPressed: () {
+              done(conflitos);
+            },
+            child: Text(
+              'Pronto',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ), //trailing: SizedBox(width: 8.0,),leading: SizedBox(width: 4.0),
       ),
-    ), //trailing: SizedBox(width: 8.0,),leading: SizedBox(width: 4.0),
-    ),);
-    return ListView(children: tiles,);
+    );
+    return ListView(
+      children: tiles,
+    );
   }
 
   List<Conflito> buildConflitos() {
@@ -150,8 +176,11 @@ class PickerState extends State<Picker> {
           done.add(j);
         }
       }
-      print('Created conflito $toAppend');
-      if (toAppend.isNotEmpty) ret.add(new Conflito(conflito: toAppend,));
+//      print('Created conflito $toAppend');
+      if (toAppend.isNotEmpty)
+        ret.add(new Conflito(
+          conflito: toAppend,
+        ));
     }
 
     return ret;
@@ -160,14 +189,13 @@ class PickerState extends State<Picker> {
   void updateData() async {
     var ret = await this.api.generateHorarios();
     ret = json.decode(ret);
-    print('Ret is $ret');
+//    print('Ret is $ret');
     setState(() {
       resp = ret['horarios'];
       dups = ret['duplicados'];
     });
   }
 }
-
 
 class Conflito extends StatefulWidget {
   var conflito;
@@ -184,7 +212,6 @@ class Conflito extends StatefulWidget {
 }
 
 class _ConflitoState extends State<Conflito> {
-
   Map<String, String> dias = {
     'Seg': 'Segunda',
     'Ter': 'Terça',
@@ -201,16 +228,18 @@ class _ConflitoState extends State<Conflito> {
     });
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return new Column(children: makeRadios());
+  }
 
   Widget buildText(option) {
     var rows = <Widget>[];
-    String teachers = '',
-        classrooms = '';
-    for (var i in option['teachers'])
-      teachers += i;
+    String teachers = '', classrooms = '';
+    for (var i in option['teachers']) teachers += i;
     for (var i in option['classrooms']) {
-      print("${option['classrooms'].indexOf(i)} < ${option['classrooms']
-          .length}");
+//      print(
+//          "${option['classrooms'].indexOf(i)} < ${option['classrooms'].length}");
       String toAppend = '${i['sala']} - ${i['lugar']}';
 //      toAppend = toAppend.replaceFirst(' - ', '\n') + 'ou';
       if (option['classrooms'].indexOf(i) < option['classrooms'].length - 1)
@@ -218,77 +247,113 @@ class _ConflitoState extends State<Conflito> {
       else
         classrooms += toAppend;
     }
-    rows.add(Row(children: <Widget>[Text(option['subject'],
-      style: TextStyle(fontSize: 16.0, color: Colors.black,),
-      overflow: TextOverflow.ellipsis,),
-    ],),);
-    rows.add(Row(children: <Widget>[
-      Text(dias[option['day']], style: TextStyle(color: Colors.grey),
-        overflow: TextOverflow.ellipsis,)
-    ],),);
-    rows.add(Row(children: <Widget>[Text(
-      '${option['starttime']} - ${option['endtime']}',
-      style: TextStyle(color: Colors.grey),
-      overflow: TextOverflow.ellipsis,)
-    ],),);
-    rows.add(Row(children: <Widget>[
-      Expanded(
-        child: Text(classrooms, style: TextStyle(color: Colors.grey,),
-          overflow: TextOverflow.clip,),
-      )
-    ],),);
-    rows.add(Row(
-      children: <Widget>[Text(teachers, style: TextStyle(color: Colors.grey),
-        overflow: TextOverflow.ellipsis,)
-      ],),);
-    return Column(children: rows,);
+    rows.add(
+      Row(
+        children: <Widget>[
+          Text(
+            option['subject'],
+            style: TextStyle(
+              fontSize: 16.0,
+              color: Colors.black,
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
+    );
+    rows.add(
+      Row(
+        children: <Widget>[
+          Text(
+            dias[option['day']],
+            style: TextStyle(color: Colors.grey),
+            overflow: TextOverflow.ellipsis,
+          )
+        ],
+      ),
+    );
+    rows.add(
+      Row(
+        children: <Widget>[
+          Text(
+            '${option['starttime']} - ${option['endtime']}',
+            style: TextStyle(color: Colors.grey),
+            overflow: TextOverflow.ellipsis,
+          )
+        ],
+      ),
+    );
+    rows.add(
+      Row(
+        children: <Widget>[
+          Expanded(
+            child: Text(
+              classrooms,
+              style: TextStyle(
+                color: Colors.grey,
+              ),
+              overflow: TextOverflow.clip,
+            ),
+          )
+        ],
+      ),
+    );
+    rows.add(
+      Row(
+        children: <Widget>[
+          Text(
+            teachers,
+            style: TextStyle(color: Colors.grey),
+            overflow: TextOverflow.ellipsis,
+          )
+        ],
+      ),
+    );
+    return Column(
+      children: rows,
+    );
   }
 
   Widget buildCard(option) {
-    return new Expanded(child: Card(
-        child: Padding(padding: EdgeInsets.fromLTRB(12.0, 4.0, 0.0, 4.0),
-          child: buildText(option),)
-    ),);
+    return new Expanded(
+      child: Card(
+          child: Padding(
+        padding: EdgeInsets.fromLTRB(12.0, 4.0, 0.0, 4.0),
+        child: buildText(option),
+      )),
+    );
   }
 
   Row buildRadio(int val) {
-    return Row(children: <Widget>[
-      buildCard(widget.conflito[val]),
-      new Radio(value: val,
-        groupValue: widget._selectedIndex,
-        onChanged: (int val) => onChange(val),
-        activeColor: PUC_COLOR,),
-    ],
+    return Row(
+      children: <Widget>[
+        buildCard(widget.conflito[val]),
+        new Radio(
+          value: val,
+          groupValue: widget._selectedIndex,
+          onChanged: (int val) => onChange(val),
+          activeColor: PUC_COLOR,
+        ),
+      ],
     );
   }
 
   List<Widget> makeRadios() {
     List<Widget> ret = new List<Widget>();
     ret.add(Row(children: <Widget>[
-        Text('Qual a sua materia?', style: TextStyle(color: Colors.grey, fontSize: 20.0, fontStyle: FontStyle.italic),),
-        Divider(indent: 30.0,),
-      ]));
+      Text(
+        'Qual a sua materia?',
+        style: TextStyle(
+            color: Colors.grey, fontSize: 20.0, fontStyle: FontStyle.italic),
+      ),
+      Divider(
+        indent: 30.0,
+      ),
+    ]));
     for (var i = 0; i < widget.conflito.length; i++) {
       ret.add(buildRadio(i));
     }
     ret.add(Divider());
     return ret;
   }
-
-//  Widget buildList(BuildContext context) {
-//    return new ListView.builder(itemBuilder: (BuildContext context, int index) {
-//
-//      return new Card(child: ListTile(
-//        title: Text("asd"),
-//        subtitle: Text('qwe'),
-//      ), );
-//    }, shrinkWrap: true, );
-//  }
-
-  @override
-  Widget build(BuildContext context) {
-//    return buildList(context );
-    return new Column(children: makeRadios());
-  }
 }
-

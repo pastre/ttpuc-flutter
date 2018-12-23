@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/design/Screen.dart';
+import 'package:horariopucpr/modules/core/Screen.dart';
 
 import 'package:horariopucpr/modules/utils/Utils.dart';
 
