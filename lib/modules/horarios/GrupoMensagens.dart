@@ -83,6 +83,9 @@ class _GrupoWidgetState extends State<GrupoWidget> {
     });
   }
 
+  /**
+   *
+   */
   @override
   Widget build(BuildContext context) {
     print('Messages is $messages');
@@ -95,78 +98,83 @@ class _GrupoWidgetState extends State<GrupoWidget> {
         ),
         backgroundColor: PUC_COLOR,
       ),
-      body: FractionallySizedBox(
-        heightFactor: 1.0,
-        child: ScrollConfiguration(
-          behavior: MyBehavior(),
-          child: ListView.builder(
-            itemBuilder: (BuildContext ctx, int index) {
-              return index < messages.length
-                  ? ListTile(
-                      trailing: Container(
-                        child: Row(
-                          children: <Widget>[
-                            username != messages[index].username
-                                ? Icon(Icons.account_circle)
-                                : SizedBox(),
-                            Card(
-                              child: Column(
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ScrollConfiguration(
+                behavior: MyBehavior(),
+                child: ListView.builder(
+                  itemBuilder: (BuildContext ctx, int index) {
+                    return ListTile(
+                            trailing: Container(
+                              child: Row(
                                 children: <Widget>[
-                                  Text(
-                                    '@' + messages[index].username,
-                                    style: TextStyle(color: Colors.red),
+                                  username != messages[index].username
+                                      ? Icon(Icons.account_circle)
+                                      : SizedBox(),
+                                  Card(
+                                    child: Column(
+                                      children: <Widget>[
+                                        Text(
+                                          '@' + messages[index].username,
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                        Divider(),
+                                        Text(messages[index].message),
+                                      ],
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                    ),
+                                    color: Color(0xFF7eccfc),
                                   ),
-                                  Divider(),
-                                  Text(messages[index].message),
+                                  username == messages[index].username
+                                      ? Icon(Icons.person_pin)
+                                      : SizedBox(),
                                 ],
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                    username == messages[index].username
+                                        ? MainAxisAlignment.end
+                                        : MainAxisAlignment.start,
                               ),
-                              color: Color(0xFF7eccfc),
+                              padding: EdgeInsets.only(left: 3.0),
                             ),
-                            username == messages[index].username
-                                ? Icon(Icons.person_pin)
-                                : SizedBox(),
-                          ],
-                          mainAxisAlignment:
-                              username == messages[index].username
-                                  ? MainAxisAlignment.end
-                                  : MainAxisAlignment.start,
-                        ),
-                        padding: EdgeInsets.only(left: 3.0),
-                      ),
-                    )
-                  : Row(
-                      children: <Widget>[
-                        Flexible(
-                          child: Card(
-                            child: TextField(
-                              controller: _textCtrl,
-                              decoration: InputDecoration(
-                                  hintText: 'Digite uma mensagem'),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          child: RawMaterialButton(
-                            onPressed: () => sendMessage(),
-                            shape: CircleBorder(),
-                            child: Icon(
-                              Icons.send,
-                              color: SUBTEXT_COLOR,
-                            ),
-                          ),
-                          width: 36.0,
-                        ),
-                      ],
-                    );
-            },
-            itemCount: messages.length + 1,
-            controller: _scrlCtrl,
-            physics: ScrollPhysics(),
+                          );
+                  },
+                  itemCount: messages.length,
+                  controller: _scrlCtrl,
+                  physics: ScrollPhysics(),
+                ),
+              ),
+            ),
           ),
-        ),
+          Padding(padding: EdgeInsets.all(8.0), child: Row(
+            children: <Widget>[
+              Flexible(
+                child: Card(
+                  child: TextField(
+                    controller: _textCtrl,
+                    decoration: InputDecoration(
+                        hintText: 'Digite uma mensagem'),
+                  ),
+                ),
+              ),
+              Container(
+                child: RawMaterialButton(
+                  onPressed: () => sendMessage(),
+                  shape: CircleBorder(),
+                  child: Icon(
+                    Icons.send,
+                    color: SUBTEXT_COLOR,
+                  ),
+                ),
+                width: 36.0,
+              ),
+            ],
+          ),)
+        ],
       ),
       backgroundColor: Color(0xfff1f4e3),
     );

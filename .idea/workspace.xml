@@ -30,7 +30,7 @@
         <entry file="file://$PROJECT_DIR$/lib/modules/horarios/GrupoMensagens.dart">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="593">
-              <caret line="186" column="34" selection-start-line="186" selection-start-column="34" selection-end-line="186" selection-end-column="34" />
+              <caret line="175" column="13" selection-start-line="175" selection-start-column="13" selection-end-line="175" selection-end-column="13" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -794,7 +794,14 @@
       <option name="project" value="LOCAL" />
       <updated>1545631526589</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Scrollable textfield">
+      <created>1545633967576</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1545633967576</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TodoView">
@@ -910,7 +917,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Forcando usuario a montar a grade" />
     <MESSAGE value="Tela de usuario dinamica: nome, usuario, saldo e cod. carteirinha" />
     <MESSAGE value="Adicionado tela para quando o usuario ainda nao gerou a grade" />
     <MESSAGE value="Funcinalidade de escolher materias na tela de usuario" />
@@ -935,7 +941,8 @@
     <MESSAGE value="Atividades podem ser atualizadas" />
     <MESSAGE value="Reestruturacao dos arquivos, comeco do grupo da sala" />
     <MESSAGE value="Funcionalidade de mensagens nos grupos das salas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Funcionalidade de mensagens nos grupos das salas" />
+    <MESSAGE value="Scrollable textfield" />
+    <option name="LAST_COMMIT_MESSAGE" value="Scrollable textfield" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1224,7 +1231,7 @@
     <entry file="file://$PROJECT_DIR$/lib/modules/horarios/GrupoMensagens.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="593">
-          <caret line="186" column="34" selection-start-line="186" selection-start-column="34" selection-end-line="186" selection-end-column="34" />
+          <caret line="175" column="13" selection-start-line="175" selection-start-column="13" selection-end-line="175" selection-end-column="13" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
