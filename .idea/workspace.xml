@@ -29,8 +29,8 @@
       <file leaf-file-name="GrupoMensagens.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/modules/horarios/GrupoMensagens.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="593">
-              <caret line="175" column="13" selection-start-line="175" selection-start-column="13" selection-end-line="175" selection-end-column="13" />
+            <state relative-caret-position="124">
+              <caret line="178" column="75" selection-start-line="178" selection-start-column="75" selection-end-line="178" selection-end-column="75" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -42,7 +42,7 @@
         <entry file="file://$PROJECT_DIR$/lib/modules/config/Usuario.dart">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="186">
-              <caret line="185" column="35" lean-forward="true" selection-start-line="185" selection-start-column="35" selection-end-line="185" selection-end-column="35" />
+              <caret line="185" column="35" selection-start-line="185" selection-start-column="35" selection-end-line="185" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -80,7 +80,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Deletar</find>
       <find>materia</find>
       <find>precisa de</find>
       <find>pronto</find>
@@ -110,6 +109,7 @@
       <find>added</find>
       <find>Icon</find>
       <find>Icons</find>
+      <find>pin</find>
     </findStrings>
     <dirStrings>
       <dir>H:\AndroidStudioProjects\test\horariopucpr</dir>
@@ -801,7 +801,14 @@
       <option name="project" value="LOCAL" />
       <updated>1545633967576</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Scrollable working textfield">
+      <created>1545634289788</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1545634289788</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TodoView">
@@ -917,7 +924,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Tela de usuario dinamica: nome, usuario, saldo e cod. carteirinha" />
     <MESSAGE value="Adicionado tela para quando o usuario ainda nao gerou a grade" />
     <MESSAGE value="Funcinalidade de escolher materias na tela de usuario" />
     <MESSAGE value="Changed message" />
@@ -942,7 +948,8 @@
     <MESSAGE value="Reestruturacao dos arquivos, comeco do grupo da sala" />
     <MESSAGE value="Funcionalidade de mensagens nos grupos das salas" />
     <MESSAGE value="Scrollable textfield" />
-    <option name="LAST_COMMIT_MESSAGE" value="Scrollable textfield" />
+    <MESSAGE value="Scrollable working textfield" />
+    <option name="LAST_COMMIT_MESSAGE" value="Scrollable working textfield" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1097,6 +1104,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1224,14 +1234,14 @@
     <entry file="file://$PROJECT_DIR$/lib/modules/config/Usuario.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
-          <caret line="185" column="35" lean-forward="true" selection-start-line="185" selection-start-column="35" selection-end-line="185" selection-end-column="35" />
+          <caret line="185" column="35" selection-start-line="185" selection-start-column="35" selection-end-line="185" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/horarios/GrupoMensagens.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="593">
-          <caret line="175" column="13" selection-start-line="175" selection-start-column="13" selection-end-line="175" selection-end-column="13" />
+        <state relative-caret-position="124">
+          <caret line="178" column="75" selection-start-line="178" selection-start-column="75" selection-end-line="178" selection-end-column="75" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
