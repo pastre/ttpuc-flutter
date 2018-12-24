@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:horariopucpr/modules/horarios/GrupoMensagens.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 
@@ -165,7 +166,7 @@ class HorariosState extends GenericAppState<HorariosWidget>
 //    print('Materias is $materias');
     for (var mat in materias) {
       if (!mat['day'].contains(key)) continue;
-      print('I is $mat');
+//      print('I is $mat');
       String time = mat['starttime'] + ' - ' + mat['endtime'];
       String messageGroupKey = '${mat['subject']}';
       String local = ''; // Local que a aula acontece
@@ -179,14 +180,13 @@ class HorariosState extends GenericAppState<HorariosWidget>
 
       if (local.startsWith(' - ')) local = local.replaceFirst(' - ', '');
 
-      for (var j in mat['teachers'])
-        professores.add(j);
+      for (var j in mat['teachers']) professores.add(j);
 
-      for(Map<String, dynamic> j in mat['classes'])
+      for (Map<String, dynamic> j in mat['classes'])
         messageGroupKey += j['curso'] + j['periodo'] + j['turma'] + j['turno'];
 
-
-      cards.add(buildCard(mat['subject'], time, professores, local, messageGroupKey));
+      cards.add(
+          buildCard(mat['subject'], time, professores, local, messageGroupKey));
     }
     if (cards.isEmpty)
       return Container(
@@ -223,7 +223,8 @@ class HorariosState extends GenericAppState<HorariosWidget>
         subtitle: Text(
           sbt,
           style: TextStyle(color: Colors.grey),
-        ),onTap: () => showDiscussion(messsageGroupKey),
+        ),
+        onTap: () => showDiscussion(messsageGroupKey, title),
       ),
       elevation: 2.0,
     );
@@ -258,8 +259,17 @@ class HorariosState extends GenericAppState<HorariosWidget>
 //    setState((){this.materias = [];});
   }
 
-  showDiscussion(messsageGroupKey) {
-
-
+  showDiscussion(String messageGroupKey, String subtitle) {
+    Navigator.push(
+      this.context,
+      MaterialPageRoute(
+        builder: (BuildContext ctx) {
+          return GrupoWidget(
+            msgKey: messageGroupKey,
+            subtitle: subtitle,
+          );
+        },
+      ),
+    );
   }
 }

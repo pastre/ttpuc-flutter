@@ -218,13 +218,6 @@ class NotaState extends State<NotaWidget> with SingleTickerProviderStateMixin {
 
     bool needsExpand() => this.widget.isExpanded == this.needsExpand;
 
-    Widget arrow = AnimatedCrossFade(
-      duration: const Duration(milliseconds: 50),
-      firstChild: Icon(Icons.keyboard_arrow_down),
-      secondChild: Icon(Icons.keyboard_arrow_left),
-      crossFadeState:
-          needsExpand() ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-    );
 
     Widget subtitle = needsExpand()
         ? buildCollapsedSubtitle()

@@ -2,6 +2,8 @@
   <library name="Flutter Plugins">
     <CLASSES>
       <root url="file://C:/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.4.2" />
+      <root url="file://C:/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.2.5+1" />
+      <root url="file://C:/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_database-0.4.6" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

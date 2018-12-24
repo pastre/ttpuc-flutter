@@ -1,0 +1,110 @@
+{
+  "project_info": {
+    "project_number": "904404985413",
+    "firebase_url": "https://horariopucpr.firebaseio.com",
+    "project_id": "horariopucpr",
+    "storage_bucket": "horariopucpr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904404985413:android:6cf067addcbe68c4",
+        "android_client_info": {
+          "package_name": "com.pastre.horariopucpr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904404985413-4khceju3k6pgsahuc5mul0ceu5kcvhno.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDadYY1--TzqFbIxF-wMfNyNBv7oqsHC8o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904404985413:android:f65a506135045326",
+        "android_client_info": {
+          "package_name": "com.thevivaz.timetablepucpr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904404985413-lusroc6au2oklfuqqt3caphsrfjpq2j3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thevivaz.timetablepucpr",
+            "certificate_hash": "7b2760dbb287a24d824daf2d2ba15096c6223986"
+          }
+        },
+        {
+          "client_id": "904404985413-t6stak0600tqatldejao26caf2gganrg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thevivaz.timetablepucpr",
+            "certificate_hash": "ab3883f1653aae4ed82a20ebbfdb940b144819f0"
+          }
+        },
+        {
+          "client_id": "904404985413-1v5igsv9l0gmbbiiqtb5tu7q1alkv1ha.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thevivaz.timetablepucpr",
+            "certificate_hash": "65350534979bd1ed3d17bf3f61c9648ca0efef10"
+          }
+        },
+        {
+          "client_id": "904404985413-4khceju3k6pgsahuc5mul0ceu5kcvhno.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDadYY1--TzqFbIxF-wMfNyNBv7oqsHC8o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904404985413-53jfcm66t1qb501f5eo005v4ao9btpek.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "904404985413-chj17t7i7sdk8qtkvoht3rvnqcnnk0mj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.pastre.horariospucpr"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      },
+      "admob_app_id": "ca-app-pub-8446667675243761~3917283615"
+    }
+  ],
+  "configuration_version": "1"
+}
