@@ -20,13 +20,16 @@ class GrupoWidget extends StatefulWidget {
 class Message {
   String username;
   String message;
+  DateTime timestamp;
 
-  Message(this.username, this.message);
+  Message(this.username, this.message, this.timestamp);
 
-  Message.fromDict(Map<String, String> map) {
+  Message.fromDict(Map<String, dynamic> map) {
     print('MAP IS $map');
     username = map['username'];
     message = map['message'];
+    timestamp =
+        DateTime.fromMillisecondsSinceEpoch(int.parse(map['timestamp']));
   }
 }
 
@@ -56,6 +59,7 @@ class _GrupoWidgetState extends State<GrupoWidget> {
     Storage().getUsername().then((username) => this.username = username);
     _textCtrl = TextEditingController();
     _scrlCtrl = ScrollController();
+
     database = FirebaseDatabase(app: app);
     messages = List();
     _messagesRef = FirebaseDatabase.instance
@@ -66,8 +70,10 @@ class _GrupoWidgetState extends State<GrupoWidget> {
     _messagesSubscription =
         _messagesRef.limitToLast(200).onChildAdded.listen((Event event) {
       var tmp = event.snapshot.value;
+      print('TMP IS $tmp');
       setState(() {
-        messages.add(Message(tmp['username'], tmp['message']));
+        messages.add(Message(tmp['username'], tmp['message'],
+            DateTime.fromMillisecondsSinceEpoch(int.parse(tmp['timestamp']))));
         print('${_scrlCtrl.position.maxScrollExtent}, ${messages.length}');
         toEnd();
       });
@@ -79,8 +85,7 @@ class _GrupoWidgetState extends State<GrupoWidget> {
 
   @override
   Widget build(BuildContext context) {
-
-//    toEnd();
+    print('Messages is $messages');
     return Scaffold(
       resizeToAvoidBottomPadding: true,
       appBar: AppBar(
@@ -90,69 +95,77 @@ class _GrupoWidgetState extends State<GrupoWidget> {
         ),
         backgroundColor: PUC_COLOR,
       ),
-      bottomNavigationBar: Row(
-        children: <Widget>[
-          Flexible(
-            child: Card(
-              child: TextField(
-                controller: _textCtrl,
-                decoration: InputDecoration(hintText: 'Digite uma mensagem'),
-              ),
-            ),
-          ),
-          Container(
-            child: RawMaterialButton(
-              onPressed: () => sendMessage(),
-              shape: CircleBorder(),
-              child: Icon(
-                Icons.send,
-                color: SUBTEXT_COLOR,
-              ),
-            ),
-            width: 36.0,
-          ),
-        ],
-      ),
-      body: ScrollConfiguration(
-        behavior: MyBehavior(),
-        child: ListView.builder(
-          itemBuilder: (BuildContext ctx, int index) {
-            return ListTile(
-              trailing: Container(
-                child: Row(
-                  children: <Widget>[
-                    username != messages[index].username
-                      ? Icon(Icons.person_pin)
-                      : SizedBox(),
-                    Card(
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            '@' + messages[index].username,
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          Divider(),
-                          Text(messages[index].message),
-                        ],
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: FractionallySizedBox(
+        heightFactor: 1.0,
+        child: ScrollConfiguration(
+          behavior: MyBehavior(),
+          child: ListView.builder(
+            itemBuilder: (BuildContext ctx, int index) {
+              return index < messages.length
+                  ? ListTile(
+                      trailing: Container(
+                        child: Row(
+                          children: <Widget>[
+                            username != messages[index].username
+                                ? Icon(Icons.account_circle)
+                                : SizedBox(),
+                            Card(
+                              child: Column(
+                                children: <Widget>[
+                                  Text(
+                                    '@' + messages[index].username,
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                  Divider(),
+                                  Text(messages[index].message),
+                                ],
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                              ),
+                              color: Color(0xFF7eccfc),
+                            ),
+                            username == messages[index].username
+                                ? Icon(Icons.person_pin)
+                                : SizedBox(),
+                          ],
+                          mainAxisAlignment:
+                              username == messages[index].username
+                                  ? MainAxisAlignment.end
+                                  : MainAxisAlignment.start,
+                        ),
+                        padding: EdgeInsets.only(left: 3.0),
                       ),
-                    ),
-                    username == messages[index].username
-                        ? Icon(Icons.person_pin)
-                        : SizedBox(),
-                  ],
-                  mainAxisAlignment: username == messages[index].username
-                      ? MainAxisAlignment.end
-                      : MainAxisAlignment.start,
-                ),
-                padding: EdgeInsets.only(left: 3.0),
-              ),
-            );
-          },
-          itemCount: messages.length,
-          controller: _scrlCtrl,
-          physics: ScrollPhysics(),
+                    )
+                  : Row(
+                      children: <Widget>[
+                        Flexible(
+                          child: Card(
+                            child: TextField(
+                              controller: _textCtrl,
+                              decoration: InputDecoration(
+                                  hintText: 'Digite uma mensagem'),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          child: RawMaterialButton(
+                            onPressed: () => sendMessage(),
+                            shape: CircleBorder(),
+                            child: Icon(
+                              Icons.send,
+                              color: SUBTEXT_COLOR,
+                            ),
+                          ),
+                          width: 36.0,
+                        ),
+                      ],
+                    );
+            },
+            itemCount: messages.length + 1,
+            controller: _scrlCtrl,
+            physics: ScrollPhysics(),
+          ),
         ),
       ),
       backgroundColor: Color(0xfff1f4e3),
@@ -164,13 +177,13 @@ class _GrupoWidgetState extends State<GrupoWidget> {
     _messagesRef.push().set(<String, String>{
       'username': "" + this.username,
       'message': _textCtrl.text,
+      'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
     }).whenComplete(() {
       //TODO: UNCOMMENT THIS BEFORE COMMITING
 //      _ctrl.clear();
     });
   }
 
-  toEnd() => _scrlCtrl.animateTo(560.0 * messages.length, duration: Duration(milliseconds: 500), curve: Curves.ease);
-  toEnd1() => messages.length != 0? _scrlCtrl.animateTo(_scrlCtrl.position.maxScrollExtent, duration: Duration(milliseconds: 50), curve: Curves.ease) : print('Nao ha mensagens para fazer scroll');
-
+  toEnd() => _scrlCtrl.animateTo(600.0 * messages.length,
+      duration: Duration(milliseconds: 500), curve: Curves.ease);
 }
