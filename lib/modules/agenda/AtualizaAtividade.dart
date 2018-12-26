@@ -42,7 +42,7 @@ class AtualizaAtividadeState extends State<AtualizaAtividade> {
     print('$_selectedMateriaIndex, $_selectedDayIndex, ${getDates(DateTime.now())}, ${this.widget.materias}');
     _dateController = new FixedExtentScrollController(initialItem: _selectedDayIndex);
     _materiaController = new FixedExtentScrollController(initialItem: _selectedMateriaIndex);
-    print('Initted SHIW!, ${_materiaController.initialItem}, $_selectedDayIndex');
+    print('Initted SHIW!, ${_materiaController.initialItem}, $_selectedDayIndex, ${this.widget.timestamp}');
   }
 
   @override
@@ -72,7 +72,7 @@ class AtualizaAtividadeState extends State<AtualizaAtividade> {
       return DateTime(year, month, 0).day;
     }
 
-    for (int mes = startTime.month; mes <= 12; mes++) {
+    for (int mes = 1; mes <= 12; mes++) {
       int days = numDaysByMonth(ano, mes) + 1;
       for (int dia = 1; dia <= days; dia++) {
         DateTime dateTime = DateTime(ano, mes, dia);

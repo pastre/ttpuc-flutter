@@ -54,6 +54,7 @@ class _GrupoWidgetState extends State<GrupoWidget> {
 
   String username, prevString;
 
+  bool isMuted = false;
 
   @override
   void initState() {
@@ -95,75 +96,95 @@ class _GrupoWidgetState extends State<GrupoWidget> {
           this.widget.subtitle,
           overflow: TextOverflow.clip,
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              isMuted ? Icons.volume_up : Icons.volume_off,
+              color: Colors.white,
+            ),
+            onPressed: () => setState(() {
+                  isMuted = !isMuted;
+                }),
+          ),
+        ],
         backgroundColor: PUC_COLOR,
       ),
       body: Column(
         children: <Widget>[
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ScrollConfiguration(
-                behavior: MyBehavior(),
-                child: ListView.separated(
-                  separatorBuilder: (BuildContext ctx, int i){
-                    return Divider(height: 36.0, color: Color(0xfff1f4e3),);
-                  },
-                  itemBuilder: (BuildContext ctx, int index) {
-                    return ListTile(
-                      trailing: Container(
-                        child: Row(
-                          children: <Widget>[
-                            username != messages[index].username
-                                ? Icon(Icons.account_circle)
-                                : SizedBox(),
-                            Expanded(
-                              child: Card(
-                                child: Column(
-                                  children: <Widget>[
-                                    Text(
-                                      '@' + messages[index].username,
-                                      style: TextStyle(color: Colors.red),
+            child: ScrollConfiguration(
+              behavior: MyBehavior(),
+              child: ListView.separated(
+                separatorBuilder: (BuildContext ctx, int i) {
+                  return Divider(
+                    height: 36.0,
+                    color: Color(0xfff1f4e3),
+                  );
+                },
+                itemBuilder: (BuildContext ctx, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0, top: 16.0),
+                    child: Column(
+                      children: <Widget>[
+                        ListTile(
+                          trailing: Container(
+                            child: Row(
+                              children: <Widget>[
+                                username != messages[index].username
+                                    ? Icon(Icons.account_circle)
+                                    : SizedBox(),
+                                Expanded(
+                                  child: Card(
+                                    child: Column(
+                                      children: <Widget>[
+                                        Text(
+                                          '@' + messages[index].username,
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                        Divider(),
+                                        Text(
+                                          '${messages[index].message} \t',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                          overflow: TextOverflow.clip,
+                                        ),
+                                        Text(
+                                          '${messages[index].timestamp.hour.toString().padLeft(2, '0')}:${messages[index].timestamp.minute.toString().padLeft(2, '0')}',
+                                          style: TextStyle(
+                                              color: SUBTEXT_COLOR,
+                                              fontSize: 12.0),
+                                          overflow: TextOverflow.clip,
+                                        ),
+                                        SizedBox(
+                                          height: 4.0,
+                                        )
+                                      ],
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                     ),
-                                    Divider(),
-                                    Text(
-                                      '${messages[index].message} \t',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                      ),
-                                      overflow: TextOverflow.clip,
-                                    ),
-                                    Text(
-                                      '${messages[index].timestamp.hour.toString().padLeft(2, '0')}:${messages[index].timestamp.minute.toString().padLeft(2, '0')}',
-                                      style: TextStyle(
-                                          color: SUBTEXT_COLOR, fontSize: 12.0),
-                                      overflow: TextOverflow.clip,
-                                    ),
-                                    SizedBox(
-                                      height: 4.0,
-                                    )
-                                  ],
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                    color: Color(0xFF7eccfc),
+                                  ),
                                 ),
-                                color: Color(0xFF7eccfc),
-                              ),
+                                username == messages[index].username
+                                    ? Icon(Icons.account_circle)
+                                    : SizedBox(),
+                              ],
+                              mainAxisAlignment:
+                                  username == messages[index].username
+                                      ? MainAxisAlignment.end
+                                      : MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.end,
                             ),
-                            username == messages[index].username
-                                ? Icon(Icons.account_circle)
-                                : SizedBox(),
-                          ],
-                          mainAxisAlignment:
-                              username == messages[index].username
-                                  ? MainAxisAlignment.end
-                                  : MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  itemCount: messages.length,
-                  controller: _scrlCtrl,
-                  physics: ScrollPhysics(),
-                ),
+                      ],
+                    ),
+                  );
+                },
+                itemCount: messages.length,
+                controller: _scrlCtrl,
+                physics: ScrollPhysics(),
               ),
             ),
           ),
@@ -177,7 +198,10 @@ class _GrupoWidgetState extends State<GrupoWidget> {
                       controller: _textCtrl,
                       decoration:
                           InputDecoration(hintText: 'Digite uma mensagem'),
-                      inputFormatters: <TextInputFormatter>[LengthLimitingTextInputFormatter(85)],
+                      inputFormatters: <TextInputFormatter>[
+                        LengthLimitingTextInputFormatter(85)
+                      ],
+//                      inputFormatters: <TextInputFormatter>[LengthLimitingTextInputFormatter(85)],
                     ),
                   ),
                 ),
@@ -209,7 +233,8 @@ class _GrupoWidgetState extends State<GrupoWidget> {
       'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
     }).whenComplete(() {
       //TODO: UNCOMMENT THIS BEFORE COMMITING
-//      _ctrl.clear();
+      FocusScope.of(context).requestFocus(new FocusNode());
+      _textCtrl.clear();
     });
   }
 

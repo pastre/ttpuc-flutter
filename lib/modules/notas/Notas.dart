@@ -218,7 +218,6 @@ class NotaState extends State<NotaWidget> with SingleTickerProviderStateMixin {
 
     bool needsExpand() => this.widget.isExpanded == this.needsExpand;
 
-
     Widget subtitle = needsExpand()
         ? buildCollapsedSubtitle()
         : buildExpandedSubtitle(
@@ -227,24 +226,21 @@ class NotaState extends State<NotaWidget> with SingleTickerProviderStateMixin {
     return ExpansionTile(
       title: Column(
         children: <Widget>[
-          Text('${this.widget.materia}',),
+          Text(
+            '${this.widget.materia}',
+          ),
           buildCollapsedSubtitle(),
         ],
         crossAxisAlignment: CrossAxisAlignment.start,
       ),
       children: <Widget>[
-        ListTile(title: buildExpandedSubtitle(
-            [this.widget.n1, this.widget.n2, this.widget.n3, this.widget.n4],
-            this.widget.faltas),
-//            children: <Widget>[],
+        ListTile(
+          title: buildExpandedSubtitle(
+              [this.widget.n1, this.widget.n2, this.widget.n3, this.widget.n4],
+              this.widget.faltas),
         ),
-//        buildExpandedSubtitle(
-//            [this.widget.n1, this.widget.n2, this.widget.n3, this.widget.n4],
-//            this.widget.faltas)
       ],
       initiallyExpanded: false,
-
-
     );
   }
 
@@ -311,7 +307,7 @@ class NotaState extends State<NotaWidget> with SingleTickerProviderStateMixin {
   }
 
   Widget getAvFinal() => RichText(
-        text: TextSpan(children: <TextSpan>[
+          text: TextSpan(children: <TextSpan>[
         TextSpan(text: 'Média final: ', style: TextStyle(color: SUBTEXT_COLOR)),
         TextSpan(
             text: '${this.widget.mediaFinal}',
@@ -321,7 +317,7 @@ class NotaState extends State<NotaWidget> with SingleTickerProviderStateMixin {
       ]));
 
   Widget getMedia() => RichText(
-        text: TextSpan(children: <TextSpan>[
+          text: TextSpan(children: <TextSpan>[
         TextSpan(text: 'Média: ', style: TextStyle(color: SUBTEXT_COLOR)),
         TextSpan(
             text: '${this.widget.media}',
@@ -353,8 +349,8 @@ class NotaState extends State<NotaWidget> with SingleTickerProviderStateMixin {
         children: <TextSpan>[
           TextSpan(
               text: subt,
-              style: TextStyle(color: SUBTEXT_COLOR, fontStyle: FontStyle.italic)
-          ),
+              style:
+                  TextStyle(color: SUBTEXT_COLOR, fontStyle: FontStyle.italic)),
         ],
       ),
     );
@@ -362,7 +358,8 @@ class NotaState extends State<NotaWidget> with SingleTickerProviderStateMixin {
 
   Widget getPrevFinal() {
     return Text(
-        'Você precisa de ${10 - (double.parse(this.widget.media))} na final', style: TextStyle(color: SUBTEXT_COLOR));
+        'Você precisa de ${10 - (double.parse(this.widget.media))} na final',
+        style: TextStyle(color: SUBTEXT_COLOR));
   }
 
   Widget getFaltasText() {

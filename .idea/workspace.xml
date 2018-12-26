@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/lib/modules/notas/Notas.dart" line="267" />
+    <bookmark url="file://$PROJECT_DIR$/lib/modules/notas/Notas.dart" line="266" />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -11,7 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0f4edf89-5e34-4f27-881f-e0436da90fe2" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/agenda/AtualizaAtividade.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/agenda/AtualizaAtividade.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/modules/horarios/GrupoMensagens.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/horarios/GrupoMensagens.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/notas/Notas.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/notas/Notas.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -26,44 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GrupoMensagens.dart" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/modules/horarios/GrupoMensagens.dart">
+      <file leaf-file-name="AtualizaAtividade.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/modules/agenda/AtualizaAtividade.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="178" column="75" selection-start-line="178" selection-start-column="75" selection-end-line="178" selection-end-column="75" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Usuario.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/modules/config/Usuario.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="185" column="35" selection-start-line="185" selection-start-column="35" selection-end-line="185" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Notas.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/modules/notas/Notas.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="219" selection-start-line="219" selection-end-line="219" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="scroll_controller.dart" pinned="false" current-in-tab="false">
-        <entry file="file://C:/flutter/flutter/packages/flutter/lib/src/widgets/scroll_controller.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1683">
-              <caret line="109" column="11" selection-start-line="109" selection-start-column="11" selection-end-line="109" selection-end-column="11" />
+            <state relative-caret-position="294">
+              <caret line="63" column="8" lean-forward="true" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -168,15 +137,15 @@
         <option value="$PROJECT_DIR$/lib/modules/core/Main.dart" />
         <option value="$PROJECT_DIR$/lib/modules/core/Screen.dart" />
         <option value="$PROJECT_DIR$/lib/modules/agenda/AdicionaAtividade.dart" />
-        <option value="$PROJECT_DIR$/lib/modules/agenda/AtualizaAtividade.dart" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/lib/modules/horarios/Horarios.dart" />
         <option value="$PROJECT_DIR$/lib/main.dart" />
         <option value="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" />
         <option value="$PROJECT_DIR$/android/app/build.gradle" />
         <option value="$PROJECT_DIR$/android/build.gradle" />
-        <option value="$PROJECT_DIR$/lib/modules/notas/Notas.dart" />
         <option value="$PROJECT_DIR$/lib/modules/horarios/GrupoMensagens.dart" />
+        <option value="$PROJECT_DIR$/lib/modules/notas/Notas.dart" />
+        <option value="$PROJECT_DIR$/lib/modules/agenda/AtualizaAtividade.dart" />
       </list>
     </option>
   </component>
@@ -192,6 +161,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -202,17 +172,6 @@
             <path>
               <item name="horariopucpr" type="b2602c69:ProjectViewProjectNode" />
               <item name="horariopucpr" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="horariopucpr" type="b2602c69:ProjectViewProjectNode" />
-              <item name="horariopucpr" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="horariopucpr" type="b2602c69:ProjectViewProjectNode" />
-              <item name="horariopucpr" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -226,14 +185,7 @@
               <item name="horariopucpr" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="horariopucpr" type="b2602c69:ProjectViewProjectNode" />
-              <item name="horariopucpr" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="horarios" type="462c0819:PsiDirectoryNode" />
+              <item name="agenda" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="horariopucpr" type="b2602c69:ProjectViewProjectNode" />
@@ -252,7 +204,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -808,7 +759,14 @@
       <option name="project" value="LOCAL" />
       <updated>1545634289788</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Adicionado medidad e contingencia: fixado tamanho da mensagem para 85">
+      <created>1545637767100</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1545637767100</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TodoView">
@@ -862,7 +820,6 @@
       <window_info id="Designer" order="6" />
       <window_info anchor="bottom" id="Dart Analysis" order="8" weight="0.24833703" />
       <window_info id="Build Variants" order="2" side_tool="true" />
-      <window_info id="Image Layers" order="3" />
       <window_info anchor="bottom" x="356" y="426" width="1278" height="460" id="Run" order="14" sideWeight="0.47121534" weight="0.27383593" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -874,6 +831,7 @@
       <window_info anchor="bottom" id="Android Profiler" order="6" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.52878463" side_tool="true" weight="0.21181718" />
+      <window_info anchor="bottom" id="TODO" order="5" weight="0.32815966" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="4" side_tool="true" />
       <window_info anchor="right" id="Flutter Outline" order="3" weight="0.23987207" />
@@ -885,7 +843,7 @@
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26226014" />
       <window_info anchor="bottom" id="Messages" order="13" sideWeight="0.4978678" visible="true" weight="0.16740577" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="TODO" order="5" weight="0.32815966" />
+      <window_info id="Image Layers" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -924,7 +882,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Adicionado tela para quando o usuario ainda nao gerou a grade" />
     <MESSAGE value="Funcinalidade de escolher materias na tela de usuario" />
     <MESSAGE value="Changed message" />
     <MESSAGE value="Moved setToday function" />
@@ -949,7 +906,8 @@
     <MESSAGE value="Funcionalidade de mensagens nos grupos das salas" />
     <MESSAGE value="Scrollable textfield" />
     <MESSAGE value="Scrollable working textfield" />
-    <option name="LAST_COMMIT_MESSAGE" value="Scrollable working textfield" />
+    <MESSAGE value="Adicionado medidad e contingencia: fixado tamanho da mensagem para 85" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionado medidad e contingencia: fixado tamanho da mensagem para 85" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1110,13 +1068,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/modules/agenda/AtualizaAtividade.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="107" column="12" selection-start-line="107" selection-start-column="12" selection-end-line="107" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/agenda/AdicionaAtividade.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -1214,23 +1165,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/flutter/flutter/packages/flutter/lib/src/widgets/scroll_controller.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1683">
-          <caret line="109" column="11" selection-start-line="109" selection-start-column="11" selection-end-line="109" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/modules/notas/Notas.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="219" selection-start-line="219" selection-end-line="219" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/config/Usuario.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
@@ -1238,13 +1172,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/modules/horarios/GrupoMensagens.dart">
+    <entry file="file://C:/flutter/flutter/packages/flutter/lib/src/widgets/scroll_controller.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="178" column="75" selection-start-line="178" selection-start-column="75" selection-end-line="178" selection-end-column="75" />
+        <state relative-caret-position="593">
+          <caret line="109" column="11" selection-start-line="109" selection-start-column="11" selection-end-line="109" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/modules/notas/Notas.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="290" column="51" selection-start-line="290" selection-start-column="51" selection-end-line="290" selection-end-column="51" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/modules/horarios/GrupoMensagens.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-631">
+          <caret line="157" column="42" lean-forward="true" selection-start-line="157" selection-start-column="42" selection-end-line="157" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/modules/agenda/AtualizaAtividade.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="63" column="8" lean-forward="true" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
         </state>
       </provider>
     </entry>
