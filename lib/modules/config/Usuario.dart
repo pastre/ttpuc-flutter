@@ -51,6 +51,12 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
         title: Text('Ajustes'),
         backgroundColor: PUC_COLOR,
         actions: <Widget>[
+          // TODO: Quando for para arquivar a atividade
+//          IconButton(icon: Icon(Icons.archive, color: Colors.white,), onPressed: () {
+//            Navigator.push(this.context, MaterialPageRoute(builder: (BuildContext ctx){
+//              return ArchievedActivities();
+//            }));
+//          }),
           IconButton(
               icon: Icon(Icons.info_outline),
               onPressed: () {
