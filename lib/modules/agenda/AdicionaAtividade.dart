@@ -103,8 +103,15 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
   Widget buildMain() {
     return Scaffold(
       key: ATIVIDADE_SCAFFOLD_KEY,
+
       appBar: AppBar(
         backgroundColor: PUC_COLOR,
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.refresh), onPressed: () async {
+            String ret = await this.apiCall();
+            this.updateState(ret);
+          }),
+        ],
         title: Text(
           'Adicione uma atividade',
           style: TextStyle(fontSize: 18.0),
