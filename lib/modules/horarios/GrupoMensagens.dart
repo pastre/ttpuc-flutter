@@ -196,11 +196,13 @@ class _GrupoWidgetState extends State<GrupoWidget> {
                   child: Card(
                     child: TextField(
                       controller: _textCtrl,
+                      maxLength: 85,
                       decoration:
                           InputDecoration(hintText: 'Digite uma mensagem'),
-                      inputFormatters: <TextInputFormatter>[
-                        LengthLimitingTextInputFormatter(85)
-                      ],
+//                      inputFormatters: <TextInputFormatter>[
+//                        LengthLimitingTextInputFormatter(85),
+//
+//                      ],
 //                      inputFormatters: <TextInputFormatter>[LengthLimitingTextInputFormatter(85)],
                     ),
                   ),
