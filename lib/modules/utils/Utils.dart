@@ -7,7 +7,7 @@ Color TATY_COLOR = Colors.pinkAccent;
 Color SUBTEXT_COLOR =  Color(0xFF919199);
 Color PUC_COLOR = Color(0xFFA00503);
 List<ScreenOption> SCREENS = [
-  ScreenOption(nome: 'Horarios', icon: Icon(Icons.subject), screenWidget: HorariosWidget()),
+  ScreenOption(nome: 'Horários', icon: Icon(Icons.subject), screenWidget: HorariosWidget()),
   ScreenOption(nome: 'Notas', icon: Icon(Icons.book), screenWidget: NotasWidget()),
   ScreenOption(nome: 'Agenda', icon: Icon(Icons.calendar_view_day), screenWidget: AgendaWidget()),
 //  ScreenOption(nome: 'Eu', icon: Icon(Icons.person), screenWidget: Placeholder()),
@@ -36,26 +36,27 @@ bool isNumeric(String s) {
 List<Widget> getNotasDev(){
   TextStyle style = TextStyle();
   return <Widget>[
-    Text('\t├Versao atualizada', overflow: TextOverflow.clip,),
-    Text('\t├Versao melhorada', overflow: TextOverflow.clip,),
-    Text('\t├Coisas novas', overflow: TextOverflow.clip,),
-    Text('\t└Novidades implementadas', overflow: TextOverflow.clip,),
+    Text('Bem vindo ao aplicativo não oficial da PUCPR.', overflow: TextOverflow.clip,),
+    Text('Esse aplicativo tem como missão unificar o ecossistema da universidade, trazendo ao aluno a melhor forma de acompanhamento acadêmico', overflow: TextOverflow.clip,),
+    Text('A filosofia é simples: nada é tão bom que não possa ser melhorado. Se acha que podemos melhorar em qualquer quesito, não hesite em enviar um email para pastre68@gmail.com'),
+    Text('Agora, estamos testando as mensagens no grupo! Para conferir, basta clicar em qualquer horário na tela de Horários!', overflow: TextOverflow.clip,),
+//    Text('\t└Novidades implementadas', overflow: TextOverflow.clip,),
   ];
 }
 
 List<Widget> getNextSteps(){
   TextStyle style = TextStyle();
   return <Widget>[
-    Text('\t├Colocar uma foto no perfil', overflow: TextOverflow.clip,),
+    Text('- Colocar uma foto no perfil', overflow: TextOverflow.clip,),
+    Text('- Melhorar essa caixa de texto', overflow: TextOverflow.clip,),
 //    Text('\t├Criar um "grupo da sala" com as matérias no horário', overflow: TextOverflow.clip,),
-    Text('\t├Conectar no Wi-Fi da PUC sozinho', overflow: TextOverflow.clip,),
-    Text('\t├Buscar professores', overflow: TextOverflow.clip,),
-    Text('\t├Botão de compartilhar o app', overflow: TextOverflow.clip,),
-    Text('\t├Editar e arquivar Atividades', overflow: TextOverflow.clip,),
-    Text('\t└Mostrar progresso no curso', overflow: TextOverflow.clip,),
+    Text('- Conectar no Wi-Fi da PUC sozinho', overflow: TextOverflow.clip,),
+    Text('- Buscar professores', overflow: TextOverflow.clip,),
+    Text('- Botão de compartilhar o app', overflow: TextOverflow.clip,),
+    Text('- Arquivar Atividades', overflow: TextOverflow.clip,),
+    Text('- Mostrar progresso no curso', overflow: TextOverflow.clip,),
     SizedBox(height: 4.0,),
-    Text('Sugestões são sempre bem-vindas!', overflow: TextOverflow.clip,),
-  ];
+   ];
 }
 
 Map<int, String> weekdays = {1: 'Seg', 2: 'Ter', 3: 'Qua', 4: 'Qui', 5: 'Sex', 6: 'Sáb', 7: 'Dom'};
