@@ -93,4 +93,10 @@ class GenericAppState<GenericAppWidget> extends State{
       updateState(localData);
   }
 
+  Future updateData() async{
+    await this.apiCall().then((data) {
+      this.updateLocal(data);
+    });
+  }
+
 }
