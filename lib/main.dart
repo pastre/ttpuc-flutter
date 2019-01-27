@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
@@ -7,6 +9,7 @@ import 'package:horariopucpr/modules/io/Storage.dart';
 import 'package:horariopucpr/modules/login/Login.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+//import 'package:flutter_crashlytics/flutter_crashlytics.dart';
 
 final String name = 'HorarioPUCPR';
 final FirebaseOptions options = const FirebaseOptions(
@@ -21,11 +24,32 @@ FirebaseAnalytics analytics = FirebaseAnalytics();
 
 //var tmp  =
 
-void main() {
+void main() async {
+  bool isInDebugMode = false;
+
   FirebaseApp.configure(name: name, options: options).then((a){
     print('CONFIGURED FIREBASE!!!!!');
     app = a;
   });
+
+//
+//  FlutterError.onError = (FlutterErrorDetails details) {
+//    if (isInDebugMode) {
+//      // In development mode simply print to console.
+//      FlutterError.dumpErrorToConsole(details);
+//    } else {
+//      // In production mode report to the application zone to report to
+//      // Crashlytics.
+//      Zone.current.handleUncaughtError(details.exception, details.stack);
+//    }
+//  };
+//
+//  await FlutterCrashlytics().initialize();
+//  runZoned<Future<Null>>(() async {
+//    runApp(AppWrapper());
+//  }, onError: (error, stackTrace) async {
+//    await FlutterCrashlytics().reportCrash(error, stackTrace, forceCrash: false);
+//  });
   runApp(AppWrapper());
 }
 
