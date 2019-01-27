@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 import 'package:horariopucpr/modules/horarios/Horarios.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
@@ -30,6 +31,8 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
   VoidCallback callback;
   HorariosWidget horarios;
 
+  final key = new GlobalKey<ScaffoldState>();
+
   UsuarioState(VoidCallback callback, HorariosWidget horarios) {
     this.callback = callback;
     this.horarios = horarios;
@@ -45,8 +48,8 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
   @override
   Widget buildScreen(BuildContext context) {
     Widget logoutBtt = this.buildLogoutButton(context);
-    var a = <Widget>[Text('')];
     return Scaffold(
+      key: key,
       appBar: AppBar(
         title: Text('Ajustes'),
         backgroundColor: PUC_COLOR,
@@ -102,7 +105,10 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                     ),
                     Divider(),
-                    Text('Por favor, inclua a versão se for enviar algum erro para o desenvolvedor!', overflow: TextOverflow.clip,)
+                    Text(
+                      'Por favor, inclua a versão se for enviar algum erro para o desenvolvedor!',
+                      overflow: TextOverflow.clip,
+                    )
                   ],
                   crossAxisAlignment: CrossAxisAlignment.start,
 //                  mainAxisAlignment: MainAxisAlignment.start,
@@ -122,10 +128,15 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
               indent: 8.0,
             ),
             getData(),
-            Divider(
-              indent: 8.0,
+//            Divider(
+//              indent: 8.0,
+//            ),
+            Expanded(
+              child: Align(
+                child: logoutBtt,
+                alignment: Alignment.bottomCenter,
+              ),
             ),
-            logoutBtt,
           ],
         ),
       ),
@@ -236,73 +247,126 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
           children: <Widget>[
             Expanded(
               child: IconButton(
-                  icon: MONEY_ICON,
-                  onPressed: () {
-                    Widget col = Column(
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Text('Saldo da impressora self-service:')
-                          ],
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                        ),
-                        Row(
-                          children: <Widget>[Text(this.userData['saldo'])],
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                        ),
-                      ],
-                    );
-                    this.doAlert(col);
-                  }),
+                icon: MONEY_ICON,
+                onPressed: () {
+                  Widget col = Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text('Saldo da impressora self-service:')
+                        ],
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(this.userData['saldo']),
+                          IconButton(
+                            icon: Icon(
+                              Icons.refresh,
+                              color: Colors.grey,
+                              size: 16.0,
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                              key.currentState.showSnackBar(SnackBar(
+                                  content: Text('Atualizando informações...')));
+                              this.updateData().then((onData) {
+                                key.currentState.hideCurrentSnackBar();
+                                key.currentState.showSnackBar(SnackBar(
+                                  content: Text('Pronto!'),
+                                  duration: Duration(seconds: 3),
+                                ));
+                              });
+                            },
+                          ),
+                        ],
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                      ),
+                    ],
+                  );
+                  this.doAlert(col);
+                },
+                tooltip: 'Saldo da impressora self-service',
+              ),
             ),
             Expanded(
               child: IconButton(
-                  icon: COD_ICON,
-                  onPressed: () {
-                    Widget col = Column(
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[Text('Código da carteirinha:')],
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                        ),
-                        Row(
-                          children: <Widget>[Text(this.userData['codigo'])],
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                        )
-                      ],
-                    );
-                    this.doAlert(col);
-                  }),
+                icon: COD_ICON,
+                onPressed: () {
+                  Widget col = Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text('Código da carteirinha:'),
+                        ],
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(this.userData['codigo']),
+                          IconButton(
+                            icon: Icon(
+                              Icons.content_copy,
+                              color: Colors.grey,
+                              size: 16.0,
+                            ),
+                            onPressed: () {
+                              Clipboard.setData(new ClipboardData(
+                                  text: this.userData['codigo']));
+                              Navigator.pop(
+                                context,
+                              );
+                              key.currentState.showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Código da carteirinha copiado!',
+                                  ),
+                                  duration: Duration(seconds: 3),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                      )
+                    ],
+                  );
+                  this.doAlert(col);
+                },
+                tooltip: 'Código da carteirinha',
+              ),
             ),
             Expanded(
               child: IconButton(
-                  icon: CALENDAR_ICON,
-                  onPressed: () {
-                    Widget col = Column(
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Text('Saldo da impressora self-service:')
-                          ],
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                        ),
-                        Row(
-                          children: <Widget>[Text(this.userData['saldo'])],
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                        ),
-                      ],
-                    );
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Picker(this.horarios)));
-                  }),
+                icon: CALENDAR_ICON,
+                onPressed: () {
+                  Widget col = Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text('Saldo da impressora self-service:')
+                        ],
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                      ),
+                      Row(
+                        children: <Widget>[Text(this.userData['saldo'])],
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                      ),
+                    ],
+                  );
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Picker(this.horarios)));
+                },
+                tooltip: 'Montando sua grade',
+              ),
             ),
           ],
         ),
