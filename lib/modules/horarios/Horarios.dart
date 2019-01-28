@@ -181,10 +181,10 @@ class HorariosState extends GenericAppState<HorariosWidget>
       if (local.startsWith(' - ')) local = local.replaceFirst(' - ', '');
 
       for (var j in mat['teachers']) professores.add(j);
-
-      for (Map<String, dynamic> j in mat['classes'])
-        messageGroupKey += j['curso'] + j['periodo'] + j['turma'] + j['turno'];
-
+      if(mat.containsKey('classes'))
+        for (Map<String, dynamic> j in mat['classes'])
+          messageGroupKey += j['curso'] + j['periodo'] + j['turma'] + j['turno'];
+      else messageGroupKey = 'nao tem chave'; // TODO: MUDAR ISSO
       cards.add(
           buildCard(mat['subject'], time, professores, local, messageGroupKey));
     }
@@ -260,16 +260,28 @@ class HorariosState extends GenericAppState<HorariosWidget>
   }
 
   showDiscussion(String messageGroupKey, String subtitle) {
-    Navigator.push(
-      this.context,
-      MaterialPageRoute(
-        builder: (BuildContext ctx) {
-          return GrupoWidget(
-            msgKey: messageGroupKey,
-            subtitle: subtitle,
-          );
+    if(messageGroupKey ==  'nao tem chave'){
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(title: Text('Ops!'),
+          content: Text(
+            'Infelizente não foi possível criar um grupo da sala para essa matéria ',
+          ),);
         },
-      ),
-    );
+      );
+    } else {
+      Navigator.push(
+        this.context,
+        MaterialPageRoute(
+          builder: (BuildContext ctx) {
+            return GrupoWidget(
+              msgKey: messageGroupKey,
+              subtitle: subtitle,
+            );
+          },
+        ),
+      );
+    }
   }
 }
