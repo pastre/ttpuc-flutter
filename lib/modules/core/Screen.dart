@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/core/Horarios.dart';
+import 'package:horariopucpr/modules/horarios/Horarios.dart';
+import 'package:horariopucpr/modules/config/Usuario.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 
 
 class Screen extends StatefulWidget {
   _ScreenState state;
+  UsuarioWidget userWidget;
 
-  Screen() {
-    this.state = new _ScreenState();
+  Screen({this.userWidget}) {
+    this.state = new _ScreenState(userWidget: this.userWidget);
   }
 
   @override
@@ -19,7 +21,6 @@ class Screen extends StatefulWidget {
     this.state.updateScreen(value);
   }
 
-
   HorariosWidget getHorarios(){
     return this.state.getHorarios();
   }
@@ -27,13 +28,18 @@ class Screen extends StatefulWidget {
 
 class _ScreenState extends State<Screen> {
   var possibleScreens, currentScreen;
+  UsuarioWidget userWidget;
 
-  _ScreenState() {
+  _ScreenState({this.userWidget}) {
     possibleScreens = Map<int, Widget>();
     for (var i = 0; i < SCREENS.length; i++) {
       possibleScreens[i] = SCREENS[i].screenWidget;
     }
     this.currentScreen = possibleScreens[1];
+
+//    this.widget.userWidget.forceLoad();
+    print('Construtor ta la');
+
   }
 
   @override
@@ -42,6 +48,12 @@ class _ScreenState extends State<Screen> {
   }
 
   void updateScreen(value) {
+
+
+//    for (var i = 0; i < SCREENS.length; i++)
+//      print('Local data from ${SCREENS[i].nome} is ${possibleScreens[i].loadLocal()}');
+
+    print('ARRIBA');
     this.setState(() {
       bool updateHorario = false;
       if (possibleScreens[value] is HorariosWidget && this.currentScreen is HorariosWidget)

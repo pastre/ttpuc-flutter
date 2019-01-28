@@ -4,26 +4,29 @@ import 'package:flutter/material.dart';
 
 import 'package:horariopucpr/modules/io/Storage.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
-import 'package:horariopucpr/modules/smaller_screens/LoadingScreen.dart';
+import 'package:horariopucpr/modules/login/LoadingScreen.dart';
 
 
 
 abstract class GenericAppWidget extends StatefulWidget{
-  List<ListTile> list;
-  GenericAppWidget({this.list});
+  var state;
+  String name;
+  GenericAppWidget({this.state, this.name}){
+    print('${this.name} was instantiated');
+    this.state.fetchData();
+  }
 
-  List<ListTile> get getList => this.list;
-
-  void call(){
-
+  @override
+  State<StatefulWidget> createState() {
+    print('Creating state for $this');
+    return this.state;
   }
 }
 
 class GenericAppState<GenericAppWidget> extends State{
   Api api;
   Storage storage;
-
-
+  bool isLoading;
 
   @override
   void initState() {
@@ -31,6 +34,7 @@ class GenericAppState<GenericAppWidget> extends State{
     this.preinit();
     this.api = new Api();
     this.storage = new Storage();
+    this.isLoading = false;
     this.fetchData();
   }
 
@@ -48,6 +52,7 @@ class GenericAppState<GenericAppWidget> extends State{
     return this.buildScreen(ctx);
   }
 
+
   Widget buildScreen(BuildContext ctx){
     // OVERRIDE THIS METHOD TO BUILD THE SCREEN
   }
@@ -58,10 +63,12 @@ class GenericAppState<GenericAppWidget> extends State{
   
 
   void updateLocal(data){
+    print('Updated local for $this');
     // OVERRIDE WITH STORAGE FUNCTION TO PERSIST DATA
   }
 
   Future apiCall() async{
+    print('API call for $this');
     // OVERRIDE WITH API CALL
   }
   Future loadLocal() async{
@@ -72,7 +79,8 @@ class GenericAppState<GenericAppWidget> extends State{
   }
 
   void fetchData() async{
-    print("Fetching data");
+    //if(this.isLoading) return;
+    print("Fetching data for ${this}");
     var localData = await this.loadLocal();
     print('Loaded local');
     if(localData == null) {
@@ -83,7 +91,14 @@ class GenericAppState<GenericAppWidget> extends State{
     }
       localData = await this.loadLocal();
       print('loadedLocal $localData');
-      updateState(localData);
+      if(mounted)
+        updateState(localData);
+  }
+
+  Future updateData() async{
+    await this.apiCall().then((data) {
+      this.updateLocal(data);
+    });
   }
 
 }

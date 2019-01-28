@@ -3,16 +3,20 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:horariopucpr/modules/core/Agenda.dart';
-import 'package:horariopucpr/modules/smaller_screens/LoadingScreen.dart';
+import 'package:horariopucpr/modules/agenda/Agenda.dart';
+import 'package:horariopucpr/modules/login/LoadingScreen.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
+
+final GlobalKey<ScaffoldState> ATIVIDADE_SCAFFOLD_KEY =
+    new GlobalKey<ScaffoldState>();
 
 class AtividadeWidget extends GenericAppWidget {
   List<String> options;
   AgendaState agenda;
 
-  AtividadeWidget({this.options, this.agenda});
+  AtividadeWidget({this.options, this.agenda})
+      : super(state: AtividadeState(agenda: agenda));
 
   @override
   State<StatefulWidget> createState() {
@@ -24,8 +28,10 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
   // Variaveis dos campos
   TextEditingController nomeController = new TextEditingController();
   TextEditingController descController = new TextEditingController();
-  Widget _selectedDayIndex, _selectedMateriaIndex;
+  int _selectedDayIndex  = 0;
+  int _selectedMateriaIndex = 0;
   FixedExtentScrollController _c = new FixedExtentScrollController();
+
   //-----------------------------------------------------//
   var materias = [];
   List<String> months = [
@@ -43,17 +49,16 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
     'Dezembro',
   ];
   AgendaState agenda;
+
   AtividadeState({this.agenda});
 
   bool isLoading = false;
-
 
   @override
   void preinit() {
     isLoading = false;
     materias = [];
   }
-
 
   @override
   Widget build(BuildContext ctx) {
@@ -62,8 +67,8 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
 
   @override
   Widget buildScreen(BuildContext ctx) {
-    if(isLoading == null) isLoading = false;
-    return  buildMain();
+    if (isLoading == null) isLoading = false;
+    return buildMain();
   }
 
   @override
@@ -90,24 +95,34 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
   void updateState(data) {
     setState(() {
       print('Data is $data');
-      var ret =  json.decode(data);
+      var ret = json.decode(data);
       this.materias = ret['materias'];
     });
   }
-  Widget buildMain(){
 
+  Widget buildMain() {
     return Scaffold(
+      key: ATIVIDADE_SCAFFOLD_KEY,
+
       appBar: AppBar(
         backgroundColor: PUC_COLOR,
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.refresh), onPressed: () async {
+            String ret = await this.apiCall();
+            this.updateState(ret);
+          }),
+        ],
         title: Text(
           'Adicione uma atividade',
           style: TextStyle(fontSize: 18.0),
         ),
       ),
       body: Container(
-        child:  isLoading ? LoadingWidget() : Column(
-          children: buildOptions(),
-        ),
+        child: isLoading
+            ? LoadingWidget(message:'Adicionando atividade...',)
+            : Column(
+                children: buildOptions(),
+              ),
         margin: EdgeInsets.only(left: 8.0, right: 8.0),
       ),
       backgroundColor: Colors.white,
@@ -129,6 +144,7 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
         ),
       );
     }
+
     List<Widget> ret = new List<Widget>();
     ret.add(buildOption(TextField(
       controller: nomeController,
@@ -169,20 +185,21 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
   }
 
   Widget buildMateriasSelector() {
-    // TODO Pegar isso da memoria
-    List<Widget> options = [];
-    for(var m in materias)
+      List<Widget> options = [];
+      for (var m in materias)
       options.add(
         Text(
           m,
           overflow: TextOverflow.ellipsis,
-        ),);
+        ),
+      );
 
     return CupertinoPicker(
         children: options,
         itemExtent: 20.0,
         onSelectedItemChanged: (int value) {
-          _selectedMateriaIndex = options[value];
+//          _selectedMateriaWidget = options[value];
+          _selectedMateriaIndex = value;
         },
         looping: true,
         scrollController: _c,
@@ -194,12 +211,12 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
   }
 
   Widget buildDateSelector() {
-    List<Widget> options = dateOptions(DateTime.now());
+    List<Widget> options = dateOptions();
     return CupertinoPicker(
         children: options,
         itemExtent: 20.0,
         onSelectedItemChanged: (int value) {
-          _selectedDayIndex = options[value];
+          _selectedDayIndex = value;
         },
         looping: false,
         scrollController: _c,
@@ -210,13 +227,8 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
         );
   }
 
-  List<Widget> dateOptions(DateTime startTime) {
+  List<Widget> dateOptions() {
     List<Widget> ret = new List<Widget>();
-    int ano = startTime.year;
-    int numDaysByMonth(int year, int month) {
-      return DateTime(year, month, 0).day;
-    }
-
 //    meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
     var weekDays = [
       'Seg',
@@ -227,14 +239,10 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
       'Sáb',
       'Dom',
     ];
-    for (int mes = startTime.month; mes <= 12; mes++) {
-      int days = numDaysByMonth(ano, mes);
-      for (int dia = 1; dia <= days; dia++) {
-        DateTime dateTime = DateTime(ano, mes, dia);
+      for(DateTime dateTime in getDates(DateTime.now())){
         ret.add(Text(
             '${weekDays[dateTime.weekday - 1]}, ${dateTime.day} de ${months[dateTime.month - 1]}'));
       }
-    }
 
     return ret;
   }
@@ -254,36 +262,51 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
     );
   }
 
-  void addAtividade() {
-    String formatText(String text) {
-      return text
-          .replaceAll("(", '')
-          .replaceAll("\"", '')
-          .replaceAll(")", '')
-          .replaceFirst('Text', '')
-          .replaceAll(',', '');
+  static List<DateTime> getDates(DateTime startTime) {
+    List<DateTime> ret = new List<DateTime>();
+    int ano = startTime.year;
+    int numDaysByMonth(int year, int month) {
+      return DateTime(year, month , 0).day;
     }
 
-    String dia = formatText(_selectedDayIndex.toString()),
-        materia = formatText(_selectedMateriaIndex.toString().replaceAll(' overflow: ellipsis',  '')),
-        nome = this.nomeController.value.text,
-        desc = this.descController.value.text;
-    var splitted = dia.split(' ');
-    int time = DateTime(
-            2018, months.indexOf(splitted.last) + 1, int.parse(splitted[1]))
-        .millisecondsSinceEpoch;
-    splitted = materia.split(' ');
-    materia = splitted[0];
+    for (int mes = startTime.month; mes <= 12; mes++) {
+      int days = numDaysByMonth(ano, mes) + 1;
+      for (int dia = 1; dia <= days; dia++) {
+        DateTime dateTime = DateTime(ano, mes, dia);
+        ret.add(dateTime);
+      }
+    }
+    return ret;
+  }
+
+
+  void addAtividade() {
+    if (nomeController.text == '') {
+      FocusScope.of(context).requestFocus(new FocusNode());
+      ATIVIDADE_SCAFFOLD_KEY.currentState.showSnackBar(SnackBar(
+        content: Text(
+          'Você precisa dar um nome a sua tarefa!',
+        ),
+        duration: Duration(seconds: 4),
+      ));
+
+      return;
+    }
+
+    String nome = this.nomeController.value.text;
+    String desc = this.descController.value.text;
+    int time = getDates(DateTime.now())[_selectedDayIndex].millisecondsSinceEpoch;
+    String materia = materias[_selectedMateriaIndex];
     setState(() {
       isLoading = true;
     });
+
+    print('Adding materia $nome, $desc, $time, $materia');
     this.api.addAtividade(nome, desc, time, materia ).then((val){
       print('Atividades is $val');
       this.storage.setAtividades(val);
       this.agenda.fetchData();
       Navigator.pop(this.context);
     });
-    print(
-        'DAY: $time\nMATERIA: $materia \nNOME: $nome \nDESC $desc');
   }
 }
