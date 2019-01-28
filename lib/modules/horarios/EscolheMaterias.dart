@@ -58,15 +58,20 @@ class PickerState extends State<Picker> {
           IconButton(
             onPressed: () {
 //              print('Pressed info!');
-              showModalBottomSheet(
-                  context: this.context,
-                  builder: (BuildContext context) {
-                    return Text(
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Olá'),
+                    content: Text(
                       'Estamos tentando montar a sua grade automaticamente\n' +
                           'Qualquer dúvida que o sistema tenha será mostrada nesta página, e pedimos que você escolha a matéria certa\n' +
                           'Esse processo só precisa ser feito uma vez',
-                    );
-                  });
+                      overflow: TextOverflow.clip,
+                    ),
+                  );
+                },
+              );
             },
             icon: Icon(Icons.info_outline),
           )
@@ -170,8 +175,11 @@ class PickerState extends State<Picker> {
     for (var i in dups) {
       if (done.contains(i)) continue;
       var toAppend = [];
+      print('I IS $i');
       for (var j in dups) {
-        if (i['subject'] == j['subject']) {
+        if (i['subject'] == j['subject'] &&
+            i['day'] == j['day'] &&
+            i['starttime'] == j['starttime']) {
           toAppend.add(j);
           done.add(j);
         }
@@ -301,10 +309,12 @@ class _ConflitoState extends State<Conflito> {
     rows.add(
       Row(
         children: <Widget>[
-          Text(
-            teachers,
-            style: TextStyle(color: Colors.grey),
-            overflow: TextOverflow.ellipsis,
+          Expanded(
+            child: Text(
+              teachers,
+              style: TextStyle(color: Colors.grey),
+              overflow: TextOverflow.clip,
+            ),
           )
         ],
       ),
