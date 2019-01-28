@@ -120,10 +120,10 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
         child: Column(
           children: <Widget>[
             getUserCard(),
-            Divider(
-              indent: 8.0,
-            ),
-            getProgressoCurso(),
+//            Divider(
+//              indent: 8.0,
+//            ),
+//            getProgressoCurso(),
             Divider(
               indent: 8.0,
             ),
@@ -172,7 +172,7 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
 
   @override
   Future loadLocal() async {
-    return this.storage.getUserData();
+    return Storage().getUserData();
   }
 
   Widget buildLogoutButton(BuildContext context) {
