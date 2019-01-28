@@ -52,6 +52,7 @@ class GenericAppState<GenericAppWidget> extends State{
     return this.buildScreen(ctx);
   }
 
+
   Widget buildScreen(BuildContext ctx){
     // OVERRIDE THIS METHOD TO BUILD THE SCREEN
   }
@@ -90,7 +91,8 @@ class GenericAppState<GenericAppWidget> extends State{
     }
       localData = await this.loadLocal();
       print('loadedLocal $localData');
-      updateState(localData);
+      if(mounted)
+        updateState(localData);
   }
 
   Future updateData() async{
