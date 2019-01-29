@@ -123,6 +123,7 @@ class PickerState extends State<Picker> {
         if (found) break;
       }
     }
+    print('List is $list');
     Map<String, dynamic> r = {'horarios': list};
     String ret = json.encode(r);
 //    debugPrint('Response is $ret');

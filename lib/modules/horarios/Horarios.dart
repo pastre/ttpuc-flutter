@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/horarios/GrupoMensagens.dart';
+import 'package:horariopucpr/modules/io/Storage.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
 
@@ -75,13 +76,13 @@ class HorariosState extends GenericAppState<HorariosWidget>
 
   @override
   void updateLocal(data) {
-    this.storage.setHorarios(data);
+    Storage().setHorarios(data);
   }
 
   @override
   Future loadLocal() async {
 //    print('Loding datalocal...');
-    return this.storage.getHorarios();
+    return Storage().getHorarios();
   }
 
   @override
@@ -181,10 +182,11 @@ class HorariosState extends GenericAppState<HorariosWidget>
       if (local.startsWith(' - ')) local = local.replaceFirst(' - ', '');
 
       for (var j in mat['teachers']) professores.add(j);
-      if(mat.containsKey('classes'))
-        for (Map<String, dynamic> j in mat['classes'])
-          messageGroupKey += j['curso'] + j['periodo'] + j['turma'] + j['turno'];
-      else messageGroupKey = 'nao tem chave'; // TODO: MUDAR ISSO
+
+      print('Mat is $mat');
+
+      for (Map<String, dynamic> j in mat['classes'])
+        messageGroupKey += j['curso'] + j['periodo'] + j['turma'] + j['turno'];
       cards.add(
           buildCard(mat['subject'], time, professores, local, messageGroupKey));
     }
