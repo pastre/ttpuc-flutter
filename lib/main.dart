@@ -13,7 +13,8 @@ import 'package:firebase_analytics/observer.dart';
 
 final String name = 'HorarioPUCPR';
 final FirebaseOptions options = const FirebaseOptions(
-  googleAppID: '1:904404985413:android:6cf067addcbe68c4',
+  googleAppID: '1:904404985413:ios:6cf067addcbe68c4',
+  androidClientID: '1:904404985413:android:6cf067addcbe68c4',
   projectID: 'horariopucpr',
   databaseURL: 'https://horariopucpr.firebaseio.com',
   apiKey: 'AIzaSyDadYY1--TzqFbIxF-wMfNyNBv7oqsHC8o',
@@ -27,7 +28,7 @@ FirebaseAnalytics analytics = FirebaseAnalytics();
 void main() async {
   bool isInDebugMode = false;
 
-  FirebaseApp.configure(name: name, options: options).then((a){
+  FirebaseApp.configure(name: name, options: options).then((a) {
     print('CONFIGURED FIREBASE!!!!!');
     app = a;
   });
@@ -54,8 +55,6 @@ void main() async {
 }
 
 class AppWrapper extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext c) {
     return new App();
