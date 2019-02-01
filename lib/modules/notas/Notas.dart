@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:horariopucpr/modules/io/Storage.dart';
 import 'package:horariopucpr/modules/utils/Expandable.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
@@ -53,7 +54,7 @@ class NotasState extends GenericAppState<NotasWidget> {
 
   @override
   Future loadLocal() async {
-    return this.storage.getNotas();
+    return Storage().getNotas();
   }
 
   @override

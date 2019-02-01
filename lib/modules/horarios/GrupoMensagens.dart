@@ -42,6 +42,78 @@ class MyBehavior extends ScrollBehavior {
   }
 }
 
+class Bubble extends StatelessWidget {
+  Bubble({this.message, this.time, this.delivered, this.isMe});
+
+  final String message, time;
+  final delivered, isMe;
+
+  @override
+  Widget build(BuildContext context) {
+    final bg = isMe ? Colors.white : Colors.greenAccent.shade100;
+    final align = isMe ? CrossAxisAlignment.start : CrossAxisAlignment.end;
+    final icon = delivered ? Icons.done_all : Icons.done;
+    final radius = isMe
+        ? BorderRadius.only(
+      topRight: Radius.circular(5.0),
+      bottomLeft: Radius.circular(10.0),
+      bottomRight: Radius.circular(5.0),
+    )
+        : BorderRadius.only(
+      topLeft: Radius.circular(5.0),
+      bottomLeft: Radius.circular(5.0),
+      bottomRight: Radius.circular(10.0),
+    );
+    return Column(
+      crossAxisAlignment: align,
+      children: <Widget>[
+        Container(
+          margin: const EdgeInsets.all(3.0),
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                  blurRadius: .5,
+                  spreadRadius: 1.0,
+                  color: Colors.black.withOpacity(.12))
+            ],
+            color: bg,
+            borderRadius: radius,
+          ),
+          child: Stack(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(right: 48.0),
+                child: Text(message),
+              ),
+              Positioned(
+                bottom: 0.0,
+                right: 0.0,
+                child: Row(
+                  children: <Widget>[
+                    Text(time,
+                        style: TextStyle(
+                          color: Colors.black38,
+                          fontSize: 10.0,
+                        )),
+                    SizedBox(width: 3.0),
+                    Icon(
+                      icon,
+                      size: 12.0,
+                      color: Colors.black38,
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    );
+  }
+}
+
+
 class _GrupoWidgetState extends State<GrupoWidget> {
   TextEditingController _textCtrl;
   ScrollController _scrlCtrl;
@@ -116,9 +188,9 @@ class _GrupoWidgetState extends State<GrupoWidget> {
               behavior: MyBehavior(),
               child: ListView.separated(
                 separatorBuilder: (BuildContext ctx, int i) {
-                  return Divider(
-                    height: 36.0,
-                    color: Color(0xfff1f4e3),
+                  return SizedBox(
+                    height: 12.0,
+//                    color: Color(0xfff1f4e3),
                   );
                 },
                 itemBuilder: (BuildContext ctx, int index) {
@@ -137,9 +209,19 @@ class _GrupoWidgetState extends State<GrupoWidget> {
                                   child: Card(
                                     child: Column(
                                       children: <Widget>[
-                                        Text(
-                                          '@' + messages[index].username,
-                                          style: TextStyle(color: Colors.red),
+                                        Row(
+                                          children: <Widget>[
+                                            Text(
+                                              '@' + messages[index].username,
+                                              style:
+                                                  TextStyle(color: Colors.black54),
+                                              textAlign: TextAlign.end,
+                                            ),
+                                          ],
+                                          mainAxisAlignment: username ==
+                                                  messages[index].username
+                                              ? MainAxisAlignment.end
+                                              : MainAxisAlignment.start,
                                         ),
                                         Divider(),
                                         Text(
@@ -149,12 +231,20 @@ class _GrupoWidgetState extends State<GrupoWidget> {
                                           ),
                                           overflow: TextOverflow.clip,
                                         ),
-                                        Text(
-                                          '${messages[index].timestamp.hour.toString().padLeft(2, '0')}:${messages[index].timestamp.minute.toString().padLeft(2, '0')}',
-                                          style: TextStyle(
-                                              color: SUBTEXT_COLOR,
-                                              fontSize: 12.0),
-                                          overflow: TextOverflow.clip,
+                                        Row(
+                                          children: <Widget>[
+                                            Text(
+                                              '${messages[index].timestamp.hour.toString().padLeft(2, '0')}:${messages[index].timestamp.minute.toString().padLeft(2, '0')} - ${messages[index].timestamp.day.toString().padLeft(2, '0')}/${messages[index].timestamp.month.toString().padLeft(2, '0')}/${messages[index].timestamp.year.toString()}',
+                                              style: TextStyle(
+                                                  color: Colors.black26,
+                                                  fontSize: 12.0),
+                                              overflow: TextOverflow.clip,
+                                            ),
+                                          ],
+                                          mainAxisAlignment: username ==
+                                                  messages[index].username
+                                              ? MainAxisAlignment.end
+                                              : MainAxisAlignment.start,
                                         ),
                                         SizedBox(
                                           height: 4.0,
@@ -163,7 +253,12 @@ class _GrupoWidgetState extends State<GrupoWidget> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                     ),
-                                    color: Color(0xFF7eccfc),
+                                    color: username == messages[index].username
+//                                        ? Color(0xFF7eccfc)
+                                        ? Colors.lightGreenAccent
+//                                        : Color(0xfff1f4e3),
+                                        : Colors.white,
+                                    elevation: 8.0,
                                   ),
                                 ),
                                 username == messages[index].username
@@ -193,7 +288,7 @@ class _GrupoWidgetState extends State<GrupoWidget> {
             child: Row(
               children: <Widget>[
                 Flexible(
-                  child: Card(
+                  child: Container(
                     child: TextField(
                       controller: _textCtrl,
                       maxLength: 85,
@@ -223,6 +318,7 @@ class _GrupoWidgetState extends State<GrupoWidget> {
           ),
         ],
       ),
+//      backgroundColor: Colors.white,
       backgroundColor: Color(0xfff1f4e3),
     );
   }

@@ -85,7 +85,7 @@ class AgendaState extends GenericAppState<AgendaWidget> {
   @override
   Future loadLocal() {
     print('Loaded local!');
-    return this.storage.getAtividades();
+    return Storage().getAtividades();
   }
 
   @override
