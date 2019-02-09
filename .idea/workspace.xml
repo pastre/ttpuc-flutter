@@ -9,9 +9,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f4edf89-5e34-4f27-881f-e0436da90fe2" name="Default" comment="Better chat screen">
+    <list default="true" id="0f4edf89-5e34-4f27-881f-e0436da90fe2" name="Default" comment="Fixed chat messages bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/horarios/GrupoMensagens.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/horarios/GrupoMensagens.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/config/Usuario.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/usuario/Usuario.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/core/Main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/core/Main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/core/Screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/core/Screen.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -36,40 +38,62 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="dart" value="8" />
+          <entry key="dart" value="10" />
+          <entry key="gradle" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Dart" value="8" />
+          <entry key="Dart" value="10" />
+          <entry key="Groovy" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dart" value="2294" />
-          <entry key="txt" value="56" />
+          <entry key="dart" value="2308" />
+          <entry key="gradle" value="1" />
+          <entry key="txt" value="81" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Dart" value="2294" />
-          <entry key="PLAIN_TEXT" value="56" />
+          <entry key="Dart" value="2308" />
+          <entry key="Groovy" value="1" />
+          <entry key="PLAIN_TEXT" value="81" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/modules/horarios/GrupoMensagens.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="117" column="87" selection-start-line="117" selection-start-column="87" selection-end-line="117" selection-end-column="87" />
+            <state relative-caret-position="310">
+              <caret line="93" column="30" lean-forward="true" selection-start-line="93" selection-start-column="30" selection-end-line="93" selection-end-column="30" />
               <folding>
                 <element signature="e#611#960#0" />
                 <element signature="e#1002#1142#0" />
                 <element signature="e#2882#2906#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/modules/core/Screen.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="44" selection-start-line="2" selection-start-column="44" selection-end-line="2" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/modules/core/Main.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="44" selection-start-line="2" selection-start-column="44" selection-end-line="2" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -165,8 +189,6 @@
         <option value="$PROJECT_DIR$/lib/modules/core/Usuario.dart" />
         <option value="$PROJECT_DIR$/lib/modules/smaller_screens/EscolheMaterias.dart" />
         <option value="$PROJECT_DIR$/lib/modules/core/Horarios.dart" />
-        <option value="$PROJECT_DIR$/lib/modules/core/Screen.dart" />
-        <option value="$PROJECT_DIR$/android/app/build.gradle" />
         <option value="$PROJECT_DIR$/lib/modules/agenda/AtualizaAtividade.dart" />
         <option value="$PROJECT_DIR$/lib/modules/agenda/ArchivedActivities.dart" />
         <option value="$PROJECT_DIR$/android/gradle.properties" />
@@ -176,7 +198,6 @@
         <option value="$PROJECT_DIR$/android/build.gradle" />
         <option value="$PROJECT_DIR$/lib/modules/core/Generic.dart" />
         <option value="$PROJECT_DIR$/lib/modules/config/Usuario.dart" />
-        <option value="$PROJECT_DIR$/lib/modules/core/Main.dart" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/lib/main.dart" />
         <option value="$PROJECT_DIR$/lib/modules/horarios/Horarios.dart" />
@@ -184,6 +205,9 @@
         <option value="$PROJECT_DIR$/lib/modules/notas/Notas.dart" />
         <option value="$PROJECT_DIR$/lib/modules/agenda/Agenda.dart" />
         <option value="$PROJECT_DIR$/lib/modules/horarios/GrupoMensagens.dart" />
+        <option value="$PROJECT_DIR$/android/app/build.gradle" />
+        <option value="$PROJECT_DIR$/lib/modules/core/Screen.dart" />
+        <option value="$PROJECT_DIR$/lib/modules/core/Main.dart" />
       </list>
     </option>
   </component>
@@ -224,21 +248,7 @@
               <item name="horariopucpr" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="horariopucpr" type="b2602c69:ProjectViewProjectNode" />
-              <item name="horariopucpr" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="horariopucpr" type="b2602c69:ProjectViewProjectNode" />
-              <item name="horariopucpr" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="horarios" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="horariopucpr" type="b2602c69:ProjectViewProjectNode" />
@@ -458,13 +468,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1535160788864</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Clicar no botao de horario coloca no dia de hoje">
-      <created>1540047172519</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1540047172519</updated>
     </task>
     <task id="LOCAL-00012" summary="Telas sem horarios mais bonitas">
       <created>1540150753386</created>
@@ -802,7 +805,14 @@
       <option name="project" value="LOCAL" />
       <updated>1549120531107</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Fixed chat messages bug">
+      <created>1549719993907</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1549719993907</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TodoView">
@@ -827,20 +837,20 @@
       <window_info id="Designer" order="6" />
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946696" weight="0.32369298" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4989339" visible="true" weight="0.32369298" />
       <window_info anchor="bottom" id="Debug" order="2" sideWeight="0.4978678" weight="0.5117057" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" weight="0.32815966" />
       <window_info anchor="bottom" id="Android Profiler" order="6" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.532516" side_tool="true" visible="true" weight="0.27252504" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5010661" side_tool="true" visible="true" weight="0.32369298" />
       <window_info anchor="bottom" id="Dart Analysis" order="8" sideWeight="0.49946696" weight="0.24805339" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4978678" weight="0.32705098" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4946695" weight="0.32035595" />
       <window_info anchor="bottom" id="Logcat" order="11" weight="0.32998884" />
       <window_info anchor="bottom" id="Flutter Performance" order="12" sideWeight="0.5021882" side_tool="true" weight="0.16685331" />
       <window_info anchor="bottom" id="Messages" order="13" sideWeight="0.49781182" weight="0.16685331" />
-      <window_info anchor="bottom" x="356" y="426" width="1278" height="460" id="Run" order="14" sideWeight="0.467484" visible="true" weight="0.27252504" />
+      <window_info anchor="bottom" x="356" y="426" width="1278" height="460" id="Run" order="14" sideWeight="0.467484" weight="0.27252504" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -918,7 +928,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Reformated code" />
     <MESSAGE value="Adicionado proximos passos" />
     <MESSAGE value="Atualizada estrutura de codigo das atividades, delete apenas para uma atividade" />
     <MESSAGE value="Atividades podem ser atualizadas" />
@@ -943,7 +952,8 @@
     <MESSAGE value="Confirgured for production" />
     <MESSAGE value="Working on a better chat screen" />
     <MESSAGE value="Better chat screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="Better chat screen" />
+    <MESSAGE value="Fixed chat messages bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed chat messages bug" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/android/gradlew">
@@ -974,13 +984,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/android/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="537">
@@ -988,20 +991,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/modules/core/Screen.dart">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/modules/config/Usuario.dart">
+    <entry file="file://$PROJECT_DIR$/lib/modules/usuario/Usuario.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="377">
           <caret line="184" column="31" lean-forward="true" selection-start-line="184" selection-start-column="31" selection-end-line="184" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/modules/core/Main.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="65" selection-start-line="3" selection-start-column="65" selection-end-line="3" selection-end-column="65" />
         </state>
       </provider>
     </entry>
@@ -1099,15 +1092,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/android/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="36" column="5" lean-forward="true" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/modules/horarios/GrupoMensagens.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="117" column="87" selection-start-line="117" selection-start-column="87" selection-end-line="117" selection-end-column="87" />
+        <state relative-caret-position="310">
+          <caret line="93" column="30" lean-forward="true" selection-start-line="93" selection-start-column="30" selection-end-line="93" selection-end-column="30" />
           <folding>
             <element signature="e#611#960#0" />
             <element signature="e#1002#1142#0" />
             <element signature="e#2882#2906#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/modules/core/Screen.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="44" selection-start-line="2" selection-start-column="44" selection-end-line="2" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/modules/core/Main.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="44" selection-start-line="2" selection-start-column="44" selection-end-line="2" selection-end-column="44" />
         </state>
       </provider>
     </entry>
