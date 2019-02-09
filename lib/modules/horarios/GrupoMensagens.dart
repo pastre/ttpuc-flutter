@@ -43,16 +43,15 @@ class MyBehavior extends ScrollBehavior {
 }
 
 class Bubble extends StatelessWidget {
-  Bubble({this.message, this.time, this.delivered, this.isMe});
+  Bubble({this.message, this.time, this.isMe, this.username});
 
-  final String message, time;
-  final delivered, isMe;
+  final String message, time, username;
+  final isMe;
 
   @override
   Widget build(BuildContext context) {
     final bg = isMe ? Colors.white : Colors.greenAccent.shade100;
     final align = !isMe ? CrossAxisAlignment.start : CrossAxisAlignment.end;
-    final icon = delivered ? Icons.done_all : Icons.done;
     final radius = !isMe
         ? BorderRadius.only(
             topRight: Radius.circular(5.0),
@@ -80,32 +79,43 @@ class Bubble extends StatelessWidget {
             color: bg,
             borderRadius: radius,
           ),
-          child: Stack(
+          child: Column(
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(right: 48.0),
-                child: Text(message),
-              ),
-              Positioned(
-                bottom: 0.0,
-                right: 0.0,
-                child: Row(
-                  children: <Widget>[
-                    Text(time,
-                        style: TextStyle(
-                          color: Colors.black38,
-                          fontSize: 10.0,
-                        )),
-                    SizedBox(width: 3.0),
-                    Icon(
-                      icon,
-                      size: 12.0,
-                      color: Colors.black38,
-                    )
-                  ],
+              Container(
+                child: Text(
+                  '@' + username,
+                  style: TextStyle(fontSize: 12.0, color: Colors.black54),
+                  textAlign: TextAlign.end,
                 ),
-              )
+              ),
+              Text(message),
+              Text(
+                time,
+                style: TextStyle(
+                  color: Colors.black38,
+                  fontSize: 10.0,
+                ),
+              ),
+//              Padding(
+//                padding: EdgeInsets.only(right: 48.0),
+//                child: Text(message),
+//              ),
+//              Container(
+////                bottom: 0.0,
+////                right: 0.0,
+//                child: Row(
+//                  children: <Widget>[
+//                    Text(time,
+//                        style: TextStyle(
+//                          color: Colors.black38,
+//                          fontSize: 10.0,
+//                        )),
+//                    SizedBox(width: 3.0,),
+//                  ],
+//                ),
+//              )
             ],
+            crossAxisAlignment: isMe ? CrossAxisAlignment.end: CrossAxisAlignment.start,
           ),
         )
       ],
@@ -125,8 +135,8 @@ class _GrupoWidgetState extends State<GrupoWidget>
   List<Message> messages;
 
   String username, prevString;
-
-  bool isMuted = false;
+  bool isMuted = false, inTheEnd = false;
+  double currScroll = 0.0;
 
   FocusNode _focusNode = FocusNode();
   AnimationController _controller;
@@ -138,7 +148,6 @@ class _GrupoWidgetState extends State<GrupoWidget>
     Storage().getUsername().then((username) => this.username = username);
     _textCtrl = TextEditingController();
     _scrlCtrl = ScrollController();
-
     database = FirebaseDatabase(app: app);
     messages = List();
     _messagesRef = FirebaseDatabase.instance
@@ -153,7 +162,7 @@ class _GrupoWidgetState extends State<GrupoWidget>
       setState(() {
         messages.add(Message(tmp['username'], tmp['message'],
             DateTime.fromMillisecondsSinceEpoch(int.parse(tmp['timestamp']))));
-        print('${_scrlCtrl.position.maxScrollExtent}, ${messages.length}');
+//        print('${_scrlCtrl.position.maxScrollExtent}, ${messages.length}');
         toEnd();
       });
     }, onError: (Object o) {
@@ -187,8 +196,8 @@ class _GrupoWidgetState extends State<GrupoWidget>
 
   @override
   Widget build(BuildContext context) {
-    print('Messages is $messages');
-
+//    print('Messages is $messages');
+//    toEnd();
     return Scaffold(
       resizeToAvoidBottomPadding: true,
       appBar: AppBar(
@@ -213,7 +222,12 @@ class _GrupoWidgetState extends State<GrupoWidget>
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
-            child: getMessages(),
+            child: Stack(
+              children: <Widget>[
+                getMessages(),
+                inTheEnd ? SizedBox() : getDownButton()
+              ],
+            ),
           ),
           getKeyboard()
 //          Expanded(child: ,),
@@ -231,16 +245,32 @@ class _GrupoWidgetState extends State<GrupoWidget>
       tmp.add(Bubble(
         message: message.message,
         isMe: message.username == username,
-        delivered: true,
+        username: message.username,
         time:
-            '${message.timestamp.hour.toString().padLeft(2, '0')}:${message.timestamp.minute.toString().padLeft(2, '0')}',
+            '${message.timestamp.hour.toString().padLeft(2, '0')}:${message.timestamp.minute.toString().padLeft(2, '0')} - ${message.timestamp.day.toString().padLeft(2, '0')}/${message.timestamp.month.toString().padLeft(2, '0')}',
       ));
-    return ScrollConfiguration(
-      child: ListView(
-        children: tmp,
-        shrinkWrap: true,
+    return NotificationListener<ScrollNotification>(
+      onNotification: (a) {
+        print('ROLANDO ${a}');
+        double diff = _scrlCtrl.position.maxScrollExtent - _scrlCtrl.offset;
+        print('Diff is ${diff}');
+        if (diff > 200 && inTheEnd)
+          setState(() {
+            inTheEnd = false;
+          });
+        else if (diff < 200 && !inTheEnd)
+          setState(() {
+            inTheEnd = true;
+          });
+      },
+      child: ScrollConfiguration(
+        child: ListView(
+          children: tmp,
+          shrinkWrap: true,
+          controller: _scrlCtrl,
+        ),
+        behavior: MyBehavior(),
       ),
-      behavior: MyBehavior(),
     );
   }
 
@@ -290,6 +320,22 @@ class _GrupoWidgetState extends State<GrupoWidget>
 
   bool isMyMessage(msg) => msg['username'] == username;
 
-  toEnd() => _scrlCtrl.animateTo(600.0 * messages.length,
-      duration: Duration(milliseconds: 500), curve: Curves.ease);
+  toEnd() => _scrlCtrl.animateTo(_scrlCtrl.position.maxScrollExtent,
+      duration: Duration(milliseconds: 300), curve: Curves.ease);
+
+  Widget getDownButton() {
+    return Positioned(
+      right: 8.0,
+      bottom: 8.0,
+      child: FloatingActionButton(
+        onPressed: toEnd,
+        mini: true,
+        backgroundColor: Colors.white,
+        child: Icon(
+          Icons.keyboard_arrow_down,
+          color: Colors.blueGrey,
+        ),
+      ),
+    );
+  }
 }
