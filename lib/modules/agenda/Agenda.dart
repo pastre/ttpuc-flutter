@@ -79,23 +79,21 @@ class AgendaState extends GenericAppState<AgendaWidget> {
 
   @override
   void updateLocal(data) {
-    this.storage.setAtividades(data);
+    Storage().setAtividades(data);
   }
 
   @override
   Future loadLocal() {
-    print('Loaded local!');
     return Storage().getAtividades();
   }
 
   @override
   Future apiCall() async {
-    return this.api.getAtividades();
+    return Api().getAtividades();
   }
 
   @override
   void updateState(data) {
-    print('Setting state to  $data');
     setState(() {
       var ret = json.decode(data);
       this.atividades = ret['eventos'];

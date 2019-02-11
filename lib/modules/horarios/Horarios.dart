@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/horarios/GrupoMensagens.dart';
+import 'package:horariopucpr/modules/io/Api.dart';
 import 'package:horariopucpr/modules/io/Storage.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
@@ -87,13 +88,14 @@ class HorariosState extends GenericAppState<HorariosWidget>
 
   @override
   Future apiCall() async {
-    return this.api.getHorarios();
+    return Api().getHorarios();
   }
 
   @override
   void updateState(data) {
 //    print('Updating state');
-    var ret = json.decode(data)['horarios']; // TODO: Checar se data é null
+    if(data == null) return;
+    var ret = json.decode(data)['horarios'];
 //    print('Setting state ${ret}');
     if (ret.isEmpty) {
       setState(() {

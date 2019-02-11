@@ -19,9 +19,9 @@ class MainScreen extends StatelessWidget {
     Api().assertData();
   }
 
-  void showConfig(context) {
+  void showConfig(context) async {
     print('Showing confing');
-    Navigator.push(
+    await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => this.userWidget),
     );
@@ -29,9 +29,11 @@ class MainScreen extends StatelessWidget {
 
   void doLogout(BuildContext context) {
     print('Do logout');
-    Storage().clearData();
-    Storage().setLogin(false);
-    updateLogin();
+    Storage().clearData().then((didIt){
+      print('Local storage cleared? $didIt');
+      updateLogin();
+      Storage().setLogin(false);
+    });
   }
 
   @override

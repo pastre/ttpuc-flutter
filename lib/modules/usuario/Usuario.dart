@@ -7,6 +7,7 @@ import 'package:horariopucpr/modules/core/Generic.dart';
 import 'package:horariopucpr/modules/horarios/Horarios.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
 import 'package:horariopucpr/modules/horarios/EscolheMaterias.dart';
+import 'package:horariopucpr/modules/usuario/ProgressoCurso.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/io/Storage.dart';
 
@@ -48,6 +49,7 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
   @override
   Widget buildScreen(BuildContext context) {
     Widget logoutBtt = this.buildLogoutButton(context);
+    Widget barraProgresso = BarraProgressoCurso();
     return Scaffold(
       key: key,
       appBar: AppBar(
@@ -116,29 +118,28 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
               })
         ],
       ),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            getUserCard(),
+      body: Column(
+        children: <Widget>[
+          getUserCard(),
+//          Divider(
+//            indent: 8.0,
+//          ),
+////            getProgressoCurso(),
+          barraProgresso,
+          Divider(
+            indent: 8.0,
+          ),
+          getData(),
 //            Divider(
 //              indent: 8.0,
 //            ),
-//            getProgressoCurso(),
-            Divider(
-              indent: 8.0,
+          Expanded(
+            child: Align(
+              child: logoutBtt,
+              alignment: Alignment.bottomCenter,
             ),
-            getData(),
-//            Divider(
-//              indent: 8.0,
-//            ),
-            Expanded(
-              child: Align(
-                child: logoutBtt,
-                alignment: Alignment.bottomCenter,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
       backgroundColor: Colors.white,
     );
@@ -151,12 +152,12 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
 
   @override
   void updateLocal(data) {
-    this.storage.setUserData(data);
+    Storage().setUserData(data);
   }
 
   @override
   Future apiCall() {
-    return this.api.getUserData();
+    return Api().getUserData();
   }
 
   @override
@@ -434,7 +435,7 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
               Flexible(
                 child: LinearProgressIndicator(
                   backgroundColor: Colors.black12,
-                  value: 0.5,
+                  value: 0.99,
                   valueColor: AlwaysStoppedAnimation<Color>(PUC_COLOR),
                 ),
               ),
@@ -447,9 +448,11 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
 
   void doLogout(BuildContext context) {
     print('Do logout');
-    this.storage.clearData();
-    this.storage.setLogin(false);
-    callback();
-    Navigator.pop(context);
+    Storage().setLogin(false);
+    Storage().clearData().then((ok){
+      print('DID IT? $ok');
+      callback();
+      Navigator.pop(context);
+    });
   }
 }
