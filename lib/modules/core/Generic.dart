@@ -47,11 +47,16 @@ class GenericAppState<GenericAppWidget> extends State{
     print("Builded");
     if(!this.hasLoaded()){
       this.fetchData();
-      return new Scaffold(body: LoadingWidget(),);
+      print('Returinig LOADING SCREEN while loading data');
+      return loadingScreen();
     }
     return this.buildScreen(ctx);
   }
 
+
+  Widget loadingScreen(){
+    return Scaffold(body: LoadingWidget(),);
+  }
 
   Widget buildScreen(BuildContext ctx){
     // OVERRIDE THIS METHOD TO BUILD THE SCREEN
@@ -82,7 +87,11 @@ class GenericAppState<GenericAppWidget> extends State{
     //if(this.isLoading) return;
     print("Fetching data for ${this}");
     var localData = await this.loadLocal();
-    print('Loaded local');
+    if(localData is Map){
+      localData.forEach((k, v){
+        if(v == null) localData = null;
+      });
+    }
     if(localData == null) {
       print('Null');
       await this.apiCall().then((data) {

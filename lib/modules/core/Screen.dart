@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/horarios/Horarios.dart';
-import 'package:horariopucpr/modules/config/Usuario.dart';
+import 'package:horariopucpr/modules/usuario/Usuario.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 
 

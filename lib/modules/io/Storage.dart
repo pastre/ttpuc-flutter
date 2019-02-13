@@ -30,6 +30,7 @@ class Storage{
     return await _get('horarios');
   }
   void setHorarios(String horariosJson){
+    print('Setting horarios $horariosJson');
     _set('horarios', horariosJson);
   }
 
@@ -73,9 +74,10 @@ class Storage{
     return;
   }
 
-  void clearData() async {
+  Future<bool> clearData() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
+    bool ret = await prefs.clear();
+    return ret;
   }
 
   void setMaterias(data) async {
@@ -96,6 +98,15 @@ class Storage{
   Future<String> getUserData() async{
     return await _get('userData');
   }
+  void setAjustes(data) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('ajustes', data);
+  }
+
+  Future<String> getAjustes() async {
+    return await _get('ajustes');
+  }
+
 
 
 }

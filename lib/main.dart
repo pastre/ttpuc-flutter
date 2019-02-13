@@ -26,18 +26,18 @@ final FirebaseOptions options = const FirebaseOptions(
 );
 
 FirebaseApp app;
-FirebaseAnalytics analytics = FirebaseAnalytics();
+FirebaseAnalytics analytics;
 
 //var tmp  =
 
 void main() async {
   bool isInDebugMode = false;
 
-  FirebaseApp.configure(name: name, options: options).then((a) {
+  await FirebaseApp.configure(name: name, options: options).then((a) {
     print('CONFIGURED FIREBASE!!!!!');
     app = a;
   });
-
+  analytics = FirebaseAnalytics();
 //
 //  FlutterError.onError = (FlutterErrorDetails details) {
 //    if (isInDebugMode) {
@@ -93,7 +93,7 @@ class AppState extends State<App> {
 
   VoidCallback updateLogin() {
     print("Called update login");
-    this.storage.isLogged().then((isLogged) => changeLogin(isLogged));
+    Storage().isLogged().then((isLogged) => changeLogin(isLogged));
   }
 
   @override

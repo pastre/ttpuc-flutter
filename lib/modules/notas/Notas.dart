@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:horariopucpr/modules/io/Api.dart';
+import 'package:horariopucpr/modules/io/Storage.dart';
 import 'package:horariopucpr/modules/utils/Expandable.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
@@ -48,17 +50,17 @@ class NotasState extends GenericAppState<NotasWidget> {
 
   @override
   void updateLocal(data) {
-    this.storage.setNotas(data);
+    Storage().setNotas(data);
   }
 
   @override
   Future loadLocal() async {
-    return this.storage.getNotas();
+    return Storage().getNotas();
   }
 
   @override
   Future apiCall() async {
-    return this.api.getNotas();
+    return Api().getNotas();
   }
 
   @override
@@ -211,8 +213,6 @@ class NotaState extends State<NotaWidget> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     if (this.needsExpand == null) this.needsExpand = false;
     if (this.widget.isExpanded == null) this.widget.isExpanded = false;
-    Widget arrowDown = Icon(Icons.keyboard_arrow_down);
-    Widget arrowLeft = Icon(Icons.keyboard_arrow_left);
     print(
         'widgetExpanded:${this.widget.isExpanded} needExpand:${this.needsExpand}');
 

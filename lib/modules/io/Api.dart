@@ -35,7 +35,7 @@ class Api {
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
 
     Response r = await get('$domain$url',
-        headers: {'authorization': basicAuth});
+        headers: {'authorization': basicAuth}, ).timeout(Duration(minutes: 5));
     return r.body;
   }
 
@@ -100,16 +100,20 @@ class Api {
     Map<String, dynamic> resp = await json.decode(body);
     print('Resp is $resp');
     if (resp['status'] == 'success') {
-      print('Returning data');
       return json.encode(resp['data']);
     }
   }
 
   Future<String> getHorarios() async {
     print('Called getHorarios()');
-    String body = await _doGet('horario');
-    Map<String, dynamic> resp = await json.decode(body);
-    if (resp['status'] == 'success') return json.encode(resp['data']);
+    String body;
+    Map<String, dynamic> resp;
+    do{
+      body = await _doGet('horario');
+      resp = await json.decode(body);
+      print('got $resp from API HORARIOS');
+    }while(resp['status'] != 'success');
+    return json.encode(resp['data']);
   }
 
   void setHorarios(String horariosJson) async {
@@ -201,5 +205,22 @@ class Api {
     Map<String, dynamic> resp = await json.decode(body);
     if (resp['status'] == 'success') return json.encode(resp['data']);
   }
+
+  Future<String> getAjustes() async {
+    String body = await _doGet('ajustes');
+    Map<String, dynamic> resp = await json.decode(body);
+//    print(' RESP IS, $resp');
+    if (resp['status'] == 'success') return json.encode(resp['data']);
+  }
+
+
+  Future<String> generateAjustes() async {
+    String body = await _doGet('ajustes/generate');
+    print('BODY IS $body');
+    Map<String, dynamic> resp = await json.decode(body);
+    print('Fired request to build ajustes $username, $password');
+    if (resp['status'] == 'success') return json.encode(resp['data']);
+  }
+
 
 }
