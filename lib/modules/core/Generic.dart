@@ -18,15 +18,16 @@ abstract class GenericAppWidget extends StatefulWidget{
 
   @override
   State<StatefulWidget> createState() {
-    print('Creating state for $this');
+    print('Creating state for $name');
     return this.state;
   }
 }
 
-class GenericAppState<GenericAppWidget> extends State{
+class GenericAppState< T extends GenericAppWidget> extends State<GenericAppWidget>{
   Api api;
   Storage storage;
   bool isLoading;
+  bool needsScaffold = true;
 
   @override
   void initState() {
@@ -35,6 +36,7 @@ class GenericAppState<GenericAppWidget> extends State{
     this.api = new Api();
     this.storage = new Storage();
     this.isLoading = false;
+    needsScaffold = false;
     this.fetchData();
   }
 
@@ -44,7 +46,7 @@ class GenericAppState<GenericAppWidget> extends State{
 
   @override
   Widget build(BuildContext ctx){
-    print("Builded");
+    print("Builded ${(widget.name)}");
     if(!this.hasLoaded()){
       this.fetchData();
       print('Returinig LOADING SCREEN while loading data');
@@ -55,7 +57,9 @@ class GenericAppState<GenericAppWidget> extends State{
 
 
   Widget loadingScreen(){
+    if(needsScaffold)
     return Scaffold(body: LoadingWidget(),);
+    return LoadingWidget();
   }
 
   Widget buildScreen(BuildContext ctx){
@@ -107,6 +111,7 @@ class GenericAppState<GenericAppWidget> extends State{
   Future updateData() async{
     await this.apiCall().then((data) {
       this.updateLocal(data);
+      this.updateState(data);
     });
   }
 

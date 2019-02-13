@@ -62,6 +62,11 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
 //              return ArchievedActivities();
 //            }));
 //          }),
+//          IconButton(icon: Icon(Icons.delete), onPressed: (){
+//            Storage().resetData().then((ok){
+//              doAlert(Text('SEUS DADOS FORAM APAGADOS!'));
+//            });
+//          }),
           IconButton(
               icon: Icon(Icons.info_outline),
               onPressed: () {

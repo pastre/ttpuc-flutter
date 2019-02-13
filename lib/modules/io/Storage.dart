@@ -80,6 +80,17 @@ class Storage{
     return ret;
   }
 
+  Future<bool> resetData() async {
+    final prefs = await SharedPreferences.getInstance();
+    var uname = await getUsername();
+    var pwd = await this.getPassword();
+    setUsername(uname);
+    setPassword(pwd);
+    bool ret = await prefs.clear();
+    return ret;
+  }
+
+
   void setMaterias(data) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('materias', data);

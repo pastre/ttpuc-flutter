@@ -36,7 +36,7 @@ class BarraProgressoCursoState extends GenericAppState<BarraProgressoCurso> {
   @override
   void preinit() {
     by_periods = Map<String, dynamic>();
-
+    super.needsScaffold = false;
   }
 
   void generateProgress() {
@@ -46,6 +46,9 @@ class BarraProgressoCursoState extends GenericAppState<BarraProgressoCurso> {
     Api().generateAjustes().then((data) {
       Storage().setAjustes(data);
       updateState(data);
+      isLoading =false;
+//       super.updateData();
+
     });
   }
 
@@ -110,11 +113,6 @@ class BarraProgressoCursoState extends GenericAppState<BarraProgressoCurso> {
         ),
       ),
     );
-  }
-
-  @override
-  Widget loadingScreen() {
-    return Text('ASDADASDASDAS ');
   }
 
   @override
