@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
 import 'package:horariopucpr/modules/io/Storage.dart';
+import 'package:horariopucpr/modules/notas/Ira.dart';
 import 'package:horariopucpr/modules/utils/Expandable.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
@@ -37,7 +38,23 @@ class NotasState extends GenericAppState<NotasWidget> {
   @override
   Widget buildScreen(BuildContext ctx) {
     return RefreshIndicator(
-      child: _buildList(ctx),
+      child: Container(
+        height: double.maxFinite,
+        child: Stack(
+          children: <Widget>[
+            Positioned(
+              child: Align(
+                child: IraWidget(),
+                alignment: FractionalOffset.bottomCenter,
+              ),
+            ),
+
+            Positioned(
+              child: _buildList(ctx),
+            ),
+          ],
+        ),
+      ),
       onRefresh: () => refreshData().then((newData) => compareData(newData)),
       color: PUC_COLOR,
     );
@@ -72,25 +89,7 @@ class NotasState extends GenericAppState<NotasWidget> {
       }
       var ret = json.decode(data);
       this.list = ret;
-      print('OBA');
     });
-  }
-
-  VoidCallback reorderShit(int index) {
-    print('Called back! $index ${this.list}');
-
-    for (int i = 0; i < this.list.length; i++) {
-      if (this.list[i]['isExpanded'] == null)
-        this.list[i]['isExpanded'] = false;
-      if (i == index) {
-        this.list[i]['isExpanded'] = !this.list[i]['isExpanded'];
-//        print('Got I, $i, ${this.list[i]}');
-      } else {
-        this.list[i]['isExpanded'] = false;
-      }
-    }
-
-    this.updateState(json.encode(this.list));
   }
 
   Widget _buildList(context) {

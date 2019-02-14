@@ -118,6 +118,17 @@ class Storage{
     return await _get('ajustes');
   }
 
+  void setIra(data) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('ira', data);
+
+  }
+
+  Future<String> getIra() async {
+    return await _get('ira');
+  }
+
+
 
 
 }
