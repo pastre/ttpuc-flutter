@@ -128,6 +128,16 @@ class Storage{
     return await _get('ira');
   }
 
+  setSaldo(data) async {
+
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('saldo', data);
+  }
+
+  Future<String> getSaldo() async {
+    return await _get('saldo');
+  }
+
 
 
 

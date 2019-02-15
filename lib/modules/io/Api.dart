@@ -222,8 +222,15 @@ class Api {
   }
 
   Future getIra() async {
-
     String body = await _doGet('ira');
+    print('BODY IS $body');
+    Map<String, dynamic> resp = await json.decode(body);
+    print('Fired request to build ajustes $username, $password');
+    if (resp['status'] == 'success') return json.encode(resp['data']);
+  }
+
+  Future getSaldo() async {
+    String body = await _doGet('impressao/saldo');
     print('BODY IS $body');
     Map<String, dynamic> resp = await json.decode(body);
     print('Fired request to build ajustes $username, $password');

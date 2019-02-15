@@ -47,7 +47,7 @@ class GenericAppState< T extends GenericAppWidget> extends State<GenericAppWidge
   @override
   Widget build(BuildContext ctx){
     print("Builded ${(widget.name)}");
-    if(!this.hasLoaded()){
+    if(!this.hasLoaded() || isLoading){
       this.fetchData();
       print('Returinig LOADING SCREEN while loading data');
       return loadingScreen();

@@ -55,52 +55,21 @@ class IraState extends GenericAppState<IraWidget> {
     });
   }
 
-  changeDisplay() {
-    setState(() {
-      this.isExpanded != this.isExpanded;
-    });
-  }
+
 
   @override
   Widget buildScreen(BuildContext ctx) {
     Widget test = Text(
-      'IRA (Índice de Rendimento Acadêmico):  ${ira.toStringAsFixed(2)}',
-      style: TextStyle(color: PUC_COLOR),
+      '${ira.toStringAsFixed(2)}',
+//      style: TextStyle(color: PUC_COLOR),
     );
     return test;
-    if (isExpanded) {
-      Widget test = Text(
-        'IRA (Índice de Rendimento Acadêmico)  ${ira.toStringAsFixed(2)}',
-        style: TextStyle(color: PUC_COLOR),
-      );
-      return Stack(
-        children: <Widget>[
-          FloatingActionButton(
-            onPressed: changeDisplay,
-            mini: true,
-            backgroundColor: Colors.white,
-            child: Icon(
-              Icons.keyboard_arrow_down,
-              color: Colors.grey,
-            ),
-          ),
-        ],
-      );
-    }
 
-    return Stack(
-      children: <Widget>[
-        FloatingActionButton(
-          onPressed: changeDisplay,
-          child: Icon(
-            Icons.arrow_drop_up,
-            color: Colors.grey,
-          ),
-          mini: true,
-          backgroundColor: Colors.white,
-        )
-//      IconButton(icon: Icon(Icons.arrow_drop_up), onPressed: (){}, )
-      ],
-    );
+  }
+
+  changeDisplay() {
+    setState(() {
+      this.isExpanded != this.isExpanded;
+    });
   }
 }

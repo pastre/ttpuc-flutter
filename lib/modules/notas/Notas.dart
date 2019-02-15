@@ -40,20 +40,7 @@ class NotasState extends GenericAppState<NotasWidget> {
     return RefreshIndicator(
       child: Container(
         height: double.maxFinite,
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              child: Align(
-                child: IraWidget(),
-                alignment: FractionalOffset.bottomCenter,
-              ),
-            ),
-
-            Positioned(
-              child: _buildList(ctx),
-            ),
-          ],
-        ),
+        child: _buildList(ctx),
       ),
       onRefresh: () => refreshData().then((newData) => compareData(newData)),
       color: PUC_COLOR,

@@ -7,16 +7,19 @@ import 'package:horariopucpr/modules/core/Generic.dart';
 import 'package:horariopucpr/modules/horarios/Horarios.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
 import 'package:horariopucpr/modules/horarios/EscolheMaterias.dart';
+import 'package:horariopucpr/modules/notas/Ira.dart';
+import 'package:horariopucpr/modules/usuario/CodigoCarteirinhaWidget.dart';
 import 'package:horariopucpr/modules/usuario/ProgressoCurso.dart';
+import 'package:horariopucpr/modules/usuario/Saldo.dart';
+import 'package:horariopucpr/modules/usuario/UserCard.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/io/Storage.dart';
 
-class UsuarioWidget extends GenericAppWidget {
+class UsuarioWidget extends StatefulWidget {
   VoidCallback callback;
   HorariosWidget horarios;
 
-  UsuarioWidget(VoidCallback callback, HorariosWidget horarios)
-      : super(state: UsuarioState(callback, horarios), name: "Usuario") {
+  UsuarioWidget(VoidCallback callback, HorariosWidget horarios) {
     this.callback = callback;
     this.horarios = horarios;
     print('Instantiated usuario');
@@ -28,7 +31,7 @@ class UsuarioWidget extends GenericAppWidget {
   }
 }
 
-class UsuarioState extends GenericAppState<UsuarioWidget> {
+class UsuarioState extends State<UsuarioWidget> {
   VoidCallback callback;
   HorariosWidget horarios;
 
@@ -47,9 +50,11 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
   }
 
   @override
-  Widget buildScreen(BuildContext context) {
+  Widget build(BuildContext context) {
     Widget logoutBtt = this.buildLogoutButton(context);
     Widget barraProgresso = BarraProgressoCurso();
+    TextStyle titleStyle =
+        TextStyle(color: PUC_COLOR, fontWeight: FontWeight.bold);
     return Scaffold(
       key: key,
       appBar: AppBar(
@@ -125,19 +130,64 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
       ),
       body: Column(
         children: <Widget>[
-          getUserCard(),
-//          Divider(
-//            indent: 8.0,
-//          ),
-////            getProgressoCurso(),
+          UserCardWidget(),
           barraProgresso,
+          Row(
+            children: <Widget>[
+              Text(
+                'Saldo na impressora self-service: ',
+                style: titleStyle,
+              ),
+              SaldoWiget()
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ),
           Divider(
             indent: 8.0,
           ),
-          getData(),
-//            Divider(
-//              indent: 8.0,
-//            ),
+
+
+          Row(
+            children: <Widget>[
+              Text(
+                'Código da carteirinha:',
+                style: titleStyle,
+              ),
+              CodigoCarteirinhaWidget()
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ),
+          Divider(
+            indent: 16.0,
+          ),
+          Row(children: <Widget>[
+            Text(
+              'IRA (Índice de Rendimento Acadêmico):',
+              style: titleStyle,
+            ),
+            IraWidget(),
+          ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ),
+          Divider(height: 16.0,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              MaterialButton(
+                onPressed: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Picker(this.horarios)));
+                },
+                color: Colors.white,
+                textColor: PUC_COLOR,
+                child: Text('Montar sua grade'),
+                elevation: 0.0,
+              ),
+            ],
+          ),
+//          Divider(height: 16.0,),
           Expanded(
             child: Align(
               child: logoutBtt,
@@ -145,35 +195,10 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
             ),
           ),
         ],
+        mainAxisAlignment: MainAxisAlignment.end,
       ),
       backgroundColor: Colors.white,
     );
-  }
-
-  @override
-  bool hasLoaded() {
-    return this.userData != null;
-  }
-
-  @override
-  void updateLocal(data) {
-    Storage().setUserData(data);
-  }
-
-  @override
-  Future apiCall() {
-    return Api().getUserData();
-  }
-
-  @override
-  void updateState(data) {
-    setState(() {
-      if (data == null) {
-        print('Null data');
-        return;
-      }
-      this.userData = json.decode(data);
-    });
   }
 
   @override
@@ -194,191 +219,39 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
         ),
       ],
     );
+
+
+    Expanded(
+      child: IconButton(
+//        icon: CALENDAR_ICON,
+        onPressed: () {
+          Widget col = Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Text('Saldo da impressora self-service:')
+                ],
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+              ),
+              Row(
+                children: <Widget>[Text(this.userData['saldo'])],
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+              ),
+            ],
+          );
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Picker(this.horarios)));
+        },
+        tooltip: 'Montando sua grade',
+      ),
+    );
   }
 
-  Widget getUserCard() {
-    return Container(
-        child: Column(
-      children: <Widget>[
-        SizedBox(
-          height: 8.0,
-        ),
-        Row(
-          children: <Widget>[
-            Icon(
-              Icons.account_circle,
-              size: 128.0,
-              color: Colors.blueGrey,
-            ),
-          ],
-          mainAxisAlignment: MainAxisAlignment.center,
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-        Row(
-          children: <Widget>[Text(this.userData['nome'])],
-          mainAxisAlignment: MainAxisAlignment.center,
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-        Row(
-          children: <Widget>[Text("@${this.userData['username']}")],
-          mainAxisAlignment: MainAxisAlignment.center,
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-      ],
-    ));
-  }
 
-  Widget getData() {
-    Icon MONEY_ICON = Icon(
-      Icons.attach_money,
-      color: PUC_COLOR,
-    );
-    Icon COD_ICON = Icon(
-      Icons.person_pin,
-      color: PUC_COLOR,
-    );
-    Icon CALENDAR_ICON = Icon(
-      Icons.calendar_today,
-      color: PUC_COLOR,
-    );
-    return Column(
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: IconButton(
-                icon: MONEY_ICON,
-                onPressed: () {
-                  Widget col = Column(
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Text('Saldo da impressora self-service:')
-                        ],
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Text(this.userData['saldo']),
-                          IconButton(
-                            icon: Icon(
-                              Icons.refresh,
-                              color: Colors.grey,
-                              size: 16.0,
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                              key.currentState.showSnackBar(SnackBar(
-                                  content: Text('Atualizando informações...')));
-                              this.updateData().then((onData) {
-                                key.currentState.hideCurrentSnackBar();
-                                key.currentState.showSnackBar(SnackBar(
-                                  content: Text('Pronto!'),
-                                  duration: Duration(seconds: 3),
-                                ));
-                              });
-                            },
-                          ),
-                        ],
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                      ),
-                    ],
-                  );
-                  this.doAlert(col);
-                },
-                tooltip: 'Saldo da impressora self-service',
-              ),
-            ),
-            Expanded(
-              child: IconButton(
-                icon: COD_ICON,
-                onPressed: () {
-                  Widget col = Column(
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Text('Código da carteirinha:'),
-                        ],
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Text(this.userData['codigo']),
-                          IconButton(
-                            icon: Icon(
-                              Icons.content_copy,
-                              color: Colors.grey,
-                              size: 16.0,
-                            ),
-                            onPressed: () {
-                              Clipboard.setData(new ClipboardData(
-                                  text: this.userData['codigo']));
-                              Navigator.pop(
-                                context,
-                              );
-                              key.currentState.showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Código da carteirinha copiado!',
-                                  ),
-                                  duration: Duration(seconds: 3),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                      )
-                    ],
-                  );
-                  this.doAlert(col);
-                },
-                tooltip: 'Código da carteirinha',
-              ),
-            ),
-            Expanded(
-              child: IconButton(
-                icon: CALENDAR_ICON,
-                onPressed: () {
-                  Widget col = Column(
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Text('Saldo da impressora self-service:')
-                        ],
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                      ),
-                      Row(
-                        children: <Widget>[Text(this.userData['saldo'])],
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                      ),
-                    ],
-                  );
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Picker(this.horarios)));
-                },
-                tooltip: 'Montando sua grade',
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
 
   void doAlert(Widget child) {
     showDialog(
@@ -391,40 +264,6 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
         });
   }
 
-  Widget getData1() {
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          height: 8.0,
-        ),
-        Center(
-          child: Center(
-            child: Row(
-              children: <Widget>[
-                Text('Ultima atualizacao das notas: 14:59 - 12/12/12'),
-              ],
-              mainAxisAlignment: MainAxisAlignment.center,
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-        Row(
-          children: <Widget>[
-            Text('Seu saldo de impressao self-service é \$12.42'),
-          ],
-          mainAxisAlignment: MainAxisAlignment.center,
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-      ],
-    );
-  }
 
   Widget getProgressoCurso() {
     return Column(
@@ -454,7 +293,7 @@ class UsuarioState extends GenericAppState<UsuarioWidget> {
   void doLogout(BuildContext context) {
     print('Do logout');
     Storage().setLogin(false);
-    Storage().clearData().then((ok){
+    Storage().clearData().then((ok) {
       print('DID IT? $ok');
       callback();
       Navigator.pop(context);
