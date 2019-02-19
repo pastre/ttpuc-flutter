@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/agenda/Agenda.dart';
+import 'package:horariopucpr/modules/io/Api.dart';
+import 'package:horariopucpr/modules/io/Storage.dart';
 import 'package:horariopucpr/modules/login/LoadingScreen.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
@@ -78,17 +80,17 @@ class AtividadeState extends GenericAppState<AtividadeWidget> {
 
   @override
   void updateLocal(data) {
-    this.storage.setMaterias(data);
+    Storage().setMaterias(data);
   }
 
   @override
   Future loadLocal() {
-    return this.storage.getMaterias();
+    return Storage().getMaterias();
   }
 
   @override
   Future apiCall() {
-    return this.api.getMaterias();
+    return Api().getMaterias();
   }
 
   @override

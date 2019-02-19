@@ -152,7 +152,7 @@ class _GrupoWidgetState extends State<GrupoWidget>
     messages = List();
     _messagesRef = FirebaseDatabase.instance
         .reference()
-        .child('messages/groups/${widget.msgKey}');
+        .child('messaging/groups/${widget.msgKey}/messages');
     database.setPersistenceEnabled(true);
     database.setPersistenceCacheSizeBytes(10000000);
     _messagesSubscription =

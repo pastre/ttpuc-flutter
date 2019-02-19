@@ -18,7 +18,7 @@ class HorariosWidget extends GenericAppWidget {
   }
 
   void setToday() {
-//    print('Set today!!');
+
     this.state.setToday();
   }
 

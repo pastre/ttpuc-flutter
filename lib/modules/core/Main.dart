@@ -6,11 +6,13 @@ import 'package:horariopucpr/modules/core/Screen.dart';
 import 'package:horariopucpr/modules/io/Storage.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 class MainScreen extends StatelessWidget {
   Screen screen;
   VoidCallback updateLogin;
   UsuarioWidget userWidget;
 
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   MainScreen(VoidCallback updateLogin) {
     this.screen = Screen();
     this.updateLogin = updateLogin;
@@ -18,6 +20,7 @@ class MainScreen extends StatelessWidget {
     print('Loaded main screen');
     Api().assertData();
   }
+
 
   void showConfig(context) async {
     print('Showing confing');
