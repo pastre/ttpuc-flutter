@@ -71,6 +71,7 @@ class SaldoState<SaldoWiget> extends GenericAppState{
       ],
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
     );
 
   }

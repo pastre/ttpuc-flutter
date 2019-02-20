@@ -50,6 +50,8 @@ class CodigoCarteirinhaState extends GenericAppState<CodigoCarteirinhaWidget>{
       ],
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
+
+      mainAxisSize: MainAxisSize.min,
     );
   }
 

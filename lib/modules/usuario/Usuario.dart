@@ -55,6 +55,7 @@ class UsuarioState extends State<UsuarioWidget> {
     Widget barraProgresso = BarraProgressoCurso();
     TextStyle titleStyle =
         TextStyle(color: PUC_COLOR, fontWeight: FontWeight.bold);
+    List<Widget> widgets = [];
     return Scaffold(
       key: key,
       appBar: AppBar(
@@ -128,74 +129,58 @@ class UsuarioState extends State<UsuarioWidget> {
               })
         ],
       ),
-      body: Column(
+      body: ListView(
         children: <Widget>[
           UserCardWidget(),
           barraProgresso,
-          Row(
-            children: <Widget>[
-              Text(
-                'Saldo na impressora self-service: ',
-                style: titleStyle,
-              ),
-              SaldoWiget()
-            ],
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          ),
           Divider(
-            indent: 8.0,
+            height: 8.0,
           ),
-
-
-          Row(
-            children: <Widget>[
-              Text(
-                'Código da carteirinha:',
-                style: titleStyle,
-              ),
-              CodigoCarteirinhaWidget()
-            ],
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ListTile(
+            title: Text(
+              'Saldo na impressora self service',
+              textDirection: TextDirection.ltr,
+              style: titleStyle,
+            ),
+            trailing: SaldoWiget(),
           ),
-          Divider(
-            indent: 16.0,
+          ListTile(
+            title: Text(
+              'Código da carteirinha:',
+              style: titleStyle,
+            ),
+            trailing: CodigoCarteirinhaWidget(),
           ),
-          Row(children: <Widget>[
-            Text(
+          ListTile(
+            title: Text(
               'IRA (Índice de Rendimento Acadêmico):',
               style: titleStyle,
             ),
-            IraWidget(),
-          ],
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            trailing: IraWidget(),
           ),
-          Divider(height: 16.0,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              MaterialButton(
-                onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Picker(this.horarios)));
-                },
-                color: Colors.white,
-                textColor: PUC_COLOR,
-                child: Text('Montar sua grade'),
-                elevation: 0.0,
-              ),
-            ],
+          Divider(
+            height: 8.0,
           ),
-//          Divider(height: 16.0,),
-          Expanded(
-            child: Align(
-              child: logoutBtt,
-              alignment: Alignment.bottomCenter,
+          ListTile(
+            title: MaterialButton(
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Picker(this.horarios),
+                  ),
+                );
+              },
+              color: Colors.white,
+              textColor: PUC_COLOR,
+              child: Text('Montar sua grade'),
+              elevation: 0.0,
             ),
           ),
+          ListTile(
+            title: logoutBtt,
+          ),
         ],
-        mainAxisAlignment: MainAxisAlignment.end,
       ),
       backgroundColor: Colors.white,
     );
@@ -220,38 +205,7 @@ class UsuarioState extends State<UsuarioWidget> {
       ],
     );
 
-
-    Expanded(
-      child: IconButton(
-//        icon: CALENDAR_ICON,
-        onPressed: () {
-          Widget col = Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Text('Saldo da impressora self-service:')
-                ],
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-              ),
-              Row(
-                children: <Widget>[Text(this.userData['saldo'])],
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-              ),
-            ],
-          );
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Picker(this.horarios)));
-        },
-        tooltip: 'Montando sua grade',
-      ),
-    );
   }
-
-
 
   void doAlert(Widget child) {
     showDialog(
@@ -260,10 +214,8 @@ class UsuarioState extends State<UsuarioWidget> {
           return SimpleDialog(
             children: <Widget>[child],
           );
-//        Container(child: child, margin: EdgeInsets.all(0.0),);
         });
   }
-
 
   Widget getProgressoCurso() {
     return Column(

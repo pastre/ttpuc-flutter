@@ -44,6 +44,14 @@ List<Widget> getNotasDev(){
   ];
 }
 
+List<Widget> getDoneSteps(){
+  return <Widget>[
+    Text('- Mostrar progresso no curso', overflow: TextOverflow.clip,),
+    Text('- Melhorias na tela de usuário', overflow: TextOverflow.clip,),
+    Text('- Preparações para lançar na App Store', overflow: TextOverflow.clip,),
+  ];
+}
+
 List<Widget> getNextSteps(){
   TextStyle style = TextStyle();
   return <Widget>[
@@ -54,7 +62,6 @@ List<Widget> getNextSteps(){
     Text('- Buscar professores', overflow: TextOverflow.clip,),
     Text('- Botão de compartilhar o app', overflow: TextOverflow.clip,),
     Text('- Arquivar Atividades', overflow: TextOverflow.clip,),
-    Text('- Mostrar progresso no curso', overflow: TextOverflow.clip,),
     SizedBox(height: 4.0,),
    ];
 }
