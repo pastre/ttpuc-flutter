@@ -87,15 +87,29 @@ class UsuarioState extends State<UsuarioWidget> {
                     ),
                     Divider(),
                     Row(
-                      children: <Widget>[Text('Versão: '), Text('0.1')],
+                      children: <Widget>[Text('Versão: '), Text('0.2')],
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     ),
                     Divider(),
                     Column(
                       children: <Widget>[
-                        Text('Notas do desenvolvedor: '),
+                        Text('Sobre: '),
                         Column(
                           children: getNotasDev(),
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                        )
+                      ],
+//                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                    ),
+                    Divider(),
+
+                    Column(
+                      children: <Widget>[
+                        Text('Notas dessa versão: '),
+                        Column(
+                          children: getDoneSteps(),
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                         )
@@ -215,31 +229,6 @@ class UsuarioState extends State<UsuarioWidget> {
             children: <Widget>[child],
           );
         });
-  }
-
-  Widget getProgressoCurso() {
-    return Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text('Progresso no curso: '),
-              ),
-              Flexible(
-                child: LinearProgressIndicator(
-                  backgroundColor: Colors.black12,
-                  value: 0.99,
-                  valueColor: AlwaysStoppedAnimation<Color>(PUC_COLOR),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
   }
 
   void doLogout(BuildContext context) {
