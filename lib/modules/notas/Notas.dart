@@ -7,7 +7,6 @@ import 'package:horariopucpr/modules/io/Storage.dart';
 import 'package:horariopucpr/modules/utils/Expandable.dart';
 import 'package:horariopucpr/modules/utils/Utils.dart';
 import 'package:horariopucpr/modules/core/Generic.dart';
-import "package:pull_to_refresh/pull_to_refresh.dart";
 import 'package:flutter/scheduler.dart';
 
 class NotasWidget extends GenericAppWidget {
@@ -36,7 +35,7 @@ class NotasState extends GenericAppState<NotasWidget> {
 
   @override
   Widget buildScreen(BuildContext ctx) {
-    return RefreshIndicator(
+    return RefreshIndicator (
       child: _buildList(ctx),
       onRefresh: () => refreshData().then((newData) => compareData(newData)),
       color: PUC_COLOR,
