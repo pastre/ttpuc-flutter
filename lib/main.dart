@@ -31,6 +31,7 @@ FirebaseAnalytics analytics;
 //var tmp  =
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   bool isInDebugMode = false;
 
   await FirebaseApp.configure(name: name, options: options).then((a) {

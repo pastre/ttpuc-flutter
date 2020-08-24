@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:horariopucpr/modules/io/Api.dart';
@@ -94,9 +95,48 @@ class AgendaState extends GenericAppState<AgendaWidget> {
 
   @override
   void updateState(data) {
+    print("Loaded eventos! $data");
     setState(() {
-      var ret = json.decode(data);
-      this.atividades = ret['eventos'];
+//      var ret = json.decode(data);
+//      this.atividades = ret['eventos'];
+
+      this.atividades = [
+        {
+          'nome': 'Prova',
+          'descricao': 'Estudar capitulos 2 e 3',
+          'materia': 'Cálculo IV',
+          'data': 15,
+          'id': 1,
+
+        },
+
+        {
+          'nome': 'Prova final',
+          'descricao': 'Vale 4 pontos',
+          'materia': 'Física III',
+          'data': 10,
+          'id': 2,
+
+        },
+
+        {
+          'nome': 'Relatório',
+          'descricao': 'Relatório 4 sobre capacitores',
+          'materia': 'Circuitos Elétricos',
+          'data': 20,
+          'id': 1,
+
+        },
+
+        {
+          'nome': 'Projeto',
+          'descricao': 'Entrega do projeto final',
+          'materia': 'Estrutura de dados',
+          'data': 4,
+          'id': 1,
+
+        },
+      ];
     });
   }
 
@@ -107,7 +147,7 @@ class AgendaState extends GenericAppState<AgendaWidget> {
             desc = atividades[index]['descricao'],
             materia = atividades[index]['materia'];
         DateTime timestamp =
-            DateTime.fromMillisecondsSinceEpoch(atividades[index]['data']);
+            DateTime.now().subtract(Duration(days: Random().nextInt(30)));
         return Evento(
             nome, materia, desc, timestamp, atividades[index]['id'], this);
       },

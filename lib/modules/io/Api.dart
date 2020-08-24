@@ -30,7 +30,7 @@ class Api {
 
   _doGet(String url) async {
     await assertData();
-    print('Basic get with $username, $password');
+    print('Basic get with $username, $password @ $url');
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
 
@@ -108,6 +108,7 @@ class Api {
     print('Called getHorarios()');
     String body;
     Map<String, dynamic> resp;
+    return '';
     do{
       body = await _doGet('horario');
       resp = await json.decode(body);
@@ -137,6 +138,7 @@ class Api {
   Future<bool> setCredentials(String username, String password) async {
     this.username = username;
     this.password = password;
+    return await true;
     return await _doCheckAuth();
   }
 

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Storage{
@@ -27,6 +28,52 @@ class Storage{
 
 
   Future<String> getHorarios() async{
+    return json.encode(
+      [
+        {
+          'starttime': '18:15',
+          'endtime': '19:45',
+          'subject': 'Cálculo IV',
+          'day': 'Seg',
+          'classrooms': [{
+            'sala': 'Sala 308',
+            'lugar': 'Bloco 4'
+          }],
+          'teachers': [
+            'Professor Calvinho'
+          ],
+          'classes': []
+        },
+        {
+          'starttime': '19:45',
+          'endtime': '21:45',
+          'subject': 'Física III',
+          'day': 'Seg',
+          'classrooms': [{
+            'sala': 'Sala 101',
+            'lugar': 'Bloco 8'
+          }],
+          'teachers': [
+            'Professora Marina'
+          ],
+          'classes': []
+        },
+        {
+          'starttime': '21:45',
+          'endtime': '23:00',
+          'subject': 'Circuitos Elétricos',
+          'day': 'Seg',
+          'classrooms': [{
+            'sala': 'Laboratório 4',
+            'lugar': 'Bloco 9'
+          }],
+          'teachers': [
+            'Professor Ivan'
+          ],
+          'classes': []
+        },
+      ]
+    );
     return await _get('horarios');
   }
   void setHorarios(String horariosJson){

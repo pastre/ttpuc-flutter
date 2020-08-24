@@ -46,7 +46,9 @@ class HorariosState extends GenericAppState<HorariosWidget>
 
   @override
   void preinit() {
-    materias = [];
+    materias = [
+
+    ];
     hasMaterias = true;
     for (var i = 0; i < this.dias.length; i++) {
       _tabs.add(new Tab(
@@ -95,7 +97,7 @@ class HorariosState extends GenericAppState<HorariosWidget>
   void updateState(data) {
 //    print('Updating state');
     if(data == null) return;
-    var ret = json.decode(data)['horarios'];
+    var ret = json.decode(data);
 //    print('Setting state ${ret}');
     if (ret.isEmpty) {
       setState(() {
@@ -165,6 +167,7 @@ class HorariosState extends GenericAppState<HorariosWidget>
   }
 
   Widget buildCardList(String key) {
+
     var cards = <Card>[];
 //    print('Materias is $materias');
     for (var mat in materias) {
